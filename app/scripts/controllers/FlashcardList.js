@@ -1,20 +1,13 @@
 'use strict';
 
-angular.module('fishkeesUiApp.flascardList')
-  .controller('FlashcardlistCtrl', function ($scope) {
-    $scope.lists = [
-        {
-            'id': 1,
-            'title': 'Spanish for beginners',
-            'create_date': new Date(1379617022 * 1000)
-        },
-        {
-            'id': 2,
-            'title': 'Russian for intermediate',
-            'create_date': new Date(1329617167 * 1000)
-        },
-
-    ];
+angular.module('fishkeesUiApp.flascardList', ['ngResource'])
+  .controller('FlashcardlistCtrl', function ($scope, FlashcardLists) {
+    $scope.lists = FlashcardLists.query();
+  })
+  .factory('FlashcardLists', function($resource) {
+    return $resource('flashcardlists/:flashcardlistId.json', {}, {
+        query: {method: 'GET', params: {flashcardlistId: 'flashcardlists'}, isArray: true}
+    });
   })
   .config(function ($routeProvider) {
     $routeProvider
