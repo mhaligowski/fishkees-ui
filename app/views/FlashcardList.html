@@ -1,1 +1,8 @@
-<p>This is the FlashcardList view.</p>
+<p>Your flashcards</p>
+
+<div class="flashcard-list-contaier">
+    <div ng-repeat="list in lists">
+        <h2>{{ list.title }}</h2>
+        <span>{{ list.create_date }}</span>
+    </div>
+</div>
