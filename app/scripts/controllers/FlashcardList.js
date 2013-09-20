@@ -20,10 +20,7 @@ angular.module('fishkeesUiApp.flascardList', ['ngResource', 'ui.bootstrap'])
             var modalInstance = $modal.open({
                 templateUrl: 'addNewListModal.html',
                 controller: 'ModalInstanceCtrl',
-                windowClass: 'add-new-list-modal',
-                resolve: {
-                    newListName: function() { return $scope.newListName; }
-                }
+                windowClass: 'add-new-list-modal'
             }); 
 
             modalInstance.result.then(function(newList) {
@@ -32,6 +29,7 @@ angular.module('fishkeesUiApp.flascardList', ['ngResource', 'ui.bootstrap'])
                     'create_date': new Date().getTime()
                 };
 
+                FlashcardLists.save(newList)
                 $scope.lists.push(newList);
             });
         };
@@ -52,8 +50,9 @@ angular.module('fishkeesUiApp.flascardList', ['ngResource', 'ui.bootstrap'])
     })
 
     .factory('FlashcardLists', function($resource) {
-        return $resource('flashcardlists/:flashcardlistId.json', {}, {
-            query: {method: 'GET', params: {flashcardlistId: 'flashcardlists'}, isArray: true}
+        return $resource('flashcardlists/:flashcardlistId', {}, {
+            query: {method: 'GET', isArray: true},
+            save: {method: 'POST'} 
         });
     })
 
