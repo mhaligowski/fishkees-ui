@@ -1,6 +1,7 @@
 'use strict';
+angular.module('fishkeesUiApp.flascardList', [])
 
-angular.module('fishkeesUiApp', [])
+angular.module('fishkeesUiApp', ['fishkeesUiApp.flascardList'])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
