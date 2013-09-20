@@ -10,5 +10,15 @@ describe('Add new flashcardlist scenarios', function() {
     it('should contain a button for adding new flashcardlist', function() {
       expect(element('button.add-new-list').count()).toBe(1);
     });
+
+    it('should not contain a modal after starting the page', function() {
+      var modalElement = element('.modal');
+      expect(modalElement.count()).toBe(0);
+    });
+
+    it('should be a modal appearing after clicking the button', function() {
+      element(':button.add-new-list').click();
+      expect(element('.modal.add-new-list-modal').count()).toBe(1);
+    });
   });
 });
