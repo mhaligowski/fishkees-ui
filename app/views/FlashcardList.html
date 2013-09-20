@@ -1,7 +1,6 @@
-<h1>Your flashcards</h1>
+<div ng-controller="FlashcardlistCtrl"> 
+    <h1>Your flashcard lists</h1>
 
-
-<div ng-controller="ModalCtrl"> 
     <button class="btn btn-primary add-new-list" ng-click="showModal()"><i class="icon-plus-sign-alt"></i> Add new list</button>
 
     <script type="text/ng-template" id="addNewListModal.html" windowClass="add-new-list-modal">
@@ -18,11 +17,11 @@
             <button class="btn close-button" ng-click="cancel()">Cancel</button>
         </div>
     </script>
-</div>
 
-<div class="flashcard-list-container">
-    <div ng-repeat="list in lists">
-        <h3>{{ list.title }}</h3>
-        <span>Added: {{ list.create_date }}</span>
+    <div class="flashcard-list-container">
+        <div ng-repeat="list in lists">
+            <h3>{{ list.title }} <small>Added: {{ list.create_date | date: 'medium'}}</small></h3>
+        </div>
     </div>
+
 </div>

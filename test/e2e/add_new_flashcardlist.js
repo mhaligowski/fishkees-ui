@@ -24,7 +24,6 @@ describe('Add new flashcardlist scenarios', function() {
     it('should show a modal after clicking the button and close it after clicking cancel', function() {
       element(':button.add-new-list').click();
       element('.modal.add-new-list-modal :button.close-button').click();
-      sleep(1);
       expect(element('.modal.add-new-list-modal').count()).toBe(0);
     });
   });
