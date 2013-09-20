@@ -20,15 +20,34 @@ angular.module('fishkeesUiApp.flascardList', ['ngResource', 'ui.bootstrap'])
             var modalInstance = $modal.open({
                 templateUrl: 'addNewListModal.html',
                 controller: 'ModalInstanceCtrl',
-                windowClass: 'add-new-list-modal'
+                windowClass: 'add-new-list-modal',
+                resolve: {
+                    newListName: function() { return $scope.newListName; }
+                }
             }); 
-        };
 
+            modalInstance.result.then(function(newList) {
+                var newList = {
+                    'title': newList.title,
+                    'create_date': new Date().getTime()
+                };
+
+                $scope.lists.push(newList);
+            });
+        };
     })
 
-    .controller('ModalInstanceCtrl', function($scope, $modalInstance) {
+    .controller('ModalInstanceCtrl', function($scope, $modalInstance) {        
+        $scope.newList = {
+            title: ''
+        }
+
         $scope.cancel = function() {
             $modalInstance.dismiss('cancel');
+        }
+
+        $scope.ok = function() {
+            $modalInstance.close($scope.newList);
         }
     })
 
