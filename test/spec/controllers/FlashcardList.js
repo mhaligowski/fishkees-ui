@@ -12,7 +12,7 @@ describe('Controller: FlashcardlistCtrl', function () {
   // Initialize the controller and a mock scope
   beforeEach(inject(function (_$httpBackend_, $controller, $rootScope) {
     $httpBackend = _$httpBackend_;
-    $httpBackend.expectGET('flashcardlists/flashcardlists.json').respond([
+    $httpBackend.expectGET('flashcardlists').respond([
         {
             'id': 1,
             'title': 'Spanish for beginners',
@@ -34,8 +34,8 @@ describe('Controller: FlashcardlistCtrl', function () {
 
   it('should show two lists', function () {
     expect(scope.lists).toEqual([]);
-
     $httpBackend.flush();
+
     expect(scope.lists.length).toEqual(2);
   });
 });
