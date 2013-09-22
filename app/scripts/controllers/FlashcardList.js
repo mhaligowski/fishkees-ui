@@ -16,6 +16,16 @@ angular.module('fishkeesUiApp.flascardList', ['ngResource', 'ui.bootstrap'])
         //     }
         // ];
 
+        $scope.createNewList = function(newListData) {
+            var newList = {
+                'title': newListData.title,
+                'create_date': new Date().getTime()
+            };
+
+            FlashcardLists.save(newList)
+            $scope.lists.push(newList);
+        }
+
         $scope.showModal = function() {
             var modalInstance = $modal.open({
                 templateUrl: 'addNewListModal.html',
@@ -23,16 +33,10 @@ angular.module('fishkeesUiApp.flascardList', ['ngResource', 'ui.bootstrap'])
                 windowClass: 'add-new-list-modal'
             }); 
 
-            modalInstance.result.then(function(newList) {
-                var newList = {
-                    'title': newList.title,
-                    'create_date': new Date().getTime()
-                };
-
-                FlashcardLists.save(newList)
-                $scope.lists.push(newList);
-            });
+            modalInstance.result.then($scope.createNewList);
         };
+
+
     })
 
     .controller('ModalInstanceCtrl', function($scope, $modalInstance) {        
