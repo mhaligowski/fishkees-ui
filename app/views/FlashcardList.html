@@ -8,7 +8,8 @@
     <div class="flashcard-list-container">
         <div ng-repeat="list in lists">
             <div class="toolbar">
-                <i class="icon-remove-sign"></i>
+                <i class="icon-remove"></i>
+                <i class="icon-edit"></i>
             </div>
             <h3>{{ list.title }} <small>Added: {{ list.create_date | date: 'medium'}}</small></h3>
         </div>

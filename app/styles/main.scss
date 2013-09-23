@@ -46,4 +46,15 @@ body {
     display: inline-block;
     float: left;
     margin-right: 15px;
+    margin-top: 10px;
+}
+
+.flashcard-list-container .toolbar i {
+    clear: both;
+    display: block;
+    color: #bbb;
+}
+
+.flashcard-list-container .toolbar i:hover {
+    color: #000;
 }
