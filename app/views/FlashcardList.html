@@ -1,25 +1,15 @@
 <div ng-controller="FlashcardlistCtrl"> 
-    <h1>Your flashcard lists</h1>
+    <div class="page-header">
+        <h1>Your flashcard lists</h1>
+    </div>
 
     <button class="btn btn-primary add-new-list" ng-click="showModal()"><i class="icon-plus-sign-alt"></i> Add new list</button>
 
-    <script type="text/ng-template" id="addNewListModal.html" windowClass="add-new-list-modal">
-        <div class='modal-header'>
-            <h3>Add new flashcard list</h3>
-        </div>
-        
-        <div class="modal-body">
-                <input type="text" ng-model="newList.title" class="input" placeholder="Name of the new list">
-        </div>
-
-        <div class="modal-footer">
-            <button type="submit" class="btn btn-success add-button" ng-click="ok()">Add</button>
-            <button class="btn close-button" ng-click="cancel()">Cancel</button>
-        </div>
-    </script>
-
     <div class="flashcard-list-container">
         <div ng-repeat="list in lists">
+            <div class="toolbar">
+                <i class="icon-remove-sign"></i>
+            </div>
             <h3>{{ list.title }} <small>Added: {{ list.create_date | date: 'medium'}}</small></h3>
         </div>
     </div>

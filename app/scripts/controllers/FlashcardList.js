@@ -2,19 +2,19 @@
 
 angular.module('fishkeesUiApp.flascardList', ['ngResource', 'ui.bootstrap'])
     .controller('FlashcardlistCtrl', function($scope, FlashcardLists, $modal) {
-        $scope.lists = FlashcardLists.query();
-        // $scope.lists = [
-        //     {
-        //         'id': 1,
-        //         'title': 'Spanish for beginners',
-        //         'create_date': 1379617022000
-        //     },
-        //     {
-        //         'id': 2,
-        //         'title': 'Russian for intermediate',
-        //         'create_date': 1339347167000
-        //     }
-        // ];
+        // $scope.lists = FlashcardLists.query();
+        $scope.lists = [
+            {
+                'id': 1,
+                'title': 'Spanish for beginners',
+                'create_date': 1379617022000
+            },
+            {
+                'id': 2,
+                'title': 'Russian for intermediate',
+                'create_date': 1339347167000
+            }
+        ];
 
         $scope.createNewList = function(newListData) {
             var newList = {
@@ -28,18 +28,16 @@ angular.module('fishkeesUiApp.flascardList', ['ngResource', 'ui.bootstrap'])
 
         $scope.showModal = function() {
             var modalInstance = $modal.open({
-                templateUrl: 'addNewListModal.html',
-                controller: 'ModalInstanceCtrl',
+                templateUrl: 'views/addNewListModal.html',
+                controller: 'AddNewListModalInstanceCtrl',
                 windowClass: 'add-new-list-modal'
             }); 
 
             modalInstance.result.then($scope.createNewList);
         };
-
-
     })
 
-    .controller('ModalInstanceCtrl', function($scope, $modalInstance) {        
+    .controller('AddNewListModalInstanceCtrl', function($scope, $modalInstance) {        
         $scope.newList = {
             title: ''
         }

@@ -81,7 +81,7 @@ describe('Controller: FlashcardlistCtrl', function () {
     // then
     expect(mockModal.open).toHaveBeenCalledWith({
       templateUrl: 'addNewListModal.html',
-      controller: 'ModalInstanceCtrl',
+      controller: 'AddNewListModalInstanceCtrl',
       windowClass: 'add-new-list-modal'
     });
     expect(mockModalResult.result.then).toHaveBeenCalled();
