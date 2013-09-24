@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('fishkeesUiApp.flascardList', ['ngResource', 'ui.bootstrap'])
-    .controller('FlashcardlistCtrl', function($scope, FlashcardLists, $modal) {
+    .controller('FlashcardlistCtrl', function($scope, $modal, FlashcardLists) {
         $scope.lists = FlashcardLists.query();
         // $scope.lists = [
         //     {
@@ -26,20 +26,42 @@ angular.module('fishkeesUiApp.flascardList', ['ngResource', 'ui.bootstrap'])
             $scope.lists.push(newList);
         }
 
-        $scope.showModal = function() {
+        $scope.removeList = function(list) {
+            var lists = $scope.lists;
+
+            for (var l in lists) {
+                if (lists[l].id == list.id) {
+                    lists.splice(l, 1);
+                    return;
+                }     
+            }
+        }
+
+        $scope.showAddNewListModal = function() {
             var modalInstance = $modal.open({
-                templateUrl: 'addNewListModal.html',
-                controller: 'ModalInstanceCtrl',
+                templateUrl: 'views/addNewListModal.html',
+                controller: 'AddNewListModalInstanceCtrl',
                 windowClass: 'add-new-list-modal'
             }); 
 
             modalInstance.result.then($scope.createNewList);
         };
+        
+        $scope.showRemoveListModal = function(list) {
+            var modalInstance = $modal.open({
+                templateUrl: 'views/removeListModal.html',
+                controller: 'RemoveListModalInstanceCtrl',
+                resolve: {
+                    list: function() { return list; }
+                },
+                windowClass: 'remove-list-modal'
+            });
 
-
+            modalInstance.result.then($scope.removeList);
+        }
     })
 
-    .controller('ModalInstanceCtrl', function($scope, $modalInstance) {        
+    .controller('AddNewListModalInstanceCtrl', function($scope, $modalInstance) {        
         $scope.newList = {
             title: ''
         }
@@ -50,6 +72,18 @@ angular.module('fishkeesUiApp.flascardList', ['ngResource', 'ui.bootstrap'])
 
         $scope.ok = function() {
             $modalInstance.close($scope.newList);
+        }
+    })
+
+    .controller('RemoveListModalInstanceCtrl', function($scope, $modalInstance, list) {
+        $scope.list = list;
+
+        $scope.cancel = function() {
+            $modalInstance.dismiss('cancel');
+        }
+
+        $scope.ok = function() {
+            $modalInstance.close($scope.list);
         }
     })
 
