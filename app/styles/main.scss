@@ -34,3 +34,30 @@ body {
     line-height: 1;
     letter-spacing: -1px;
 }
+
+.flashcard-list-container > div {
+    margin: 15px 0px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding-left: 16px;
+}
+
+.flashcard-list-container .toolbar {
+    display: inline-block;
+    float: left;
+    margin-right: 15px;
+    margin-top: 10px;
+}
+
+.flashcard-list-container .toolbar button {
+    clear: both;
+    display: block;
+    color: #bbb;
+    text-decoration: none;
+    padding: 0px;
+}
+
+.flashcard-list-container .toolbar button:hover {
+    color: #000;
+    text-decoration: none;
+}
