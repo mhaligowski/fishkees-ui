@@ -26,7 +26,7 @@ angular.module('fishkeesUiApp.flascardList', ['ngResource', 'ui.bootstrap'])
             $scope.lists.push(newList);
         }
 
-        $scope.showModal = function() {
+        $scope.showAddNewListModal = function() {
             var modalInstance = $modal.open({
                 templateUrl: 'views/addNewListModal.html',
                 controller: 'AddNewListModalInstanceCtrl',
@@ -35,6 +35,14 @@ angular.module('fishkeesUiApp.flascardList', ['ngResource', 'ui.bootstrap'])
 
             modalInstance.result.then($scope.createNewList);
         };
+        
+        $scope.showRemoveListModal = function() {
+            var modalInstance = $modal.open({
+                templateUrl: 'views/removeListModal.html',
+                // controller: 'AddNewListModalInstanceCtrl',
+                windowClass: 'remove-list-modal'
+            });
+        }
     })
 
     .controller('AddNewListModalInstanceCtrl', function($scope, $modalInstance) {        

@@ -3,13 +3,13 @@
         <h1>Your flashcard lists</h1>
     </div>
 
-    <button class="btn btn-primary add-new-list" ng-click="showModal()"><i class="icon-plus-sign-alt"></i> Add new list</button>
+    <button class="btn btn-primary add-new-list" ng-click="showAddNewListModal()"><i class="icon-plus-sign-alt"></i> Add new list</button>
 
     <div class="flashcard-list-container">
         <div ng-repeat="list in lists">
             <div class="toolbar">
-                <a><i class="icon-remove"></i></a>
-                <a><i class="icon-edit"></i></a>
+                <button class="btn btn-link remove-flashcard-list" ng-click="showRemoveListModal()"><i class="icon-remove"></i></button>
+                <button class="btn btn-link edit-flashcardlist" ><i class="icon-edit"></i></button>
             </div>
             <h3>{{ list.title }} <small>Added: {{ list.create_date | date: 'medium'}}</small></h3>
         </div>
