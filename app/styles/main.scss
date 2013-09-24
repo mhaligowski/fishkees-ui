@@ -49,12 +49,14 @@ body {
     margin-top: 10px;
 }
 
-.flashcard-list-container .toolbar i {
+.flashcard-list-container .toolbar a {
     clear: both;
     display: block;
     color: #bbb;
+    text-decoration: none;
 }
 
-.flashcard-list-container .toolbar i:hover {
+.flashcard-list-container .toolbar a:hover {
     color: #000;
+    text-decoration: none;
 }
