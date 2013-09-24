@@ -1,11 +1,11 @@
 'use strict'
 
-describe('Controller: ModalInstanceCtrl', function () {
+describe('Controller: AddNewListModalInstanceCtrl', function () {
 
   // load the controller's module
   beforeEach(module('fishkeesUiApp.flascardList'));
 
-  var ModalInstanceCtrl,
+  var AddNewListModalInstanceCtrl,
     scope,
     mockModalInstance;
 
@@ -24,7 +24,7 @@ describe('Controller: ModalInstanceCtrl', function () {
     scope = $rootScope.$new();
 
     // mock controller
-    ModalInstanceCtrl = $controller('ModalInstanceCtrl', {
+    AddNewListModalInstanceCtrl = $controller('AddNewListModalInstanceCtrl', {
       $scope: scope,
       $modalInstance: mockModalInstance,
     });

@@ -3,10 +3,10 @@
 </div>
 
 <div class="modal-body">
-    Are you sure you want to remove the list {{ listName }}?
+    Are you sure you want to remove the list {{ list.title }}?
 </div>
 
 <div class="modal-footer">
-    <button class="btn btn-danger">Yes, remove the list</button>
-    <button class="btn">No, leave it alone</button>
+    <button class="btn btn-danger confirm" ng-click="ok()" >Yes, remove the list</button>
+    <button class="btn close-modal" ng-click="cancel()" >No, leave it alone</button>
 </div>
