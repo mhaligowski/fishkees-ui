@@ -1,6 +1,4 @@
-'use strict';
-
-angular.module('fishkeesUiApp.flascardList', ['ngResource', 'ui.bootstrap'])
+angular.module('flashcardListModule.controllers', ['ui.bootstrap', 'flashcardListModule.modals', 'flashcardListModule.flashcardListResource'])
     .controller('FlashcardlistCtrl', function($scope, $modal, FlashcardLists) {
         $scope.lists = FlashcardLists.query();
         // $scope.lists = [
@@ -40,7 +38,7 @@ angular.module('fishkeesUiApp.flascardList', ['ngResource', 'ui.bootstrap'])
         $scope.showAddNewListModal = function() {
             var modalInstance = $modal.open({
                 templateUrl: 'views/addNewListModal.html',
-                controller: 'AddNewListModalInstanceCtrl',
+                controller: 'AddNewListModalCtrl',
                 windowClass: 'add-new-list-modal'
             }); 
 
@@ -50,7 +48,7 @@ angular.module('fishkeesUiApp.flascardList', ['ngResource', 'ui.bootstrap'])
         $scope.showRemoveListModal = function(list) {
             var modalInstance = $modal.open({
                 templateUrl: 'views/removeListModal.html',
-                controller: 'RemoveListModalInstanceCtrl',
+                controller: 'RemoveListModalCtrl',
                 resolve: {
                     list: function() { return list; }
                 },
@@ -60,43 +58,3 @@ angular.module('fishkeesUiApp.flascardList', ['ngResource', 'ui.bootstrap'])
             modalInstance.result.then($scope.removeList);
         }
     })
-
-    .controller('AddNewListModalInstanceCtrl', function($scope, $modalInstance) {        
-        $scope.newList = {
-            title: ''
-        }
-
-        $scope.cancel = function() {
-            $modalInstance.dismiss('cancel');
-        }
-
-        $scope.ok = function() {
-            $modalInstance.close($scope.newList);
-        }
-    })
-
-    .controller('RemoveListModalInstanceCtrl', function($scope, $modalInstance, list) {
-        $scope.list = list;
-
-        $scope.cancel = function() {
-            $modalInstance.dismiss('cancel');
-        }
-
-        $scope.ok = function() {
-            $modalInstance.close($scope.list);
-        }
-    })
-
-    .factory('FlashcardLists', function($resource) {
-        return $resource('flashcardlists/:flashcardlistId', {}, {
-            query: {method: 'GET', isArray: true},
-            save: {method: 'POST'} 
-        });
-    })
-
-    .config(function ($routeProvider) {
-        $routeProvider
-        .when('/FlashcardLists', {
-            templateUrl: 'views/FlashcardList.html'
-        })
-    });

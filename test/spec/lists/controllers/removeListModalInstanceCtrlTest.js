@@ -3,9 +3,9 @@
 describe('Controller: RemoveListModalInstanceCtrl', function () {
 
   // load the controller's module
-  beforeEach(module('fishkeesUiApp.flascardList'));
+  beforeEach(module('flashcardListModule.modals'));
 
-  var RemoveListModalInstanceCtrl,
+  var RemoveListModalCtrl,
     scope,
     mockModalInstance,
     list;
@@ -29,7 +29,7 @@ describe('Controller: RemoveListModalInstanceCtrl', function () {
     };
 
     // mock controller
-    RemoveListModalInstanceCtrl = $controller('RemoveListModalInstanceCtrl', {
+    RemoveListModalCtrl = $controller('RemoveListModalCtrl', {
       $scope: scope,
       $modalInstance: mockModalInstance,
       list: list

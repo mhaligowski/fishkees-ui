@@ -3,7 +3,7 @@
 describe('Controller: FlashcardlistCtrl', function () {
 
   // load the controller's module
-  beforeEach(module('fishkeesUiApp.flascardList'));
+  beforeEach(module('flashcardListModule.controllers'));
 
   var FlashcardlistCtrl,
     scope,
@@ -81,7 +81,7 @@ describe('Controller: FlashcardlistCtrl', function () {
     // then
     expect(mockModal.open).toHaveBeenCalledWith({
       templateUrl: 'views/addNewListModal.html',
-      controller: 'AddNewListModalInstanceCtrl',
+      controller: 'AddNewListModalCtrl',
       windowClass: 'add-new-list-modal'
     });
     expect(mockModalResult.result.then).toHaveBeenCalled();
@@ -129,7 +129,7 @@ describe('Controller: FlashcardlistCtrl', function () {
     // then
     expect(mockModal.open).toHaveBeenCalledWith({
       templateUrl: 'views/removeListModal.html',
-      controller: 'RemoveListModalInstanceCtrl',
+      controller: 'RemoveListModalCtrl',
       windowClass: 'remove-list-modal',
       resolve: {
         list: jasmine.any(Function)
