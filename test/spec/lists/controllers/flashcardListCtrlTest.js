@@ -64,7 +64,7 @@ describe('Controller: FlashcardListCtrl', function () {
     expect(scope.lists.length).toEqual(2);
 
     // when
-    scope.createNewList({
+    scope.createList({
       'title': 'MockList',
       'create_date': 12345
     });
@@ -74,20 +74,24 @@ describe('Controller: FlashcardListCtrl', function () {
 
   });
 
-  it('it should show add new list modal', function() {
+  it('should show add new list modal', function() {
     // when
     scope.showAddNewListModal();
     
     // then
     expect(mockModal.open).toHaveBeenCalledWith({
       templateUrl: 'views/addNewListModal.html',
-      controller: 'AddNewListModalCtrl',
-      windowClass: 'add-new-list-modal'
+      controller: 'ListModalCtrl',
+      windowClass: 'add-new-list-modal',
+      resolve: {
+        list: jasmine.any(Function)
+      }
+
     });
     expect(mockModalResult.result.then).toHaveBeenCalled();
   });
 
-  it('it should remove the list', function() {
+  it('should remove the list', function() {
     // given
     scope.lists = [
         {
@@ -129,7 +133,7 @@ describe('Controller: FlashcardListCtrl', function () {
     // then
     expect(mockModal.open).toHaveBeenCalledWith({
       templateUrl: 'views/removeListModal.html',
-      controller: 'RemoveListModalCtrl',
+      controller: 'ListModalCtrl',
       windowClass: 'remove-list-modal',
       resolve: {
         list: jasmine.any(Function)
@@ -145,7 +149,7 @@ describe('Controller: FlashcardListCtrl', function () {
     // then
     expect(mockModal.open).toHaveBeenCalledWith({
       templateUrl: 'views/editListModal.html',
-      controller: 'EditListModalCtrl',
+      controller: 'ListModalCtrl',
       windowClass: 'edit-list-modal',
       resolve: {
         list: jasmine.any(Function)

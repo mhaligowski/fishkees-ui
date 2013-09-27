@@ -14,7 +14,7 @@ angular.module('flashcardListModule.controllers', ['ui.bootstrap', 'flashcardLis
         //     }
         // ];
 
-        $scope.createNewList = function(newListData) {
+        $scope.createList = function(newListData) {
             var newList = {
                 'title': newListData.title,
                 'create_date': new Date().getTime()
@@ -38,17 +38,20 @@ angular.module('flashcardListModule.controllers', ['ui.bootstrap', 'flashcardLis
         $scope.showAddNewListModal = function() {
             var modalInstance = $modal.open({
                 templateUrl: 'views/addNewListModal.html',
-                controller: 'AddNewListModalCtrl',
-                windowClass: 'add-new-list-modal'
+                controller: 'ListModalCtrl',
+                windowClass: 'add-new-list-modal',
+                resolve: {
+                    list: function() { return {'title': ''}; }
+                }
             }); 
 
-            modalInstance.result.then($scope.createNewList);
+            modalInstance.result.then($scope.createList);
         };
         
         $scope.showRemoveListModal = function(list) {
             var modalInstance = $modal.open({
                 templateUrl: 'views/removeListModal.html',
-                controller: 'RemoveListModalCtrl',
+                controller: 'ListModalCtrl',
                 resolve: {
                     list: function() { return list; }
                 },
@@ -61,9 +64,13 @@ angular.module('flashcardListModule.controllers', ['ui.bootstrap', 'flashcardLis
         $scope.showEditListModal = function(list) {
             var modalInstance = $modal.open({
                 templateUrl: 'views/editListModal.html',
-                controller: 'EditListModalCtrl',
+                controller: 'ListModalCtrl',
                 resolve: {
-                    list: function() { return list; }
+                    list: function() { return {
+                            'id': list.id,
+                            'title': list.title
+                        }
+                    },
                 },
                 windowClass: 'edit-list-modal'
             });

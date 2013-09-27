@@ -1,13 +1,14 @@
 'use strict'
 
-describe('Controller: addNewListModalCtrl', function () {
+describe('Controller: RemoveListModalInstanceCtrl', function () {
 
   // load the controller's module
   beforeEach(module('flashcardListModule.modals'));
 
-  var AddNewListModalCtrl,
+  var ListModalCtrl,
     scope,
-    mockModalInstance;
+    mockModalInstance,
+    list;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
@@ -23,19 +24,24 @@ describe('Controller: addNewListModalCtrl', function () {
     // mock scope
     scope = $rootScope.$new();
 
+    list = {
+      id: 1
+    };
+
     // mock controller
-    AddNewListModalCtrl = $controller('AddNewListModalCtrl', {
+    ListModalCtrl = $controller('ListModalCtrl', {
       $scope: scope,
       $modalInstance: mockModalInstance,
+      list: list
     });
   }));
 
-  it('should contain empty new list', function() {
-    expect(scope.newList).toEqual({
-      title: ''
+  it('should contain the same list after create', function() {
+    expect(scope.list).toEqual({
+      id: 1
     });
 
-    expect(scope.newList).not.toEqual({
+    expect(scope.list).not.toEqual({
       title: 'someTitle'
     });
   });
@@ -49,11 +55,8 @@ describe('Controller: addNewListModalCtrl', function () {
   });
 
   it('should call modal closing with returning argument', function() {
-    scope.newList = {
-        title: 'newTestList'
-    };
-
     scope.ok();
-    expect(mockModalInstance.close).toHaveBeenCalledWith(scope.newList);
+
+    expect(mockModalInstance.close).toHaveBeenCalledWith(scope.list);
   });
 });

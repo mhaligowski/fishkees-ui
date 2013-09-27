@@ -7,10 +7,13 @@
 
     <div class="flashcard-list-container">
         <div ng-repeat="list in lists">
+            
             <div class="toolbar">
                 <button class="btn btn-link remove-flashcard-list" ng-click="showRemoveListModal(list)"><i class="icon-remove" ></i></button>
+                
                 <button class="btn btn-link edit-flashcard-list" ng-click="showEditListModal(list)"><i class="icon-edit"></i></button>
             </div>
+
             <h3><span class="flashcard-list-title">{{ list.title }}</span> <small>Added: {{ list.create_date | date: 'medium'}}</small></h3>
         </div>
     </div>

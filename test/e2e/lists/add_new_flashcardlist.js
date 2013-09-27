@@ -31,7 +31,7 @@ describe('Add new flashcardlist scenarios', function() {
       expect(repeater('.flashcard-list-container > div').count()).toBe(2);
 
       element(':button.add-new-list').click();
-      input('newList.title').enter('Learning JavaScript');
+      input('list.title').enter('Learning JavaScript');
       element(':button.add-button').click();
 
       // then
