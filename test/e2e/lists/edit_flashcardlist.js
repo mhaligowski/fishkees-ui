@@ -5,16 +5,16 @@ describe('Edit flashcardlist scenarios', function() {
     beforeEach(function() {
       browser().navigateTo('/#/FlashcardLists');
     }); 
- 
-    it('after clicking on the first item, it should change to input, one should not be able edit nor remove', function() {
-        expect(element('.flashcard-list-container > div:first span.flashcard-list-title').count()).toBe(1);
-        expect(element('.flashcard-list-container > div:first input.flashcard-list-title').count()).toBe(0);
 
-        element('.flashcard-list-container > div:first span.flashcard-list-title').click();
+    it('should not contain a modal after starting the page', function() {
+      expect(element('.modal.edit-list-modal').count()).toBe(0);
+    });
 
-        expect(element('.flashcard-list-container > div:first span.flashcard-list-title').count()).toBe(0);
-        expect(element('.flashcard-list-container > div:first input.flashcard-list-title').count()).toBe(1);
+    it('should show edit modal after clicking on the first edit button', function() {
+        element('.flashcard-list-container > div:first :button.edit-flashcard-list').click();
 
+        expect(element('.modal.edit-list-modal').count()).toBe(1);
+        expect(input('list.title').val()).toMatch('Spanish for beginners');
     });
 
   });

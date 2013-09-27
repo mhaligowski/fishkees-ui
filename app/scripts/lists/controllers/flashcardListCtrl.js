@@ -1,5 +1,5 @@
 angular.module('flashcardListModule.controllers', ['ui.bootstrap', 'flashcardListModule.modals', 'flashcardListModule.flashcardListResource'])
-    .controller('FlashcardlistCtrl', function($scope, $modal, FlashcardLists) {
+    .controller('FlashcardListCtrl', function($scope, $modal, FlashcardLists) {
         $scope.lists = FlashcardLists.query();
         // $scope.lists = [
         //     {
@@ -56,5 +56,18 @@ angular.module('flashcardListModule.controllers', ['ui.bootstrap', 'flashcardLis
             });
 
             modalInstance.result.then($scope.removeList);
+        }
+
+        $scope.showEditListModal = function(list) {
+            var modalInstance = $modal.open({
+                templateUrl: 'views/editListModal.html',
+                controller: 'EditListModalCtrl',
+                resolve: {
+                    list: function() { return list; }
+                },
+                windowClass: 'edit-list-modal'
+            });
+
+            modalInstance.result.then($scope.editList);
         }
     })

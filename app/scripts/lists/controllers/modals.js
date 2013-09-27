@@ -1,26 +1,23 @@
 angular.module('flashcardListModule.modals', ['ui.bootstrap'])
     .controller('AddNewListModalCtrl', function($scope, $modalInstance) {        
-        $scope.newList = {
-            title: ''
-        }
+        $scope.newList = { title: '' }
 
-        $scope.cancel = function() {
-            $modalInstance.dismiss('cancel');
-        }
-
-        $scope.ok = function() {
-            $modalInstance.close($scope.newList);
-        }
+        $scope.cancel = function() { $modalInstance.dismiss('cancel'); }
+        $scope.ok = function() { $modalInstance.close($scope.newList); }
     })
 
     .controller('RemoveListModalCtrl', function($scope, $modalInstance, list) {
         $scope.list = list;
 
-        $scope.cancel = function() {
-            $modalInstance.dismiss('cancel');
+        $scope.cancel = function() { $modalInstance.dismiss('cancel'); }
+        $scope.ok = function() { $modalInstance.close($scope.list); }
+    })
+
+    .controller('EditListModalCtrl', function($scope, $modalInstance, list) {
+        $scope.list = {
+            'title': list.title
         }
 
-        $scope.ok = function() {
-            $modalInstance.close($scope.list);
-        }
+        $scope.cancel = function() { $modalInstance.dismiss('cancel'); }
+        $scope.ok = function() { $modalInstance.close($scope.list); }
     })
