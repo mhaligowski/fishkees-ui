@@ -1,11 +1,11 @@
 'use strict';
 
-describe('Controller: FlashcardlistCtrl', function () {
+describe('Controller: FlashcardListCtrl', function () {
 
   // load the controller's module
-  beforeEach(module('fishkeesUiApp.flascardList'));
+  beforeEach(module('flashcardListModule.controllers'));
 
-  var FlashcardlistCtrl,
+  var FlashcardListCtrl,
     scope,
     $httpBackend,
     mockModal,
@@ -45,7 +45,7 @@ describe('Controller: FlashcardlistCtrl', function () {
     scope = $rootScope.$new();
 
     // mock controller
-    FlashcardlistCtrl = $controller('FlashcardlistCtrl', {
+    FlashcardListCtrl = $controller('FlashcardListCtrl', {
       $scope: scope,
       $modal: mockModal,
     });
@@ -64,7 +64,7 @@ describe('Controller: FlashcardlistCtrl', function () {
     expect(scope.lists.length).toEqual(2);
 
     // when
-    scope.createNewList({
+    scope.createList({
       'title': 'MockList',
       'create_date': 12345
     });
@@ -74,20 +74,24 @@ describe('Controller: FlashcardlistCtrl', function () {
 
   });
 
-  it('it should show add new list modal', function() {
+  it('should show add new list modal', function() {
     // when
     scope.showAddNewListModal();
     
     // then
     expect(mockModal.open).toHaveBeenCalledWith({
       templateUrl: 'views/addNewListModal.html',
-      controller: 'AddNewListModalInstanceCtrl',
-      windowClass: 'add-new-list-modal'
+      controller: 'ListModalCtrl',
+      windowClass: 'add-new-list-modal',
+      resolve: {
+        list: jasmine.any(Function)
+      }
+
     });
     expect(mockModalResult.result.then).toHaveBeenCalled();
   });
 
-  it('it should remove the list', function() {
+  it('should remove the middle list', function() {
     // given
     scope.lists = [
         {
@@ -122,14 +126,14 @@ describe('Controller: FlashcardlistCtrl', function () {
     expect(scope.lists[1].id).toBe(3);
   });
 
-  it('it should show remove list modal', function() {
+  it('should show remove list modal', function() {
     // when
     scope.showRemoveListModal({ id: 1 });
     
     // then
     expect(mockModal.open).toHaveBeenCalledWith({
       templateUrl: 'views/removeListModal.html',
-      controller: 'RemoveListModalInstanceCtrl',
+      controller: 'ListModalCtrl',
       windowClass: 'remove-list-modal',
       resolve: {
         list: jasmine.any(Function)
@@ -138,5 +142,37 @@ describe('Controller: FlashcardlistCtrl', function () {
     expect(mockModalResult.result.then).toHaveBeenCalled();
   });
 
+  it('should call opening the show edit modal button', function() {
+    // when
+    scope.showEditListModal({ id: 1 });
+    
+    // then
+    expect(mockModal.open).toHaveBeenCalledWith({
+      templateUrl: 'views/editListModal.html',
+      controller: 'ListModalCtrl',
+      windowClass: 'edit-list-modal',
+      resolve: {
+        list: jasmine.any(Function)
+      }
+    });
+    expect(mockModalResult.result.then).toHaveBeenCalled();
+  });
 
+  it('should edit the list', function() {
+    // given
+    $httpBackend.flush();
+    expect(scope.lists.length).toBe(2);
+
+    // when
+    scope.editList({
+        'id': 1,
+        'title': 'Klingon for beginners'
+    });
+
+    // then
+    expect(scope.lists.length).toBe(2);
+    expect(scope.lists[0].title).toMatch('Klingon for beginners');
+    expect(scope.lists[0].id).toBe(1);
+    expect(scope.lists[0].create_date).toEqual(new Date(1379617022 * 1000));
+  });
 });
