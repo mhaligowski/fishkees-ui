@@ -1,7 +1,5 @@
-'use strict';
-
-angular.module('fishkeesUiApp.flascardList', ['ngResource', 'ui.bootstrap'])
-    .controller('FlashcardlistCtrl', function($scope, $modal, FlashcardLists) {
+angular.module('flashcardListModule.controllers', ['ui.bootstrap', 'flashcardListModule.modals', 'flashcardListModule.flashcardListResource'])
+    .controller('FlashcardListCtrl', function($scope, $modal, FlashcardLists) {
         $scope.lists = FlashcardLists.query();
         // $scope.lists = [
         //     {
@@ -16,7 +14,7 @@ angular.module('fishkeesUiApp.flascardList', ['ngResource', 'ui.bootstrap'])
         //     }
         // ];
 
-        $scope.createNewList = function(newListData) {
+        $scope.createList = function(newListData) {
             var newList = {
                 'title': newListData.title,
                 'create_date': new Date().getTime()
@@ -37,20 +35,33 @@ angular.module('fishkeesUiApp.flascardList', ['ngResource', 'ui.bootstrap'])
             }
         }
 
+        $scope.editList = function(list) {
+            var lists = $scope.lists;
+            for (var l in lists) {
+                if (lists[l].id == list.id) {
+                    lists[l].title = list.title;
+                    return;
+                }
+            }
+        }
+
         $scope.showAddNewListModal = function() {
             var modalInstance = $modal.open({
                 templateUrl: 'views/addNewListModal.html',
-                controller: 'AddNewListModalInstanceCtrl',
-                windowClass: 'add-new-list-modal'
+                controller: 'ListModalCtrl',
+                windowClass: 'add-new-list-modal',
+                resolve: {
+                    list: function() { return {'title': ''}; }
+                }
             }); 
 
-            modalInstance.result.then($scope.createNewList);
+            modalInstance.result.then($scope.createList);
         };
         
         $scope.showRemoveListModal = function(list) {
             var modalInstance = $modal.open({
                 templateUrl: 'views/removeListModal.html',
-                controller: 'RemoveListModalInstanceCtrl',
+                controller: 'ListModalCtrl',
                 resolve: {
                     list: function() { return list; }
                 },
@@ -59,44 +70,21 @@ angular.module('fishkeesUiApp.flascardList', ['ngResource', 'ui.bootstrap'])
 
             modalInstance.result.then($scope.removeList);
         }
-    })
 
-    .controller('AddNewListModalInstanceCtrl', function($scope, $modalInstance) {        
-        $scope.newList = {
-            title: ''
-        }
+        $scope.showEditListModal = function(list) {
+            var modalInstance = $modal.open({
+                templateUrl: 'views/editListModal.html',
+                controller: 'ListModalCtrl',
+                resolve: {
+                    list: function() { return {
+                            'id': list.id,
+                            'title': list.title
+                        }
+                    },
+                },
+                windowClass: 'edit-list-modal'
+            });
 
-        $scope.cancel = function() {
-            $modalInstance.dismiss('cancel');
-        }
-
-        $scope.ok = function() {
-            $modalInstance.close($scope.newList);
-        }
-    })
-
-    .controller('RemoveListModalInstanceCtrl', function($scope, $modalInstance, list) {
-        $scope.list = list;
-
-        $scope.cancel = function() {
-            $modalInstance.dismiss('cancel');
-        }
-
-        $scope.ok = function() {
-            $modalInstance.close($scope.list);
+            modalInstance.result.then($scope.editList);
         }
     })
-
-    .factory('FlashcardLists', function($resource) {
-        return $resource('flashcardlists/:flashcardlistId', {}, {
-            query: {method: 'GET', isArray: true},
-            save: {method: 'POST'} 
-        });
-    })
-
-    .config(function ($routeProvider) {
-        $routeProvider
-        .when('/FlashcardLists', {
-            templateUrl: 'views/FlashcardList.html'
-        })
-    });
