@@ -35,6 +35,16 @@ angular.module('flashcardListModule.controllers', ['ui.bootstrap', 'flashcardLis
             }
         }
 
+        $scope.editList = function(list) {
+            var lists = $scope.lists;
+            for (var l in lists) {
+                if (lists[l].id == list.id) {
+                    lists[l].title = list.title;
+                    return;
+                }
+            }
+        }
+
         $scope.showAddNewListModal = function() {
             var modalInstance = $modal.open({
                 templateUrl: 'views/addNewListModal.html',

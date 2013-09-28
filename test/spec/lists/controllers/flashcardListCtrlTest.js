@@ -91,7 +91,7 @@ describe('Controller: FlashcardListCtrl', function () {
     expect(mockModalResult.result.then).toHaveBeenCalled();
   });
 
-  it('should remove the list', function() {
+  it('should remove the middle list', function() {
     // given
     scope.lists = [
         {
@@ -158,4 +158,21 @@ describe('Controller: FlashcardListCtrl', function () {
     expect(mockModalResult.result.then).toHaveBeenCalled();
   });
 
+  it('should edit the list', function() {
+    // given
+    $httpBackend.flush();
+    expect(scope.lists.length).toBe(2);
+
+    // when
+    scope.editList({
+        'id': 1,
+        'title': 'Klingon for beginners'
+    });
+
+    // then
+    expect(scope.lists.length).toBe(2);
+    expect(scope.lists[0].title).toMatch('Klingon for beginners');
+    expect(scope.lists[0].id).toBe(1);
+    expect(scope.lists[0].create_date).toEqual(new Date(1379617022 * 1000));
+  });
 });
