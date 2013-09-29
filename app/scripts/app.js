@@ -1,5 +1,5 @@
 'use strict';
-angular.module('flashcardListsModule', [])
+angular.module('flashcardListsModule');
 
 angular.module('fishkeesUiApp', ['flashcardListsModule'])
   .config(function ($routeProvider) {

@@ -1,7 +1,4 @@
-angular.module('flashcardListModule.flashcardListResource', ['ngResource'])
+angular.module('flashcardListModule.services')
     .factory('FlashcardLists', function($resource) {
-        return $resource('flashcardlists/:flashcardlistId', {}, {
-            query: {method: 'GET', isArray: true},
-            save: {method: 'POST'} 
-        });
+        return $resource('flashcardlists/:flashcardlistId');
     })
