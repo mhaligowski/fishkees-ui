@@ -1,4 +1,5 @@
 'use strict';
+angular.module('commonModule');
 angular.module('flashcardListsModule');
 
 angular.module('fishkeesUiApp', ['flashcardListsModule'])
