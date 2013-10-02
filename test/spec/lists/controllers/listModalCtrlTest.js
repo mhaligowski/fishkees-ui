@@ -3,7 +3,7 @@
 describe('Controller: RemoveListModalInstanceCtrl', function () {
 
   // load the controller's module
-  beforeEach(module('flashcardListModule.modals'));
+  beforeEach(module('flashcardListModule.controllers'));
 
   var ListModalCtrl,
     scope,

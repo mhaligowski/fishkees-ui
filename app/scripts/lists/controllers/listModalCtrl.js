@@ -1,4 +1,4 @@
-angular.module('flashcardListModule.modals', ['ui.bootstrap'])
+angular.module('flashcardListModule.controllers')
     .controller('ListModalCtrl', function($scope, $modalInstance, list) {
         $scope.list = list;
 
