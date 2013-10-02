@@ -15,11 +15,17 @@ module.exports = function(config) {
       'app/bower_components/angular-mocks/angular-mocks.js',
       'app/bower_components/angular-resource/angular-resource.js',
       'app/bower_components/angular-ui-bootstrap-bower/ui-bootstrap-tpls.js',
+
+      // common
+      'app/scripts/common/*.js',
+      'app/scripts/common/services/*.js',
       
+      // lists
       'app/scripts/lists/*.js',
       'app/scripts/lists/services/*.js',
       'app/scripts/lists/controllers/*.js',
       
+      // tests
       'test/mock/**/*.js',
       'test/spec/**/*.js'
     ],
