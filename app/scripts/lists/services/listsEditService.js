@@ -1,18 +1,7 @@
 angular.module('flashcardListModule.services')
-  .service('listsEditService', function() {
+  .service('listsEditService', function(FlashcardLists) {
         this.getLists = function() {
-            return [
-                {
-                    'id': 1,
-                    'title': 'Spanish for beginners',
-                    'create_date': 1379617022000
-                },
-                {
-                    'id': 2,
-                    'title': 'Russian for intermediate',
-                    'create_date': 1339347167000
-                }
-            ];
+            return FlashcardLists.query();
         }
 
         this.addToLists = function(lists, newList) {

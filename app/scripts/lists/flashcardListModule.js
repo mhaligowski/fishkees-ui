@@ -1,4 +1,4 @@
-angular.module('flashcardListModule.services', ['ngResource']);
+angular.module('flashcardListModule.services', ['ngResource', 'commonModule.services']);
 angular.module('flashcardListModule.controllers', ['ui.bootstrap', 'flashcardListModule.services']);
 
 angular.module('flashcardListsModule', ['flashcardListModule.controllers'])    
