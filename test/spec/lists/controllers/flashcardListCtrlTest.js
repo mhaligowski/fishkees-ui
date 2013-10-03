@@ -8,7 +8,8 @@ describe('Controller: FlashcardListCtrl', function () {
   var FlashcardListCtrl,
     scope,
     mockModal,
-    mockModalResult;
+    mockModalInstance,
+    mockListsEditService;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
@@ -17,12 +18,31 @@ describe('Controller: FlashcardListCtrl', function () {
       open: function() {}
     };
 
-    mockModalResult =  {
-      result: { then: function() {} }
+    mockModalInstance =  {
+      result: { then: function() { }}
     }
     
-    spyOn(mockModal, 'open').andReturn(mockModalResult);
-    spyOn(mockModalResult.result, 'then');
+    spyOn(mockModal, 'open').andReturn(mockModalInstance);
+    spyOn(mockModalInstance.result, 'then');
+
+    // mock listEditService
+    mockListsEditService = {
+      getLists: function() {
+        return [{
+            "id": 1,
+            "title": "Spanish for beginners",
+            "create_date": 1379617022000
+        },
+        {
+            "id": 2,
+            "title": "Russian for intermediate",
+            "create_date": 1339347167000
+        }];
+      },
+      addToLists: function(lists, newList) {},
+      removeFromLists: function(lists, toRemove) {},
+      updateLists: function(lists, toUpdate) {}
+    };
 
     // mock scope
     scope = $rootScope.$new();
@@ -31,6 +51,7 @@ describe('Controller: FlashcardListCtrl', function () {
     FlashcardListCtrl = $controller('FlashcardListCtrl', {
       $scope: scope,
       $modal: mockModal,
+      listsEditService: mockListsEditService
     });
   }));
 
@@ -52,7 +73,7 @@ describe('Controller: FlashcardListCtrl', function () {
       }
 
     });
-    expect(mockModalResult.result.then).toHaveBeenCalled();
+    expect(mockModalInstance.result.then).toHaveBeenCalled();
   });
 
 
@@ -69,7 +90,7 @@ describe('Controller: FlashcardListCtrl', function () {
         list: jasmine.any(Function)
       }
     });
-    expect(mockModalResult.result.then).toHaveBeenCalled();
+    expect(mockModalInstance.result.then).toHaveBeenCalled();
   });
 
   it('should call opening the show edit modal button', function() {
@@ -85,7 +106,7 @@ describe('Controller: FlashcardListCtrl', function () {
         list: jasmine.any(Function)
       }
     });
-    expect(mockModalResult.result.then).toHaveBeenCalled();
+    expect(mockModalInstance.result.then).toHaveBeenCalled();
   });
 
 
