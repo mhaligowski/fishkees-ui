@@ -3,4 +3,4 @@ angular.module('commonModule.services')
         this.getAddress = function(path) {
             return REST_PREFIX + path;
         };
-    })
+    });

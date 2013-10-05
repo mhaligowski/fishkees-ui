@@ -1,12 +1,13 @@
 angular.module('flashcardListModule.services')
   .service('listsEditService', function(FlashcardLists) {
         this.getLists = function() {
-            return FlashcardLists.query();
+            return FlashcardLists.query().then(function(response) {
+                return response;
+            });
         }
 
         this.addToLists = function(lists, newList) {
             // FlashcardLists.save(newList)
-            newList.createDate = new Date();
             lists.push(newList);
         }
 
