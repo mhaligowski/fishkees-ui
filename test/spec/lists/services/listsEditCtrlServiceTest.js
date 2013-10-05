@@ -5,7 +5,7 @@ describe('Service: ListEditCtrlService', function () {
     // load the controller's module
     beforeEach(module('flashcardListModule.services'));
 
-    var ListsEditService, lists, mockFlashcardLists;
+    var ListsEditService, lists, mockFlashcardLists, rootScope, q;
 
     // Initialize the controller and a mock scope
     beforeEach(function() { 
@@ -28,24 +28,39 @@ describe('Service: ListEditCtrlService', function () {
         ];
 
         mockFlashcardLists = {
-            query: function() { return lists; }
+            query: function() { 
+                var deferred = q.defer();
+                deferred.resolve(lists);
+                return deferred.promise;
+            }
         }
 
-        module(function($provide) {
+
+        module(function ($provide) {
             $provide.value('FlashcardLists', mockFlashcardLists);
         })
 
+        inject(function ($q, $rootScope) {
+            q = $q;
+            rootScope = $rootScope;
+        });
+
         inject(function ($injector) {
             ListsEditService = $injector.get('listsEditService');
+            $injector.get('$rootScope');
         });
     });
 
     it('should show 3 lists at the beginning', function() {
         // when
-        var result = ListsEditService.getLists();
-
+        var testLists = [];
+        ListsEditService.getLists().then(function(response) {
+            testLists = response;
+        });
+        rootScope.$apply();
+        
         // then
-        expect(result.length).toBe(3);
+        expect(testLists.length).toBe(3);
     });
 
     it('should add new list', function() {

@@ -1,6 +1,8 @@
 angular.module('flashcardListModule.controllers')
     .controller('FlashcardListCtrl', function($scope, $modal, listsEditService) {
-        $scope.lists = listsEditService.getLists();
+        listsEditService.getLists().then(function(result) {
+            $scope.lists = result;
+        });
 
         $scope.showAddNewListModal = function() {
             var modalInstance = $modal.open({
