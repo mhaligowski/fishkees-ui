@@ -9,7 +9,7 @@ angular.module('commonModule.services')
 
             Resource.query = function(params) {
                 return $http.get(resourceUrl, {
-                    params: angular.extend({q: JSON.stringify({} || params)}, {})
+                    params: angular.extend({q: JSON.stringify(null || params)}, null)
                 })
 
                 .then(function(response) {
