@@ -1,7 +1,7 @@
 angular.module('flashcardListModule.services', ['commonModule.services']);
 angular.module('flashcardListModule.controllers', ['ui.bootstrap', 'flashcardListModule.services']);
 
-angular.module('flashcardListsModule', ['flashcardListModule.controllers'])    
+angular.module('flashcardListsModule', ['flashcardListModule.controllers', 'ngRoute'])    
     .config(function ($routeProvider) {
         $routeProvider
         .when('/FlashcardLists', {
