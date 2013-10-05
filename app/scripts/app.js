@@ -2,7 +2,7 @@
 angular.module('commonModule');
 angular.module('flashcardListsModule');
 
-angular.module('fishkeesUiApp', ['flashcardListsModule'])
+angular.module('fishkeesUiApp', ['flashcardListsModule', 'ngRoute'])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {

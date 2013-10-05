@@ -1,5 +1,5 @@
 angular.module('flashcardListModule.services')
-    .factory('FlashcardLists', function($resource, RestAdressService) {
-        var adress = RestAdressService.getAddress('flashcardlists/:flashcardlistId');
-        return $resource(adress);
-    })
+    .factory('FlashcardLists', function(FishkeesResource, RestAdressService) {
+        var url = RestAdressService.getAddress('flashcardlists/');
+        return FishkeesResource(url);
+    });
