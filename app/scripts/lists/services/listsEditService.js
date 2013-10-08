@@ -1,24 +1,31 @@
 angular.module('flashcardListModule.services')
   .service('listsEditService', function(FlashcardLists) {
         this.getLists = function() {
-            return FlashcardLists.query().then(function(response) {
-                return response;
-            });
-        }
+            return FlashcardLists
+                    .query()
+                    .then(function(response) {
+                        return response;
+                    });
+        };
 
         this.addToLists = function(lists, newList) {
             // FlashcardLists.save(newList)
             lists.push(newList);
-        }
+        };
 
         this.removeFromLists = function(lists, toRemove) {
-            // FlashcardLists.remove(toRemove)
-            for (var l in lists) {
-                if (lists[l].id == toRemove.id) {
-                    lists.splice(l, 1);
-                    return;
-                }     
-            }
+            return FlashcardLists
+                    .remove(toRemove)
+                    .then(function(response) {
+                        for (var l in lists) {
+                            if (lists[l].id == response.id) {
+                                lists.splice(l, 1);
+                                break;
+                            }
+                        }
+
+                        return response;
+                    });
         }
 
         this.updateLists = function(lists, toUpdate) {

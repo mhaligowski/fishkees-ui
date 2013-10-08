@@ -32,6 +32,11 @@ describe('Service: ListEditCtrlService', function () {
                 var deferred = q.defer();
                 deferred.resolve(lists);
                 return deferred.promise;
+            },
+            remove: function(list) {
+                var deferred = q.defer();
+                deferred.resolve(list);
+                return deferred.promise;
             }
         }
 
@@ -54,9 +59,11 @@ describe('Service: ListEditCtrlService', function () {
     it('should show 3 lists at the beginning', function() {
         // when
         var testLists = [];
-        ListsEditService.getLists().then(function(response) {
-            testLists = response;
-        });
+        ListsEditService
+            .getLists()
+            .then(function(response) {
+                testLists = response;
+            });
         rootScope.$apply();
         
         // then
@@ -77,12 +84,19 @@ describe('Service: ListEditCtrlService', function () {
 
     it('should remove the middle list', function() {
         // when
-        ListsEditService.removeFromLists(lists, {
-            'id': 2,
-            'title': 'Russian for intermediate'
-        });
+        var testList = null;
+        ListsEditService
+            .removeFromLists(lists, {
+                'id': 2,
+                'title': 'Russian for intermediate'
+            })
+            .then(function(response) {
+                testList = response;
+            });
+        rootScope.$apply();
 
         // then
+        expect(testList.id).toBe(2);
         expect(lists.length).toBe(2);
         expect(lists[0].id).toBe(1);
         expect(lists[1].id).toBe(3);

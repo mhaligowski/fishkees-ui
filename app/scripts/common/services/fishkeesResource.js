@@ -9,24 +9,24 @@ angular.module('commonModule.services')
 
             Resource.query = function() {
                 return $http.get(resourceUrl)
+                            .then(function(response) {
+                                var result = [];
 
-                .then(function(response) {
-                    var result = [];
+                                angular.forEach(response.data, function(value, key) {
+                                    result[key] = new Resource(value);
+                                });
 
-                    angular.forEach(response.data, function(value, key) {
-                        result[key] = new Resource(value);
-                    });
-
-                    return result;
-                });
+                                return result;
+                            });
             };
 
             Resource.remove = function(object) {
                 var deleteUrl = resourceUrl + "/" + object.id;
+
                 return $http.delete(deleteUrl)
-                .then(function(response) {
-                    return new Resource(response.data);
-                });
+                            .then(function(response) {
+                                return new Resource(response.data);
+                            });
             };
 
             return Resource;
