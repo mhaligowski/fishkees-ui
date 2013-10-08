@@ -1,3 +1,5 @@
+'use strict'
+
 describe('Add new flashcardlist scenarios', function() {
  
   describe('The view', function() {

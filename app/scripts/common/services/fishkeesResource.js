@@ -7,20 +7,26 @@ angular.module('commonModule.services')
                 angular.extend(this, data);
             };
 
-            Resource.query = function(params) {
-                return $http.get(resourceUrl, {
-                    params: angular.extend({q: JSON.stringify(null || params)}, null)
-                })
+            Resource.query = function() {
+                return $http.get(resourceUrl)
+                            .then(function(response) {
+                                var result = [];
 
-                .then(function(response) {
-                    var result = [];
+                                angular.forEach(response.data, function(value, key) {
+                                    result[key] = new Resource(value);
+                                });
 
-                    angular.forEach(response.data, function(value, key) {
-                        result[key] = new Resource(value);
-                    });
+                                return result;
+                            });
+            };
 
-                    return result;
-                });
+            Resource.remove = function(object) {
+                var deleteUrl = resourceUrl + "/" + object.id;
+
+                return $http.delete(deleteUrl)
+                            .then(function(response) {
+                                return new Resource(response.data);
+                            });
             };
 
             return Resource;
