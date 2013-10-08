@@ -27,9 +27,9 @@ describe('Factory: FishkeesResource', function() {
             { "id": 2, "title": "Russian for intermediate", "create_date": 1339347167000 }
         ]; 
 
-        httpBackend.expect('GET', 'someUrl?').respond(returnedData);
+        httpBackend.expect('GET', 'someUrl').respond(returnedData);
 
-        var test = { handler: function() {} }
+        var test = { handler: function() {} };
         spyOn(test, 'handler');
 
         var testResource = testObj('someUrl');
@@ -39,7 +39,30 @@ describe('Factory: FishkeesResource', function() {
         // when
         httpBackend.flush();
 
-
+        // then
         expect(test.handler).toHaveBeenCalledWith(returnedData);
+    });
+
+    it('should remove list', function() {
+        expect(testObj).not.toBeUndefined();
+        expect(httpBackend).not.toBeUndefined();
+
+        // given
+        var removedItem = { "id": 1};
+
+        httpBackend.expect('DELETE', 'someUrl/1').respond(200, removedItem);
+
+        var test = { handler: function() {} };
+        spyOn(test, 'handler');
+
+        var testResource = testObj('someUrl');
+        var deletePromise = testResource.remove({"id": 1});
+        deletePromise.then(test.handler);
+
+        // when
+        httpBackend.flush();
+
+        // then
+        expect(test.handler).toHaveBeenCalledWith(removedItem);
     });
 });
