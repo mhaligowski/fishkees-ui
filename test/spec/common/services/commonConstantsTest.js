@@ -9,7 +9,7 @@ describe('Module: CommonConstants', function() {
         restPrefixValue = REST_PREFIX;
     }));
 
-    it('should be localhost:8080', function() {
-        expect(restPrefixValue).toMatch('http://localhost:8080');
+    it('should be /service/', function() {
+        expect(restPrefixValue).toMatch('/service/');
     })
 });
