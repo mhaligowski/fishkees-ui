@@ -5,7 +5,9 @@ describe('Add new flashcardlist scenarios', function() {
   describe('The view', function() {
  
     beforeEach(function() {
-      browser().navigateTo('/#/FlashcardLists');
+        browser().navigateTo('/');
+        restartDB();
+        browser().navigateTo('/#/FlashcardLists');
     }); 
  
     it('should contain a button for adding new flashcardlist', function() {

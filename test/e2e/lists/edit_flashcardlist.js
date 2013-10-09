@@ -3,6 +3,8 @@ describe('Edit flashcardlist scenarios', function() {
   describe('The view', function() {
  
     beforeEach(function() {
+        browser().navigateTo('/');
+        restartDB();
         browser().navigateTo('/#/FlashcardLists');
     }); 
 
