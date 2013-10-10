@@ -65,4 +65,34 @@ describe('Factory: FishkeesResource', function() {
         // then
         expect(test.handler).toHaveBeenCalledWith(removedItem);
     });
+
+    it('should add list', function() {
+        expect(testObj).not.toBeUndefined();
+        expect(httpBackend).not.toBeUndefined();
+
+        // given
+        var newItem = {"title": "test"};
+        var newResponseItem = {"id": 1, "title": "test", "create_date": 12345}
+
+        httpBackend
+            .expect('POST', 'someUrl')
+            .respond(201, null, {"location": "someUrl/1"});
+
+        httpBackend
+            .expect('GET', 'someUrl/1')
+            .respond(200, newResponseItem);
+
+        var test = { handler: function() {}};
+        spyOn(test, 'handler');
+
+        var testResource = testObj('someUrl');
+        var postPromise = testResource.save(newItem);
+        postPromise.then(test.handler);
+
+        // when
+        httpBackend.flush();
+
+        // then
+        expect(test.handler).toHaveBeenCalledWith(newResponseItem);
+    });
 });
