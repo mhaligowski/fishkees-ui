@@ -81,7 +81,7 @@ module.exports = function (grunt) {
           host: 'localhost',
           port: '8080',
           https: false,
-          changeOrigin: false,
+          changeOrigin: true,
           xforward: false,
           rewrite: {
             '^/service': ''

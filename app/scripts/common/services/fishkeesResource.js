@@ -3,7 +3,7 @@ angular.module('commonModule.services')
         return function(url) {
             var resourceUrl = url;
 
-            var Resource = function (data) {
+            var Resource = function(data) {
                 angular.extend(this, data);
             };
 
@@ -20,14 +20,30 @@ angular.module('commonModule.services')
                             });
             };
 
-            Resource.remove = function(object) {
-                var deleteUrl = resourceUrl + "/" + object.id;
+            Resource.remove = function(data) {
+                var deleteUrl = resourceUrl + "/" + data.id;
 
                 return $http.delete(deleteUrl)
                             .then(function(response) {
                                 return new Resource(response.data);
                             });
             };
+
+            var getResource = function(url) {
+                return $http.get(url)
+                            .then(function(response) {
+                                return new Resource(response.data);
+                            });
+            };
+
+            Resource.save = function(newListData) {
+                return $http.post(resourceUrl, newListData)
+                            .then(function(postResponse) {
+                                var newLocation = postResponse.headers("location");
+                                
+                                return getResource(newLocation);
+                            });
+            }
 
             return Resource;
         };

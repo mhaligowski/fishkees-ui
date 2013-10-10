@@ -9,8 +9,12 @@ angular.module('flashcardListModule.services')
         };
 
         this.addToLists = function(lists, newList) {
-            // FlashcardLists.save(newList)
-            lists.push(newList);
+            return FlashcardLists
+                    .save(newList)
+                    .then(function(response) {
+                        lists.push(response);
+                        return response;
+                    });
         };
 
         this.removeFromLists = function(lists, toRemove) {
