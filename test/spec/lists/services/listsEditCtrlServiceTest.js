@@ -37,6 +37,15 @@ describe('Service: ListEditCtrlService', function () {
                 var deferred = q.defer();
                 deferred.resolve(list);
                 return deferred.promise;
+            },
+            save: function(newList) {
+                var deferred = q.defer();
+                deferred.resolve({
+                    "id": 4,
+                    "title": newList.title,
+                    "create_date": 12345
+                });
+                return deferred.promise;
             }
         }
 
@@ -72,14 +81,17 @@ describe('Service: ListEditCtrlService', function () {
 
     it('should add new list', function() {
         // when
-        ListsEditService.addToLists(lists, {
-            'title': 'MockList',
-            'create_date': 12345
-        });
+        var newList;
+        ListsEditService.addToLists(lists, { 'title': 'MockList' })
+                        .then(function(response) {
+                            newList = response;
+                        });
+        rootScope.$apply();
 
         // then
         expect(lists.length).toEqual(4);
-        expect(lists[3].create_date).not.toBeUndefined();
+        expect(lists[3].create_date).toBe(12345);
+        expect(lists[3].id).toBe(4)
     });
 
     it('should remove the middle list', function() {
