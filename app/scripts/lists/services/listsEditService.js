@@ -36,6 +36,4 @@ angular.module('flashcardListModule.services')
                 }
             }
         }
-
-
   })

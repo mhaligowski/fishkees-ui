@@ -92,7 +92,7 @@ describe('Service: ListEditCtrlService', function () {
     it('should edit the list', function() {
         // when
         ListsEditService.updateLists(lists, {
-            'id': 1,
+            'id': "realId1",
             'title': 'Klingon for beginners'
         });
 
