@@ -5,12 +5,9 @@ angular.module('flashcardListModule.services')
         };
 
         this.addToLists = function(lists, newList) {
-            return FlashcardLists
-                    .save(newList)
-                    .then(function(response) {
-                        lists.push(response);
-                        return response;
-                    });
+            newFlashcardList = FlashcardLists.save(newList);
+
+            lists.push(newFlashcardList);
         };
 
         this.removeFromLists = function(lists, toRemove) {

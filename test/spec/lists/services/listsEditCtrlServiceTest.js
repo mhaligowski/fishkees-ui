@@ -5,7 +5,7 @@ describe('Service: ListEditCtrlService', function () {
     // load the controller's module
     beforeEach(module('flashcardListModule.services'));
 
-    var ListsEditService, lists, mockFlashcardLists, rootScope, q;
+    var ListsEditService, lists, $httpBackend;
 
     // Initialize the controller and a mock scope
     beforeEach(function() { 
@@ -27,71 +27,46 @@ describe('Service: ListEditCtrlService', function () {
             }
         ];
 
-        mockFlashcardLists = {
-            query: function() { 
-                var deferred = q.defer();
-                deferred.resolve(lists);
-                return deferred.promise;
-            },
-            remove: function(list) {
-                var deferred = q.defer();
-                deferred.resolve(list);
-                return deferred.promise;
-            },
-            save: function(newList) {
-                var deferred = q.defer();
-                deferred.resolve({
-                    "id": 4,
-                    "title": newList.title,
-                    "create_date": 12345
-                });
-                return deferred.promise;
-            }
-        }
-
-
-        module(function ($provide) {
-            $provide.value('FlashcardLists', mockFlashcardLists);
-        })
-
-        inject(function ($q, $rootScope) {
-            q = $q;
-            rootScope = $rootScope;
+        inject(function (_$httpBackend_) {
+            $httpBackend = _$httpBackend_;
         });
+
 
         inject(function ($injector) {
             ListsEditService = $injector.get('listsEditService');
-            $injector.get('$rootScope');
         });
     });
 
     it('should show 3 lists at the beginning', function() {
+        //given
+        $httpBackend.expectGET('/service/flashcardlists').respond(lists);
+
         // when
-        var testLists = [];
-        ListsEditService
-            .getLists()
-            .then(function(response) {
-                testLists = response;
-            });
-        rootScope.$apply();
+        var testLists = ListsEditService.getLists();
+        $httpBackend.flush();
         
         // then
         expect(testLists.length).toBe(3);
     });
 
     it('should add new list', function() {
+        // given
+        $httpBackend.expectPOST('/service/flashcardlists', { 'title': 'MockList' })
+            .respond(201, {
+                "id": "someId",
+                "title": "MockList",
+                "create_date": 12345
+            });
+
         // when
-        var newList;
-        ListsEditService.addToLists(lists, { 'title': 'MockList' })
-                        .then(function(response) {
-                            newList = response;
-                        });
-        rootScope.$apply();
+        var newList = [];
+        ListsEditService.addToLists(newList, { 'title': 'MockList' });
+        $httpBackend.flush();
 
         // then
-        expect(lists.length).toEqual(4);
-        expect(lists[3].create_date).toBe(12345);
-        expect(lists[3].id).toBe(4)
+        expect(newList.length).toEqual(1);
+        expect(newList[0].create_date).toBe(12345);
+        expect(newList[0].id).toBe("someId");
     });
 
     it('should remove the middle list', function() {
@@ -101,11 +76,7 @@ describe('Service: ListEditCtrlService', function () {
             .removeFromLists(lists, {
                 'id': 2,
                 'title': 'Russian for intermediate'
-            })
-            .then(function(response) {
-                testList = response;
             });
-        rootScope.$apply();
 
         // then
         expect(testList.id).toBe(2);
