@@ -22,9 +22,9 @@
 
             // mock listEditService
             mockListsEditService = {
-                getLists: function() {
-                    deferred = q.defer();
-                    deferred.resolve([{
+                getLists: function() { 
+                    return [
+                        {
                             "id": 1,
                             "title": "Spanish for beginners",
                             "create_date": 1379617022000
@@ -33,8 +33,8 @@
                             "id": 2,
                             "title": "Russian for intermediate",
                             "create_date": 1339347167000
-                    }]);
-                    return deferred.promise;
+                        }
+                    ];
                 },
                 addToLists: function(lists, newList) {},
                 removeFromLists: function(lists, toRemove) {},
@@ -62,8 +62,6 @@
         }));
 
         it('should show two lists after start', function () {
-            scope.$apply();
-
             expect(scope.lists.length).toEqual(2);
         });
 

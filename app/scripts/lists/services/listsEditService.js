@@ -1,11 +1,7 @@
 angular.module('flashcardListModule.services')
   .service('listsEditService', function(FlashcardLists) {
         this.getLists = function() {
-            return FlashcardLists
-                    .query()
-                    .then(function(response) {
-                        return response;
-                    });
+            return FlashcardLists.query();
         };
 
         this.addToLists = function(lists, newList) {
