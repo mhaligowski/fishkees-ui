@@ -11,17 +11,17 @@ describe('Service: ListEditCtrlService', function () {
     beforeEach(function() { 
         lists = [
             {
-                'id': 1,
+                'id': "realId1",
                 'title': 'Spanish for beginners',
                 'create_date': 1379617022000
             },
             {
-                'id': 2,
+                'id': "realId2",
                 'title': 'Russian for intermediate',
                 'create_date': 1339347167000
             },
             {
-                'id': 3,
+                'id': "realId3",
                 'title': 'Something completely different',
                 'create_date': 1339347167000
             }
@@ -70,19 +70,23 @@ describe('Service: ListEditCtrlService', function () {
     });
 
     it('should remove the middle list', function() {
+        // given
+        $httpBackend.expectDELETE('/service/flashcardlists/realId2')
+                    .respond(200, lists[1]);
+
         // when
-        var testList = null;
-        ListsEditService
-            .removeFromLists(lists, {
-                'id': 2,
-                'title': 'Russian for intermediate'
-            });
+        var removedList = ListsEditService.removeFromLists(lists, {
+            'id': "realId2", 'title': 'Russian for intermediate'
+        });
+        $httpBackend.flush();
 
         // then
-        expect(testList.id).toBe(2);
+
+        expect(removedList).not.toBeUndefined();
+        expect(removedList.id).not.toBeUndefined();
         expect(lists.length).toBe(2);
-        expect(lists[0].id).toBe(1);
-        expect(lists[1].id).toBe(3);
+        expect(lists[0].id).toBe("realId1");
+        expect(lists[1].id).toBe("realId3");
     });
 
     it('should edit the list', function() {
@@ -95,7 +99,7 @@ describe('Service: ListEditCtrlService', function () {
         // then
         expect(lists.length).toBe(3);
         expect(lists[0].title).toMatch('Klingon for beginners');
-        expect(lists[0].id).toBe(1);
+        expect(lists[0].id).toBe("realId1");
         expect(lists[0].create_date).toEqual(1379617022000);
     });
 });

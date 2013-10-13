@@ -5,24 +5,26 @@ angular.module('flashcardListModule.services')
         };
 
         this.addToLists = function(lists, newList) {
-            newFlashcardList = FlashcardLists.save(newList);
-
+            var newFlashcardList = FlashcardLists.save(newList);
             lists.push(newFlashcardList);
+
+            return newFlashcardList;
         };
 
         this.removeFromLists = function(lists, toRemove) {
-            return FlashcardLists
-                    .remove(toRemove)
-                    .then(function(response) {
-                        for (var l in lists) {
-                            if (lists[l].id == response.id) {
-                                lists.splice(l, 1);
-                                break;
-                            }
+            var removed = FlashcardLists.remove(
+                {'flashcardListId': toRemove.id}, 
+                function(response) {
+                    for (var l in lists) {
+                        if (lists[l].id == response.id) {
+                            lists.splice(l, 1);
+                            break;
                         }
+                    }
+                });
 
-                        return response;
-                    });
+
+            return removed;
         }
 
         this.updateLists = function(lists, toUpdate) {
