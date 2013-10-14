@@ -28,12 +28,13 @@ angular.module('flashcardListModule.services')
         }
 
         this.updateLists = function(lists, toUpdate) {
-            // FlashcardLists.save(toUpdate);
-            for (var l in lists) {
-                if (lists[l].id == toUpdate.id) {
-                    lists[l].title = toUpdate.title;
-                    return;
-                }
-            }
+            FlashcardLists.update(toUpdate, function(response) {
+                for (var l in lists) {
+                    if (lists[l].id == toUpdate.id) {
+                        lists[l].title = toUpdate.title;
+                        return;
+                    }
+                }                
+            });
         }
   })

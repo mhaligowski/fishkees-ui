@@ -39,7 +39,8 @@ angular.module('flashcardListModule.controllers')
                 resolve: {
                     list: function() { return {
                         'id': list.id,
-                        'title': list.title
+                        'title': list.title,
+                        'create_date': list.create_date
                     }},
                 },
                 windowClass: 'edit-list-modal'

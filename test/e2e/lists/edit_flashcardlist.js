@@ -44,5 +44,21 @@ describe('Edit flashcardlist scenarios', function() {
         var titleElement = element('.flashcard-list-container > div:first span.flashcard-list-title');
         expect(titleElement.text()).toBe('Klingon for beginners');
     });
+
+    it('should change the list and remain after refresh', function() {
+        element('.flashcard-list-container > div:first :button.edit-flashcard-list').click();
+        expect(element('.modal.edit-list-modal').count()).toBe(1);
+
+        input('list.title').enter('Klingon for beginners');
+        element('.modal .save-button').click();
+
+        expect(element('modal.edit.list-modal').count()).toBe(0);
+
+        var titleElement = element('.flashcard-list-container > div:first span.flashcard-list-title');
+        expect(titleElement.text()).toBe('Klingon for beginners');
+
+        browser().reload();
+        expect(repeater('.flashcard-list-container > div').count()).toBe(2);
+    });
   });
 });
