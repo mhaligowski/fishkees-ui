@@ -90,11 +90,20 @@ describe('Service: ListEditCtrlService', function () {
     });
 
     it('should edit the list', function() {
+        // given
+        $httpBackend.expectPUT('/service/flashcardlists/realId1')
+                    .respond(200, {
+                        'id': 'realId1',
+                        'title': 'Klingon for beginners',
+                        'create_date': 1379617022000
+                    });
+
         // when
         ListsEditService.updateLists(lists, {
             'id': "realId1",
             'title': 'Klingon for beginners'
         });
+        $httpBackend.flush();
 
         // then
         expect(lists.length).toBe(3);
