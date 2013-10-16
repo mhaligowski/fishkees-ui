@@ -59,35 +59,53 @@ describe('Controller: FlashcardListCtrl', function () {
     it('should show add new list modal', function() {
         // when
         $scope.showAddNewListModal();
-
         deferred.resolve('someThing');
         $scope.$digest();
 
         // then
         expect(mockService.addToLists).toHaveBeenCalledWith($scope.lists, 'someThing');
+
+        var callObject = modalMock.open.mostRecentCall.args[0];
+        expect(callObject.templateUrl).toBe('views/addNewListModal.html');
+        expect(callObject.controller).toBe('ListModalCtrl');
+        expect(callObject.windowClass).toBe('add-new-list-modal');
+        expect(callObject.resolve.list).not.toBeUndefined();
+        expect(callObject.resolve.list()).toEqual({ 'title': '' });
     });
 
 
     it('should show remove list modal', function() {
         // when
         $scope.showRemoveListModal({ id: 1 });
-    
-        // then
         deferred.resolve('someThing');
         $scope.$digest();
+    
+        // then
         
         expect(mockService.removeFromLists).toHaveBeenCalledWith($scope.lists, 'someThing');
+
+        var callObject = modalMock.open.mostRecentCall.args[0];
+        expect(callObject.templateUrl).toBe('views/removeListModal.html');
+        expect(callObject.controller).toBe('ListModalCtrl');
+        expect(callObject.windowClass).toBe('remove-list-modal');
+        expect(callObject.resolve.list).not.toBeUndefined();
+        expect(callObject.resolve.list()).toEqual({ id: 1 });
     });
 
     it('should call opening the show edit modal button', function() {
         // when
         $scope.showEditListModal({ id: 1 });
-    
-        // then
-        // then
         deferred.resolve('someThing');
         $scope.$digest();
-        
+    
+        // then        
         expect(mockService.updateLists).toHaveBeenCalledWith($scope.lists, 'someThing');
+
+        var callObject = modalMock.open.mostRecentCall.args[0];
+        expect(callObject.templateUrl).toBe('views/editListModal.html');
+        expect(callObject.controller).toBe('ListModalCtrl');
+        expect(callObject.windowClass).toBe('edit-list-modal');
+        expect(callObject.resolve.list).not.toBeUndefined();
+        expect(callObject.resolve.list()).toEqual({ id: 1 });
     });
 });
