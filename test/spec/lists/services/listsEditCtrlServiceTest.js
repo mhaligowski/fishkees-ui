@@ -111,4 +111,28 @@ describe('Service: ListEditCtrlService', function () {
         expect(lists[0].id).toBe("realId1");
         expect(lists[0].create_date).toEqual(1379617022000);
     });
+
+    it('should edit another list', function() {
+        // given
+        $httpBackend.expectPUT('/service/flashcardlists/realId2')
+                    .respond(200, {
+                        'id': 'realId2',
+                        'title': 'Valaryan for intermediate',
+                        'create_date': 1339347167000
+                    });
+
+        // when
+        ListsEditService.updateLists(lists, {
+            'id': "realId2",
+            'title': 'Valaryan for intermediate'
+        });
+        $httpBackend.flush();
+
+        // then
+        expect(lists.length).toBe(3);
+        expect(lists[1].title).toMatch('Valaryan for intermediate');
+        expect(lists[1].id).toBe("realId2");
+        expect(lists[1].create_date).toEqual(1339347167000);
+    });
+
 });

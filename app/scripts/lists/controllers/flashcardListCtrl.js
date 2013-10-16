@@ -27,6 +27,7 @@ angular.module('flashcardListModule.controllers')
                 windowClass: 'remove-list-modal'
             });
 
+
             modalInstance.result.then(function(list) {
                 listsEditService.removeFromLists($scope.lists, list);
             });

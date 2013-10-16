@@ -6,5 +6,5 @@ angular.module('flashcardListsModule', ['flashcardListModule.controllers', 'ngRo
         $routeProvider
         .when('/FlashcardLists', {
             templateUrl: 'views/FlashcardList.html'
-        })
+        });
     });
