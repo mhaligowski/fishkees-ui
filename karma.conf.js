@@ -43,7 +43,6 @@ module.exports = function(config) {
       'app/scripts/lists/controllers/*.js',
       
       // tests
-      'test/mock/**/*.js',
       'test/spec/**/*.js'
     ],
 
