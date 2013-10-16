@@ -7,6 +7,7 @@ describe('Add new flashcardlist scenarios', function() {
     beforeEach(function() {
         browser().navigateTo('/');
         restartDB();
+        sleep(0.3);
         browser().navigateTo('/#/FlashcardLists');
     }); 
  

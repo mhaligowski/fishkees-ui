@@ -28,7 +28,6 @@ angular.module('flashcardListModule.services')
 
         this.updateLists = function(lists, toUpdate) {
             FlashcardLists.update(toUpdate, function(response) {
-                console.log(response);
                 for (var l in lists) {
                     if (lists[l].id == response.id) {
                         lists[l].title = response.title;
