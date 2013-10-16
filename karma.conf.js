@@ -30,6 +30,7 @@ module.exports = function(config) {
       'app/bower_components/angular/angular.js',
       'app/bower_components/angular-mocks/angular-mocks.js',
       'app/bower_components/angular-resource/angular-resource.js',
+      'app/bower_components/angular-route/angular-route.js',
       'app/bower_components/angular-ui-bootstrap-bower/ui-bootstrap-tpls.js',
 
       // common
@@ -42,7 +43,6 @@ module.exports = function(config) {
       'app/scripts/lists/controllers/*.js',
       
       // tests
-      'test/mock/**/*.js',
       'test/spec/**/*.js'
     ],
 
