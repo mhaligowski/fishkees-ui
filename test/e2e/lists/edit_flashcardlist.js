@@ -5,7 +5,7 @@ describe('Edit flashcardlist scenarios', function() {
     beforeEach(function() {
         browser().navigateTo('/');
         restartDB();
-        browser().navigateTo('/#/FlashcardLists');
+        browser().navigateTo('/#/FlashcardList');
     }); 
 
     it('should not contain a modal after starting the page', function() {

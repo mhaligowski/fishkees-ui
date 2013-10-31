@@ -8,7 +8,7 @@ describe('Add new flashcardlist scenarios', function() {
         browser().navigateTo('/');
         restartDB();
         sleep(0.3);
-        browser().navigateTo('/#/FlashcardLists');
+        browser().navigateTo('/#/FlashcardList');
     }); 
  
     it('should contain a button for adding new flashcardlist', function() {

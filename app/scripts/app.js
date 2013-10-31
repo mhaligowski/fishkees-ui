@@ -1,8 +1,9 @@
 'use strict';
 angular.module('commonModule');
-angular.module('flashcardListsModule');
+angular.module('flashcardListModule');
+angular.module('flashcardModule');
 
-angular.module('fishkeesUiApp', ['flashcardListsModule', 'ngRoute'])
+angular.module('fishkeesUiApp', ['flashcardListModule', 'flashcardModule', 'ngRoute'])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
