@@ -5,7 +5,7 @@ describe('Add new flashcardlist scenarios', function() {
     beforeEach(function() {
         browser().navigateTo('/');
         restartDB();
-        browser().navigateTo('/#/FlashcardLists');
+        browser().navigateTo('/#/FlashcardList');
     });
  
     it('should contain a button for removing flashcardlist', function() {

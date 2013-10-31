@@ -2,7 +2,7 @@ describe("Module: FlashcardList module", function() {
     
     var route, location, rootScope, httpBackend;
 
-    beforeEach(module('flashcardListsModule'));
+    beforeEach(module('flashcardListModule'));
 
     beforeEach(inject(function ($route, $location, $rootScope, $httpBackend) {
         route = $route;
@@ -11,14 +11,14 @@ describe("Module: FlashcardList module", function() {
         httpBackend = $httpBackend;
     }));
 
-    it("should handle /FlashcardLists properly", function() {
+    it("should handle /FlashcardList properly", function() {
         // given
         httpBackend.expectGET('views/FlashcardList.html').respond(200);
 
         expect(route.current).toBeUndefined();
         
         // when
-        location.path("/FlashcardLists");
+        location.path("/FlashcardList");
         rootScope.$digest();
         httpBackend.flush();
 
