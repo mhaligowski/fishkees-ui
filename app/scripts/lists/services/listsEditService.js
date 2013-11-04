@@ -1,5 +1,9 @@
 angular.module('flashcardListModule.services')
   .service('listsEditService', function(FlashcardLists) {
+        var sortFunction = function(list1, list2) {
+            return list1.title.localeCompare(list2.title);
+        }
+
         this.getLists = function() {
             return FlashcardLists.query();
         };
@@ -7,6 +11,7 @@ angular.module('flashcardListModule.services')
         this.addToLists = function(lists, newList) {
             var newFlashcardList = FlashcardLists.save(newList);
             lists.push(newFlashcardList);
+            lists.sort(sortFunction);
 
             return newFlashcardList;
         };
@@ -18,6 +23,7 @@ angular.module('flashcardListModule.services')
                     for (var l in lists) {
                         if (lists[l].id == response.id) {
                             lists.splice(l, 1);
+                            lists.sort(sortFunction);
                             break;
                         }
                     }
@@ -31,6 +37,7 @@ angular.module('flashcardListModule.services')
                 for (var l in lists) {
                     if (lists[l].id == response.id) {
                         lists[l].title = response.title;
+                        lists.sort(sortFunction);
                         return;
                     }
                 }                

@@ -81,7 +81,6 @@ describe('Controller: FlashcardListCtrl', function () {
         $scope.$digest();
     
         // then
-        
         expect(mockService.removeFromLists).toHaveBeenCalledWith($scope.lists, 'someThing');
 
         var callObject = modalMock.open.mostRecentCall.args[0];

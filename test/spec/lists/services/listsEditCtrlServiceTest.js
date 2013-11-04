@@ -12,17 +12,17 @@ describe('Service: ListEditCtrlService', function () {
         lists = [
             {
                 'id': "realId1",
-                'title': 'Spanish for beginners',
+                'title': 'AAAAA',
                 'create_date': 1379617022000
             },
             {
                 'id': "realId2",
-                'title': 'Russian for intermediate',
+                'title': 'BBBBB',
                 'create_date': 1339347167000
             },
             {
                 'id': "realId3",
-                'title': 'Something completely different',
+                'title': 'CCCCC',
                 'create_date': 1339347167000
             }
         ];
@@ -89,27 +89,27 @@ describe('Service: ListEditCtrlService', function () {
         expect(lists[1].id).toBe("realId3");
     });
 
-    it('should edit the list', function() {
+    it('should edit the list and put it at the end', function() {
         // given
         $httpBackend.expectPUT('/service/flashcardlists/realId1')
                     .respond(200, {
                         'id': 'realId1',
-                        'title': 'Klingon for beginners',
+                        'title': 'YYYYY',
                         'create_date': 1379617022000
                     });
 
         // when
         ListsEditService.updateLists(lists, {
             'id': "realId1",
-            'title': 'Klingon for beginners'
+            'title': 'YYYYY'
         });
         $httpBackend.flush();
 
         // then
         expect(lists.length).toBe(3);
-        expect(lists[0].title).toMatch('Klingon for beginners');
-        expect(lists[0].id).toBe("realId1");
-        expect(lists[0].create_date).toEqual(1379617022000);
+        expect(lists[2].title).toMatch('YYYYY');
+        expect(lists[2].id).toBe("realId1");
+        expect(lists[2].create_date).toEqual(1379617022000);
     });
 
     it('should edit another list', function() {
@@ -117,22 +117,22 @@ describe('Service: ListEditCtrlService', function () {
         $httpBackend.expectPUT('/service/flashcardlists/realId2')
                     .respond(200, {
                         'id': 'realId2',
-                        'title': 'Valaryan for intermediate',
+                        'title': 'YYYYY',
                         'create_date': 1339347167000
                     });
 
         // when
         ListsEditService.updateLists(lists, {
             'id': "realId2",
-            'title': 'Valaryan for intermediate'
+            'title': 'YYYYY'
         });
         $httpBackend.flush();
 
         // then
         expect(lists.length).toBe(3);
-        expect(lists[1].title).toMatch('Valaryan for intermediate');
-        expect(lists[1].id).toBe("realId2");
-        expect(lists[1].create_date).toEqual(1339347167000);
+        expect(lists[2].title).toMatch('YYYYY');
+        expect(lists[2].id).toBe("realId2");
+        expect(lists[2].create_date).toEqual(1339347167000);
     });
 
 });
