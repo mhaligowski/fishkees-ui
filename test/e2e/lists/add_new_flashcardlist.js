@@ -1,9 +1,14 @@
+'use strict'
+
 describe('Add new flashcardlist scenarios', function() {
  
   describe('The view', function() {
  
     beforeEach(function() {
-      browser().navigateTo('/#/FlashcardLists');
+        browser().navigateTo('/');
+        restartDB();
+        sleep(0.3);
+        browser().navigateTo('/#/FlashcardList');
     }); 
  
     it('should contain a button for adding new flashcardlist', function() {
@@ -37,7 +42,22 @@ describe('Add new flashcardlist scenarios', function() {
       // then
       expect(element('.modal.add-new-list-modal').count()).toBe(0);
       expect(repeater('.flashcard-list-container > div').count()).toBe(3);
-      expect(element('.flashcard-list-container > div:last').text()).toContain("Learning JavaScript");
+      expect(element('.flashcard-list-container > div:first').text()).toContain("Learning JavaScript");
+    });
+    
+    it('should close the modal and add new list after clicking Add button in modal and refresh', function() {
+      // when
+      expect(repeater('.flashcard-list-container > div').count()).toBe(2);
+
+      element(':button.add-new-list').click();
+      input('list.title').enter('Learning JavaScript');
+      element(':button.add-button').click();
+
+      browser().reload();
+
+      // then
+      expect(element('.modal.add-new-list-modal').count()).toBe(0);
+      expect(repeater('.flashcard-list-container > div').count()).toBe(3);
     });
   });
 });

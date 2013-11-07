@@ -11,6 +11,7 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
+      'test/dsl/*.js',
       'test/e2e/**/*.js'
     ],
 
@@ -18,7 +19,7 @@ module.exports = function(config) {
     exclude: [],
 
     // web server port
-    port: 8080,
+    port: 12345,
 
     // level of logging
     // possible values: LOG_DISABLE || LOG_ERROR || LOG_WARN || LOG_INFO || LOG_DEBUG
@@ -37,8 +38,7 @@ module.exports = function(config) {
     // - Safari (only Mac)
     // - PhantomJS
     // - IE (only Windows)
-    browsers: ['Chrome', 'Firefox'],
-
+    browsers: ['Chrome'],
 
     // Continuous Integration mode
     // if true, it capture browsers, run tests and exit
@@ -46,6 +46,8 @@ module.exports = function(config) {
 
     // Uncomment the following lines if you are using grunt's server to run the tests
     proxies: {
+      '/service': 'http://localhost:8080/',
+      '/admin': 'http://localhost:8081/',
       '/': 'http://localhost:9000/'
     },
     // URL root prevent conflicts with the site root

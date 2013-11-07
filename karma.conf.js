@@ -9,18 +9,40 @@ module.exports = function(config) {
     // testing framework to use (jasmine/mocha/qunit/...)
     frameworks: ['jasmine'],
 
+    // coverage reporter generates the coverage
+    reporters: ['progress', 'coverage'],
+    
+    preprocessors: {
+      // source files, that you wanna generate coverage for
+      // do not include tests or libraries
+      // (these files will be instrumented by Istanbul)
+      'app/scripts/**/*.js': ['coverage']
+    },
+
+    // optionally, configure the reporter
+    coverageReporter: {
+      type : 'html',
+      dir : 'coverage/'
+    },
+
     // list of files / patterns to load in the browser
     files: [
       'app/bower_components/angular/angular.js',
       'app/bower_components/angular-mocks/angular-mocks.js',
       'app/bower_components/angular-resource/angular-resource.js',
+      'app/bower_components/angular-route/angular-route.js',
       'app/bower_components/angular-ui-bootstrap-bower/ui-bootstrap-tpls.js',
+
+      // common
+      'app/scripts/common/*.js',
+      'app/scripts/common/services/*.js',
       
+      // lists
       'app/scripts/lists/*.js',
       'app/scripts/lists/services/*.js',
       'app/scripts/lists/controllers/*.js',
       
-      'test/mock/**/*.js',
+      // tests
       'test/spec/**/*.js'
     ],
 
@@ -51,6 +73,6 @@ module.exports = function(config) {
 
     // Continuous Integration mode
     // if true, it capture browsers, run tests and exit
-    singleRun: false
+    singleRun: true
   });
 };

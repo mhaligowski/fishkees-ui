@@ -1,9 +1,9 @@
 node_modules
 dist
+coverage
 .tmp
 .sass-cache
 app/bower_components
 
 *.sublime-project
-
 *.sublime-workspace

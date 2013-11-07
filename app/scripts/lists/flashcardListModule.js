@@ -1,12 +1,12 @@
-angular.module('flashcardListModule.services', ['ngResource']);
+'use strict';
+
+angular.module('flashcardListModule.services', ['commonModule.services', 'ngResource']);
 angular.module('flashcardListModule.controllers', ['ui.bootstrap', 'flashcardListModule.services']);
 
-angular.module('flashcardListsModule', ['ngResource', 
-    'ui.bootstrap', 
-    'flashcardListModule.controllers'])    
+angular.module('flashcardListModule', ['flashcardListModule.controllers', 'ngRoute'])
     .config(function ($routeProvider) {
         $routeProvider
-        .when('/FlashcardLists', {
+        .when('/FlashcardList', {
             templateUrl: 'views/FlashcardList.html'
-        })
-    });
+          });
+      });

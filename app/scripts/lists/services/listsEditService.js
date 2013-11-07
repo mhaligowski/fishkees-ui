@@ -1,45 +1,46 @@
 angular.module('flashcardListModule.services')
-  .service('listsEditService', function() {
-        this.getLists = function() {
-            return [
-                {
-                    'id': 1,
-                    'title': 'Spanish for beginners',
-                    'create_date': 1379617022000
-                },
-                {
-                    'id': 2,
-                    'title': 'Russian for intermediate',
-                    'create_date': 1339347167000
-                }
-            ];
+  .service('listsEditService', function(FlashcardLists) {
+        var sortFunction = function(list1, list2) {
+            return list1.title.localeCompare(list2.title);
         }
+
+        this.getLists = function() {
+            return FlashcardLists.query();
+        };
 
         this.addToLists = function(lists, newList) {
-            // FlashcardLists.save(newList)
-            newList.createDate = new Date();
-            lists.push(newList);
-        }
+            var newFlashcardList = FlashcardLists.save(newList);
+            lists.push(newFlashcardList);
+            lists.sort(sortFunction);
+
+            return newFlashcardList;
+        };
 
         this.removeFromLists = function(lists, toRemove) {
-            // FlashcardLists.remove(toRemove)
-            for (var l in lists) {
-                if (lists[l].id == toRemove.id) {
-                    lists.splice(l, 1);
-                    return;
-                }     
-            }
+            var removed = FlashcardLists.remove(
+                {'flashcardListId': toRemove.id}, 
+                function(response) {
+                    for (var l in lists) {
+                        if (lists[l].id == response.id) {
+                            lists.splice(l, 1);
+                            lists.sort(sortFunction);
+                            break;
+                        }
+                    }
+                });
+
+            return removed;
         }
 
         this.updateLists = function(lists, toUpdate) {
-            // FlashcardLists.save(toUpdate);
-            for (var l in lists) {
-                if (lists[l].id == toUpdate.id) {
-                    lists[l].title = toUpdate.title;
-                    return;
-                }
-            }
+            FlashcardLists.update(toUpdate, function(response) {
+                for (var l in lists) {
+                    if (lists[l].id == response.id) {
+                        lists[l].title = response.title;
+                        lists.sort(sortFunction);
+                        return;
+                    }
+                }                
+            });
         }
-
-
   })

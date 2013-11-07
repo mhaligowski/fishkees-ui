@@ -1,12 +1,13 @@
 'use strict';
-angular.module('flashcardListsModule');
+angular.module('commonModule');
+angular.module('flashcardListModule');
+angular.module('flashcardModule');
 
-angular.module('fishkeesUiApp', ['flashcardListsModule'])
+angular.module('fishkeesUiApp', ['flashcardListModule', 'flashcardModule', 'ngRoute'])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
       })
       .otherwise({
         redirectTo: '/'
