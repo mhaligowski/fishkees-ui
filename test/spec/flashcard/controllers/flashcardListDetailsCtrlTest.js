@@ -4,6 +4,7 @@ describe('FlashcardListDetailsCtrl controller', function() {
    
     var FlashcardListDetailsCtrl,
         mockService,
+        mockParams,
         $scope;
 
     beforeEach(function() {
@@ -14,9 +15,13 @@ describe('FlashcardListDetailsCtrl controller', function() {
             };
         module('flashcardModule');
 
+        // mock service
         mockService = jasmine.createSpyObj('flashcardlistDetailsService', 
             ['getListDetails', 'getFlashcards']);
         mockService.getListDetails.andCallFake(function() { return testList; });
+
+        // mock params
+        mockParams = { id: "someNiceId1" };
 
         module(function ($provide) {
             $provide.value('flashcardlistDetailsService', mockService);
@@ -26,12 +31,14 @@ describe('FlashcardListDetailsCtrl controller', function() {
             $scope = $rootScope.$new();
 
             FlashcardListDetailsCtrl = $controller('FlashcardListDetailsCtrl', {
-                $scope: $scope
+                $scope: $scope,
+                $routeParams: mockParams
             });
         });
     });
 
     it('should give the title from the flashcardListResource', function() {
-
+        expect($scope.list.title).toBe("Spanish for beginners");
+        expect(mockService.getListDetails).toHaveBeenCalledWith("someNiceId1");
     });
 });
