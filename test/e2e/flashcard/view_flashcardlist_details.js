@@ -6,13 +6,15 @@ describe('View details for flashcardlist', function() {
         browser().navigateTo('/');
         restartDB();
         sleep(0.3);
+        browser().navigateTo('/#/FlashcardList/someNiceId1');
     });  
 
     it('should not redirect when going to the page', function() {
-        // when
-        browser().navigateTo('/#/FlashcardList/12345');
-
         // then
-        expect(browser().window().hash()).toBe('/FlashcardList/12345');
+        expect(browser().window().hash()).toBe('/FlashcardList/someNiceId1');
+    });
+
+    it('should show the proper title when going to the page', function() {
+        expect(element('.page-header > h1').text()).toBe("Spanish for beginners");
     });
 });
