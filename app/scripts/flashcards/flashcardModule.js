@@ -1,6 +1,7 @@
 'use strict';
 
-angular.module('flashcardModule.controllers', []);
+angular.module('flashcardModule.services', ['flashcardListModule.services']);
+angular.module('flashcardModule.controllers', ['flashcardModule.services']);
 
 angular.module('flashcardModule', ['flashcardModule.controllers', 'ngRoute'])
     .config(function($routeProvider) {
