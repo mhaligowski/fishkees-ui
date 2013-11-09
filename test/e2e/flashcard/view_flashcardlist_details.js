@@ -6,12 +6,12 @@ describe('View details for flashcardlist', function() {
         browser().navigateTo('/');
         restartDB();
         sleep(0.3);
-        browser().navigateTo('/#/FlashcardList/someNiceId1');
+        browser().navigateTo('/#/FlashcardList/someFlashcardListId1');
     });  
 
     it('should not redirect when going to the page', function() {
         // then
-        expect(browser().window().hash()).toBe('/FlashcardList/someNiceId1');
+        expect(browser().window().hash()).toBe('/FlashcardList/someFlashcardListId1');
     });
 
     it('should show the proper title when going to the page', function() {
