@@ -15,7 +15,7 @@ describe('FlashcardListDetailsService', function() {
 
         inject(function (_$httpBackend_, $injector) {
             $httpBackend = _$httpBackend_;
-            testObj = $injector.get('flashcardlistDetailsService');
+            testObj = $injector.get('flashcardListDetailsService');
         });
     });
 

@@ -16,7 +16,7 @@ describe('FlashcardListDetailsCtrl controller', function() {
         module('flashcardModule');
 
         // mock service
-        mockService = jasmine.createSpyObj('flashcardlistDetailsService', 
+        mockService = jasmine.createSpyObj('flashcardListDetailsService', 
             ['getListDetails', 'getFlashcards']);
         mockService.getListDetails.andCallFake(function() { return testList; });
 
@@ -24,7 +24,7 @@ describe('FlashcardListDetailsCtrl controller', function() {
         mockParams = { id: "someNiceId1" };
 
         module(function ($provide) {
-            $provide.value('flashcardlistDetailsService', mockService);
+            $provide.value('flashcardListDetailsService', mockService);
         });
 
         inject(function ($controller, $rootScope) {

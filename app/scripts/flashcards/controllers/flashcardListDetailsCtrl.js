@@ -1,7 +1,7 @@
 angular.module('flashcardModule.controllers')
     .controller(
         'FlashcardListDetailsCtrl', 
-        function($scope, $routeParams, flashcardlistDetailsService){
+        function($scope, $routeParams, flashcardListDetailsService){
             var listId = $routeParams.id;
-            $scope.list = flashcardlistDetailsService.getListDetails(listId);
+            $scope.list = flashcardListDetailsService.getListDetails(listId);
         });

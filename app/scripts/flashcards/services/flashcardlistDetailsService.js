@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module('flashcardModule.services')
-    .service('flashcardlistDetailsService', function(FlashcardLists) {
+    .service('flashcardListDetailsService', function(FlashcardLists) {
         this.getListDetails = function(listId) {
             return FlashcardLists.get( { flashcardListId: listId } );
         }
