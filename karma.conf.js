@@ -42,6 +42,11 @@ module.exports = function(config) {
       'app/scripts/lists/services/*.js',
       'app/scripts/lists/controllers/*.js',
       
+      // flashcards
+      'app/scripts/flashcards/*.js',
+      'app/scripts/flashcards/services/*.js',
+      'app/scripts/flashcards/controllers/*.js',
+
       // tests
       'test/spec/**/*.js'
     ],
