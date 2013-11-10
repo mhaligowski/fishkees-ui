@@ -7,4 +7,12 @@
         You have not yet added any flashcards to this list!
     </p>
 
+    <div ng-if="flashcards.length != 0" class="flashcards-container">
+        <div ng-repeat="fl in flashcards" class="row-fluid">
+            <div class="span5 well well-small">{{ fl.front }}</div>
+            <div class="span5 well well-small">{{ fl.back }}</div>
+            <div class="span2"></div>
+        </div>
+    </div>
+
 </div>
