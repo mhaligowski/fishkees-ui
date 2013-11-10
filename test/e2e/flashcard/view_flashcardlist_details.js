@@ -1,6 +1,7 @@
 'use strict'
 
 describe('View details for flashcardlist', function() {
+    var LIST1_COUNT = 2;
     
     beforeEach(function() {
         browser().navigateTo('/');
@@ -26,5 +27,20 @@ describe('View details for flashcardlist', function() {
         expect(element('.page-header > h1').text()).toBe("List with no flashcards");
         expect(element('.flashcards-container > tr').count()).toBe(0);
         expect(element('.no-flashcards-message').count()).toBe(1);
+    });
+
+    it('should not show a message when entering the non-empty list', function() {
+        expect(element('.no-flashcards-message').count()).toBe(0);
+    });
+
+    it('should display list of flashcards when entering the non-empty list', function() {
+        // then
+        expect(element('.flashcards-container > tr').count()).toBe(LIST1_COUNT);
+
+        expect(element('.flashcards-container > tr:nth-child(1) > td:nth-child(1)').text()).toBe('front 1');
+        expect(element('.flashcards-container > tr:nth-child(1) > td:nth-child(2)').text()).toBe('back 1');
+
+        expect(element('.flashcards-container > tr:nth-child(1) > td:nth-child(1)').text()).toBe('front 2');
+        expect(element('.flashcards-container > tr:nth-child(1) > td:nth-child(2)').text()).toBe('back 2');
     });
 });
