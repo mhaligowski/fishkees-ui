@@ -15,10 +15,34 @@ describe('FlashcardListDetailsCtrl controller', function() {
             };
         module('flashcardModule');
 
+        var testFlashcards = [
+            {
+                id: "someId1",
+                flashcard_list_id: "someNiceId1",
+                front: "front 1",
+                back: "back 1",
+                create_date: 520603200000
+            },
+            {
+                id: "someId2",
+                flashcard_list_id: "someNiceId1",
+                front: "front 2",
+                back: "back 2",
+                create_date: 520603200000
+            },
+            {
+                id: "someId3",
+                flashcard_list_id: "someNiceId1",
+                front: "front 3",
+                back: "back 3",
+                create_date: 520603200000
+            }];
+
         // mock service
         mockService = jasmine.createSpyObj('flashcardListDetailsService', 
             ['getListDetails', 'getFlashcards']);
         mockService.getListDetails.andCallFake(function() { return testList; });
+        mockService.getFlashcards.andCallFake(function() { return testFlashcards; });
 
         // mock params
         mockParams = { id: "someNiceId1" };
@@ -40,5 +64,10 @@ describe('FlashcardListDetailsCtrl controller', function() {
     it('should give the title from the flashcardListResource', function() {
         expect($scope.list.title).toBe("Spanish for beginners");
         expect(mockService.getListDetails).toHaveBeenCalledWith("someNiceId1");
+    });
+
+    it('should load the flashcards at the startup', function() {
+        expect($scope.flashcards.length).toBe(3);
+        expect(mockService.getFlashcards).toHaveBeenCalledWith("someNiceId1");
     });
 });
