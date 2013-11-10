@@ -3,7 +3,8 @@
 describe('Add new flashcardlist scenarios', function() {
  
   describe('The view', function() {
- 
+    var INITIAL_NUMBER_OF_LISTS = 3;
+
     beforeEach(function() {
         browser().navigateTo('/');
         restartDB();
@@ -33,7 +34,7 @@ describe('Add new flashcardlist scenarios', function() {
 
     it('should close the modal and add new list after clicking Add button in modal', function() {
       // when
-      expect(repeater('.flashcard-list-container > div').count()).toBe(2);
+      expect(repeater('.flashcard-list-container > div').count()).toBe(INITIAL_NUMBER_OF_LISTS);
 
       element(':button.add-new-list').click();
       input('list.title').enter('Learning JavaScript');
@@ -41,13 +42,13 @@ describe('Add new flashcardlist scenarios', function() {
 
       // then
       expect(element('.modal.add-new-list-modal').count()).toBe(0);
-      expect(repeater('.flashcard-list-container > div').count()).toBe(3);
+      expect(repeater('.flashcard-list-container > div').count()).toBe(INITIAL_NUMBER_OF_LISTS + 1);
       expect(element('.flashcard-list-container > div:first').text()).toContain("Learning JavaScript");
     });
     
     it('should close the modal and add new list after clicking Add button in modal and refresh', function() {
       // when
-      expect(repeater('.flashcard-list-container > div').count()).toBe(2);
+      expect(repeater('.flashcard-list-container > div').count()).toBe(INITIAL_NUMBER_OF_LISTS);
 
       element(':button.add-new-list').click();
       input('list.title').enter('Learning JavaScript');
@@ -57,7 +58,7 @@ describe('Add new flashcardlist scenarios', function() {
 
       // then
       expect(element('.modal.add-new-list-modal').count()).toBe(0);
-      expect(repeater('.flashcard-list-container > div').count()).toBe(3);
+      expect(repeater('.flashcard-list-container > div').count()).toBe(INITIAL_NUMBER_OF_LISTS + 1);
     });
   });
 });

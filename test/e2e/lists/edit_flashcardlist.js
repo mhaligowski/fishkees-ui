@@ -1,6 +1,7 @@
 describe('Edit flashcardlist scenarios', function() {
  
   describe('The view', function() {
+    var INITIAL_NUMBER_OF_LISTS = 3;
  
     beforeEach(function() {
         browser().navigateTo('/');
@@ -13,14 +14,14 @@ describe('Edit flashcardlist scenarios', function() {
     });
 
     it('should show edit modal after clicking on the second edit button', function() {
-        element('.flashcard-list-container > div:nth-child(2) :button.edit-flashcard-list').click();
+        element('.flashcard-list-container > div:nth-child(3) :button.edit-flashcard-list').click();
 
         expect(element('.modal.edit-list-modal').count()).toBe(1);
         expect(input('list.title').val()).toMatch('Spanish for beginners');
     });
 
     it('should do nothing after clicking the cancel button', function() {
-        element('.flashcard-list-container > div:nth-child(2) :button.edit-flashcard-list').click();
+        element('.flashcard-list-container > div:nth-child(3) :button.edit-flashcard-list').click();
         expect(element('.modal.edit-list-modal').count()).toBe(1);
 
         input('list.title').enter('Klingon for beginners');
@@ -28,7 +29,7 @@ describe('Edit flashcardlist scenarios', function() {
 
         expect(element('modal.edit.list-modal').count()).toBe(0);
 
-        var titleElement = element('.flashcard-list-container > div:nth-child(2) span.flashcard-list-title');
+        var titleElement = element('.flashcard-list-container > div:nth-child(3) span.flashcard-list-title');
         expect(titleElement.text()).toBe('Spanish for beginners');
     });
 
@@ -58,7 +59,7 @@ describe('Edit flashcardlist scenarios', function() {
         expect(titleElement.text()).toBe('Klingon for beginners');
 
         browser().reload();
-        expect(repeater('.flashcard-list-container > div').count()).toBe(2);
+        expect(repeater('.flashcard-list-container > div').count()).toBe(INITIAL_NUMBER_OF_LISTS);
     });
 
     it('should ensure sorting at editing', function() {
@@ -74,7 +75,7 @@ describe('Edit flashcardlist scenarios', function() {
         expect(titleElement.text()).toBe('AAAAA');
 
         browser().reload();
-        expect(repeater('.flashcard-list-container > div').count()).toBe(2);
+        expect(repeater('.flashcard-list-container > div').count()).toBe(INITIAL_NUMBER_OF_LISTS);
     });
   });
 });
