@@ -3,9 +3,12 @@
 describe('FlashcardListDetailsCtrl controller', function() {
    
     var FlashcardListDetailsCtrl,
+        mockModal,
         mockService,
         mockParams,
-        $scope;
+        $scope,
+        $q,
+        deferred;
 
     beforeEach(function() {
         var testList = {
@@ -44,15 +47,25 @@ describe('FlashcardListDetailsCtrl controller', function() {
         mockService.getListDetails.andCallFake(function() { return testList; });
         mockService.getFlashcards.andCallFake(function() { return testFlashcards; });
 
+        // mock modal
+        mockModal = jasmine.createSpyObj('$modal', ['open']);
+
         // mock params
         mockParams = { id: "someNiceId1" };
 
         module(function ($provide) {
             $provide.value('flashcardListDetailsService', mockService);
+            $provide.value('$modal', mockModal);
         });
 
-        inject(function ($controller, $rootScope) {
+        inject(function ($controller, $rootScope, _$q_) {
             $scope = $rootScope.$new();
+            $q = _$q_;
+
+            mockModal.open.andCallFake(function() { 
+                deferred = $q.defer(); 
+                return { result: deferred.promise };
+            });
 
             FlashcardListDetailsCtrl = $controller('FlashcardListDetailsCtrl', {
                 $scope: $scope,
@@ -69,5 +82,13 @@ describe('FlashcardListDetailsCtrl controller', function() {
     it('should load the flashcards at the startup', function() {
         expect($scope.flashcards.length).toBe(3);
         expect(mockService.getFlashcards).toHaveBeenCalledWith("someNiceId1");
+    });
+
+    it('should open the modal', function() {
+        // when
+        $scope.showRemoveFlashcardModal({ id: 'someId3' });
+
+        // then
+        expect(mockModal.open).toHaveBeenCalled();
     });
 });

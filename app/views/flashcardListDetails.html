@@ -13,7 +13,10 @@
             <div class="span5 front well well-small">{{ fl.front }}</div>
             <div class="span5 back well well-small">{{ fl.back }}</div>
             <div class="span2 toolbox">
-                <button class="btn btn-link remove-flashcard"><i class="icon-remove" ></i></button>
+                <button class="btn btn-link remove-flashcard"
+                        ng-click="showRemoveFlashcardModal(fl);">
+                    <i class="icon-remove" ></i>
+                </button>
             </div>
         </div>
     </div>
