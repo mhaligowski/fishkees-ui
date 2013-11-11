@@ -69,4 +69,22 @@ describe('FlashcardListDetailsService', function() {
         // then
         expect(actual.length).toEqual(3);
     });
+
+    it('should remove flashcard from the list', function() {
+        // given
+        $httpBackend
+            .expectDELETE('/service/flashcardlists/someNiceId1/flashcards/someId2')
+            .respond(testList[1]);
+
+        // when
+        var actual = null; 
+        testObj.removeFlashcardFromList(testFlashcards[1], testFlashcards)
+               .then(function(r) { actual = r; });
+        $httpBackend.flush();
+
+        // then
+        expect(actual.length).toEqual(2);
+        expect(actual[0]).toEqual(testFlashcards[0]);
+        expect(actual[1]).toEqual(testFlashcards[2]);
+    });
 });
