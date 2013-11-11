@@ -93,6 +93,18 @@ describe('FlashcardListDetailsCtrl controller', function() {
         expect(mockModal.open).toHaveBeenCalled();
     });
 
+    it('should pass the appropriate list to the modal', function() {
+        // given
+        var argument = { id: 'someId' };
+
+        // when
+        $scope.showRemoveFlashcardModal(argument);
+
+        // then
+        var callObject = mockModal.open.mostRecentCall.args[0];
+        expect(callObject.resolve.modalObject()).toEqual(argument);
+    });
+
     it('should call removing the modal', function() {
         // given
         var result = [
