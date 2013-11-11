@@ -32,6 +32,20 @@ describe('Removing flashcards from the list', function() {
         element(':button.close-modal').click();
 
         // then
-        expect(element(".modal.remove-flashcard-modal").count()).toBe(0);
+        expect(element('.modal.remove-flashcard-modal').count()).toBe(0);
+        expect(element('.flashcards-container > div').count()).toBe(INITIAL_FLASHCARDS_COUNT);
+    });
+
+    it('should hide the modal and remove the flashcard from the list upon confirming', function() {
+        // when
+        element(':button.remove-flashcard:first').click();
+        element(':button.confirm').click();
+
+        // then
+        expect(element('.modal.remove-flashcard-modal').count()).toBe(0);
+        expect(element('.flashcards-container > div').count()).toBe(INITIAL_FLASHCARDS_COUNT - 1);
+
+        expect(element('.flashcards-container > div:nth-child(1) > .front').text()).toBe('front 2');
+        expect(element('.flashcards-container > div:nth-child(1) > .back').text()).toBe('back 2');
     });
 });
