@@ -36,6 +36,7 @@ module.exports = function(config) {
       // common
       'app/scripts/common/*.js',
       'app/scripts/common/services/*.js',
+      'app/scripts/common/controllers/*.js',
       
       // lists
       'app/scripts/lists/*.js',

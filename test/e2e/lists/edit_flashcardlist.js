@@ -17,14 +17,14 @@ describe('Edit flashcardlist scenarios', function() {
         element('.flashcard-list-container > div:nth-child(3) :button.edit-flashcard-list').click();
 
         expect(element('.modal.edit-list-modal').count()).toBe(1);
-        expect(input('list.title').val()).toMatch('Spanish for beginners');
+        expect(input('modalObject.title').val()).toMatch('Spanish for beginners');
     });
 
     it('should do nothing after clicking the cancel button', function() {
         element('.flashcard-list-container > div:nth-child(3) :button.edit-flashcard-list').click();
         expect(element('.modal.edit-list-modal').count()).toBe(1);
 
-        input('list.title').enter('Klingon for beginners');
+        input('modalObject.title').enter('Klingon for beginners');
         element('.modal .close-button').click();
 
         expect(element('modal.edit.list-modal').count()).toBe(0);
@@ -37,7 +37,7 @@ describe('Edit flashcardlist scenarios', function() {
         element('.flashcard-list-container > div:first :button.edit-flashcard-list').click();
         expect(element('.modal.edit-list-modal').count()).toBe(1);
 
-        input('list.title').enter('Klingon for beginners');
+        input('modalObject.title').enter('Klingon for beginners');
         element('.modal .save-button').click();
 
         expect(element('modal.edit.list-modal').count()).toBe(0);
@@ -50,7 +50,7 @@ describe('Edit flashcardlist scenarios', function() {
         element('.flashcard-list-container > div:first :button.edit-flashcard-list').click();
         expect(element('.modal.edit-list-modal').count()).toBe(1);
 
-        input('list.title').enter('Klingon for beginners');
+        input('modalObject.title').enter('Klingon for beginners');
         element('.modal .save-button').click();
 
         expect(element('modal.edit.list-modal').count()).toBe(0);
@@ -66,7 +66,7 @@ describe('Edit flashcardlist scenarios', function() {
         element('.flashcard-list-container > div:nth-child(2) :button.edit-flashcard-list').click();
         expect(element('.modal.edit-list-modal').count()).toBe(1);
 
-        input('list.title').enter('AAAAA');
+        input('modalObject.title').enter('AAAAA');
         element('.modal .save-button').click();
 
         expect(element('modal.edit.list-modal').count()).toBe(0);

@@ -19,7 +19,19 @@ describe('Removing flashcards from the list', function() {
     });
 
     it('should show modal when clicking on the remove button', function() {
+        // when
         element(":button.remove-flashcard:first").click();
+
+        // then
         expect(element(".modal.remove-flashcard-modal").count()).toBe(1);
+    });
+
+    it('should hide the modal and remain the flashcards upon clicking cancel', function() {
+        // when
+        element(':button.remove-flashcard:first').click();
+        element(':button.close-modal').click();
+
+        // then
+        expect(element(".modal.remove-flashcard-modal").count()).toBe(0);
     });
 });

@@ -67,10 +67,10 @@ describe('Controller: FlashcardListCtrl', function () {
 
         var callObject = modalMock.open.mostRecentCall.args[0];
         expect(callObject.templateUrl).toBe('views/addNewListModal.html');
-        expect(callObject.controller).toBe('ListModalCtrl');
+        expect(callObject.controller).toBe('SimpleModalCtrl');
         expect(callObject.windowClass).toBe('add-new-list-modal');
-        expect(callObject.resolve.list).not.toBeUndefined();
-        expect(callObject.resolve.list()).toEqual({ 'title': '' });
+        expect(callObject.resolve.modalObject).not.toBeUndefined();
+        expect(callObject.resolve.modalObject()).toEqual({ 'title': '' });
     });
 
 
@@ -85,10 +85,10 @@ describe('Controller: FlashcardListCtrl', function () {
 
         var callObject = modalMock.open.mostRecentCall.args[0];
         expect(callObject.templateUrl).toBe('views/removeListModal.html');
-        expect(callObject.controller).toBe('ListModalCtrl');
+        expect(callObject.controller).toBe('SimpleModalCtrl');
         expect(callObject.windowClass).toBe('remove-list-modal');
-        expect(callObject.resolve.list).not.toBeUndefined();
-        expect(callObject.resolve.list()).toEqual({ id: 1 });
+        expect(callObject.resolve.modalObject).not.toBeUndefined();
+        expect(callObject.resolve.modalObject()).toEqual({ id: 1 });
     });
 
     it('should call opening the show edit modal button', function() {
@@ -102,9 +102,9 @@ describe('Controller: FlashcardListCtrl', function () {
 
         var callObject = modalMock.open.mostRecentCall.args[0];
         expect(callObject.templateUrl).toBe('views/editListModal.html');
-        expect(callObject.controller).toBe('ListModalCtrl');
+        expect(callObject.controller).toBe('SimpleModalCtrl');
         expect(callObject.windowClass).toBe('edit-list-modal');
-        expect(callObject.resolve.list).not.toBeUndefined();
-        expect(callObject.resolve.list()).toEqual({ id: 1 });
+        expect(callObject.resolve.modalObject).not.toBeUndefined();
+        expect(callObject.resolve.modalObject()).toEqual({ id: 1 });
     });
 });

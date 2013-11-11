@@ -13,8 +13,11 @@ angular.module('flashcardModule.controllers')
             $scope.showRemoveFlashcardModal = function(flashcard) {
                 $modal.open({
                     templateUrl: 'views/removeFlashcardModal.html',
-                    windowClass: 'remove-flashcard-modal'
+                    windowClass: 'remove-flashcard-modal',
+                    controller: 'SimpleModalCtrl',
+                    resolve: {
+                        modalObject: function() { return {} }
+                    }
                 });
-                
             }
         });
