@@ -5,6 +5,9 @@ angular
     .directive('markdownEditor', function() {
         return {
             restrict: "E",
-            template: "<div>Hello directive</div>"
+            scope: {
+                text: '=text'
+            },
+            template: "<span>{{ text }}</span>"
         }
     });

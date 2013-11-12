@@ -37,10 +37,10 @@ describe('View details for flashcardlist', function() {
         // then
         expect(element('.flashcards-container > div').count()).toBe(LIST1_COUNT);
 
-        expect(element('.flashcards-container > div:nth-child(1) > .front').text()).toBe('front 1');
-        expect(element('.flashcards-container > div:nth-child(1) > .back').text()).toBe('back 1');
+        expect(element('.flashcards-container > div:nth-child(1) > .front').text()).toMatch('front 1');
+        expect(element('.flashcards-container > div:nth-child(1) > .back').text()).toMatch('back 1');
 
-        expect(element('.flashcards-container > div:nth-child(2) > .front').text()).toBe('front 2');
-        expect(element('.flashcards-container > div:nth-child(2) > .back').text()).toBe('back 2');
+        expect(element('.flashcards-container > div:nth-child(2) > .front').text()).toMatch('front 2');
+        expect(element('.flashcards-container > div:nth-child(2) > .back').text()).toMatch('back 2');
     });
 });

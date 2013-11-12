@@ -45,7 +45,7 @@ describe('Removing flashcards from the list', function() {
         expect(element('.modal.remove-flashcard-modal').count()).toBe(0);
         expect(element('.flashcards-container > div').count()).toBe(INITIAL_FLASHCARDS_COUNT - 1);
 
-        expect(element('.flashcards-container > div:nth-child(1) > .front').text()).toBe('front 2');
-        expect(element('.flashcards-container > div:nth-child(1) > .back').text()).toBe('back 2');
+        expect(element('.flashcards-container > div:nth-child(1) > .front').text()).toMatch('front 2');
+        expect(element('.flashcards-container > div:nth-child(1) > .back').text()).toMatch('back 2');
     });
 });
