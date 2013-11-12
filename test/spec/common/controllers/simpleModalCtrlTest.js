@@ -1,14 +1,14 @@
 'use strict'
 
-describe('Controller: RemoveListModalInstanceCtrl', function () {
+describe('Modal controller', function () {
 
   // load the controller's module
-  beforeEach(module('flashcardListModule.controllers'));
+  beforeEach(module('commonModule.controllers'));
 
-  var ListModalCtrl,
+  var SimpleModalCtrl,
     scope,
     mockModalInstance,
-    list;
+    modalObject;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
@@ -24,24 +24,24 @@ describe('Controller: RemoveListModalInstanceCtrl', function () {
     // mock scope
     scope = $rootScope.$new();
 
-    list = {
+    modalObject = {
       id: 1
     };
 
     // mock controller
-    ListModalCtrl = $controller('ListModalCtrl', {
+    SimpleModalCtrl = $controller('SimpleModalCtrl', {
       $scope: scope,
       $modalInstance: mockModalInstance,
-      list: list
+      modalObject: modalObject
     });
   }));
 
-  it('should contain the same list after create', function() {
-    expect(scope.list).toEqual({
+  it('should contain the same modalObject after create', function() {
+    expect(scope.modalObject).toEqual({
       id: 1
     });
 
-    expect(scope.list).not.toEqual({
+    expect(scope.modalObject).not.toEqual({
       title: 'someTitle'
     });
   });
@@ -57,6 +57,6 @@ describe('Controller: RemoveListModalInstanceCtrl', function () {
   it('should call modal closing with returning argument', function() {
     scope.ok();
 
-    expect(mockModalInstance.close).toHaveBeenCalledWith(scope.list);
+    expect(mockModalInstance.close).toHaveBeenCalledWith(scope.modalObject);
   });
 });

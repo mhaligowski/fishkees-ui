@@ -5,10 +5,10 @@ angular.module('flashcardListModule.controllers')
         $scope.showAddNewListModal = function() {
             var modalInstance = $modal.open({
                 templateUrl: 'views/addNewListModal.html',
-                controller: 'ListModalCtrl',
+                controller: 'SimpleModalCtrl',
                 windowClass: 'add-new-list-modal',
                 resolve: {
-                    list: function() { return {'title': ''}; }
+                    modalObject: function() { return {'title': ''}; }
                 }
             }); 
 
@@ -20,9 +20,9 @@ angular.module('flashcardListModule.controllers')
         $scope.showRemoveListModal = function(list) {
             var modalInstance = $modal.open({
                 templateUrl: 'views/removeListModal.html',
-                controller: 'ListModalCtrl',
+                controller: 'SimpleModalCtrl',
                 resolve: {
-                    list: function() { return list; }
+                    modalObject: function() { return list; }
                 },
                 windowClass: 'remove-list-modal'
             });
@@ -36,9 +36,9 @@ angular.module('flashcardListModule.controllers')
         $scope.showEditListModal = function(list) {
             var modalInstance = $modal.open({
                 templateUrl: 'views/editListModal.html',
-                controller: 'ListModalCtrl',
+                controller: 'SimpleModalCtrl',
                 resolve: {
-                    list: function() { return {
+                    modalObject: function() { return {
                         'id': list.id,
                         'title': list.title,
                         'create_date': list.create_date

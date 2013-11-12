@@ -1,5 +1,24 @@
 <div ng-controller="FlashcardListDetailsCtrl">
     <div class="page-header">
-        <h1>{{ title }}</h1>
+        <h1>{{ list.title }}</h1>
     </div>
+
+    <p ng-if="flashcards.length == 0" class="text-warning no-flashcards-message">
+        You have not yet added any flashcards to this list!
+    </p>
+
+
+    <div ng-if="flashcards.length != 0" class="flashcards-container">
+        <div ng-repeat="fl in flashcards" class="row-fluid flashcard">
+            <div class="span5 front well well-small">{{ fl.front }}</div>
+            <div class="span5 back well well-small">{{ fl.back }}</div>
+            <div class="span2 toolbox">
+                <button class="btn btn-link remove-flashcard"
+                        ng-click="showRemoveFlashcardModal(fl);">
+                    <i class="icon-remove" ></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
 </div>
