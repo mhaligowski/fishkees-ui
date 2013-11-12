@@ -8,6 +8,9 @@ angular
             scope: {
                 text: '=text'
             },
-            template: "<span>{{ text }}</span>"
+            template: "{{ text }}",
+            link: function link(scope, element, attrs) {
+                console.log(markdown.toHTML(element));
+            }
         }
     });
