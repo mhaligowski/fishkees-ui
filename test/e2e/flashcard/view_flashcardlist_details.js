@@ -37,11 +37,11 @@ describe('View details for flashcardlist', function() {
         // then
         expect(element('.flashcards-container > div').count()).toBe(LIST1_COUNT);
 
-        expect(element('.flashcards-container > div:nth-child(1) > .front').text()).toMatch('<em>front 1</em>');
-        expect(element('.flashcards-container > div:nth-child(1) > .back').text()).toMatch('<em>back 1</em>');
+        expect(element('.flashcards-container > div:nth-child(1) > .front').html()).toMatch('<em>front 1</em>');
+        expect(element('.flashcards-container > div:nth-child(1) > .back').html()).toMatch('<em>back 1</em>');
 
-        expect(element('.flashcards-container > div:nth-child(2) > .front').text()).toMatch('<strong>front 2</strong>');
-        expect(element('.flashcards-container > div:nth-child(2) > .back').text()).toMatch('<strong>back 2</strong>');
+        expect(element('.flashcards-container > div:nth-child(2) > .front').html()).toMatch('<strong>front 2</strong>');
+        expect(element('.flashcards-container > div:nth-child(2) > .back').html()).toMatch('<strong>back 2</strong>');
     });
 
 });

@@ -3,14 +3,21 @@
 angular
     .module('flashcardModule.directives')
     .directive('markdownEditor', function() {
+        var converter = new Showdown.converter();
         return {
             restrict: "E",
             scope: {
                 text: '=text'
             },
-            template: "{{ text }}",
-            link: function link(scope, element, attrs) {
-                console.log(markdown.toHTML(element));
+            compile: function compile(tElement, attrs, transclude) {
+                return function(scope, element, attrs) {
+                    scope.isEditMode = false;
+
+                    if (scope.text) {
+                        var htmlText = converter.makeHtml(scope.text);
+                        element.html(htmlText);
+                    }
+                }
             }
         }
     });
