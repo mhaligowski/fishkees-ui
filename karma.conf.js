@@ -47,6 +47,7 @@ module.exports = function(config) {
       'app/scripts/flashcards/*.js',
       'app/scripts/flashcards/services/*.js',
       'app/scripts/flashcards/controllers/*.js',
+      'app/scripts/flashcards/directives/*.js',
 
       // tests
       'test/spec/**/*.js'
