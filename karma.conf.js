@@ -32,6 +32,7 @@ module.exports = function(config) {
       'app/bower_components/angular-resource/angular-resource.js',
       'app/bower_components/angular-route/angular-route.js',
       'app/bower_components/angular-ui-bootstrap-bower/ui-bootstrap-tpls.js',
+      'app/bower_components/showdown/compressed/showdown.js',
 
       // common
       'app/scripts/common/*.js',
@@ -47,6 +48,7 @@ module.exports = function(config) {
       'app/scripts/flashcards/*.js',
       'app/scripts/flashcards/services/*.js',
       'app/scripts/flashcards/controllers/*.js',
+      'app/scripts/flashcards/directives/*.js',
 
       // tests
       'test/spec/**/*.js'

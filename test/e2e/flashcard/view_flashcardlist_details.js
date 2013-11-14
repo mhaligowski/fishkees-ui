@@ -33,14 +33,15 @@ describe('View details for flashcardlist', function() {
         expect(element('.no-flashcards-message').count()).toBe(0);
     });
 
-    it('should display list of flashcards when entering the non-empty list', function() {
+    it('should display list markdowned list of flashcards when entering the non-empty list', function() {
         // then
         expect(element('.flashcards-container > div').count()).toBe(LIST1_COUNT);
 
-        expect(element('.flashcards-container > div:nth-child(1) > .front').text()).toBe('front 1');
-        expect(element('.flashcards-container > div:nth-child(1) > .back').text()).toBe('back 1');
+        expect(element('.flashcards-container > div:nth-child(1) > .front').html()).toContain('<em>front 1</em>');
+        expect(element('.flashcards-container > div:nth-child(1) > .back').html()).toContain('<em>back 1</em>');
 
-        expect(element('.flashcards-container > div:nth-child(2) > .front').text()).toBe('front 2');
-        expect(element('.flashcards-container > div:nth-child(2) > .back').text()).toBe('back 2');
+        expect(element('.flashcards-container > div:nth-child(2) > .front').html()).toContain('<strong>front 2</strong>');
+        expect(element('.flashcards-container > div:nth-child(2) > .back').html()).toContain('<strong>back 2</strong>');
     });
+
 });
