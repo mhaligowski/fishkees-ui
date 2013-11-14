@@ -11,8 +11,6 @@ angular
             },
             compile: function(tElement, tAttrs, transclude) {
                 return function(scope, iElement, iAttrs, controller) {
-                    scope.isEditMode = false;
-
                     if (scope.text) {
                         var htmlText = converter.makeHtml(scope.text);
                         iElement.html(htmlText);

@@ -15,18 +15,6 @@ describe('MarkdownEditorDirective', function() {
         });
     });
 
-    it('should be in view mode by default', function() {
-        // given
-        $scope.testText = '';
-
-        // when
-        var element = $compile(template)($scope);
-        $scope.$digest();
-
-        // then
-        expect(element.scope().isEditMode).toBe(false);
-    });
-
     it('should be empty if there is no text', function() {
         // given
         $scope.testText = '';
