@@ -9,15 +9,15 @@ angular
             scope: {
                 text: '=text'
             },
-            compile: function compile(tElement, attrs, transclude) {
-                return function(scope, element, attrs) {
+            compile: function(tElement, tAttrs, transclude) {
+                return function(scope, iElement, iAttrs, controller) {
                     scope.isEditMode = false;
 
                     if (scope.text) {
                         var htmlText = converter.makeHtml(scope.text);
-                        element.html(htmlText);
+                        iElement.html(htmlText);
                     }
                 }
             }
-        }
+        };
     });
