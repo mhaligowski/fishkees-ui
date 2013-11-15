@@ -15,18 +15,6 @@ describe('MarkdownEditorDirective', function() {
         });
     });
 
-    it('should be empty if there is no text', function() {
-        // given
-        $scope.testText = '';
-
-        // when
-        var element = $compile(template)($scope);
-        $scope.$digest();
-
-        // then
-        expect(element.text()).toBe("");
-    });
-
     it('should compile to markdown', function() {
         // given
         $scope.testText = '**hello**';
@@ -40,5 +28,20 @@ describe('MarkdownEditorDirective', function() {
 
     });
 
+    it('should have editor mode off by default', function() {
+        // when
+        var element = $compile(template)($scope);
 
+        // then
+        expect(element.scope().isEditMode).toBe(false);
+    });
+
+    it("should haved editor mode on upon clicking", function() {
+        // when
+        var element = $compile(template)($scope);
+        element.scope().toEditMode();
+
+        // then
+        expect(element.scope().isEditMode).toBe(true);
+    });
 });
