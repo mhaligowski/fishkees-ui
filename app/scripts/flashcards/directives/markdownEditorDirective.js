@@ -5,7 +5,7 @@ angular
     .directive('markdownEditor', function() {
         var converter = new Showdown.converter();
         var previewTemplate = '<div ng-hide="isEditMode" ng-dblclick="toEditMode()" class="preview"></div>';
-        var editorTemplate = '<textarea ng-show="isEditMode" class="editor"></textarea>';
+        var editorTemplate = '<textarea ng-show="isEditMode" class="editor input-block-level"></textarea>';
 
         return {
             restrict: 'E',
