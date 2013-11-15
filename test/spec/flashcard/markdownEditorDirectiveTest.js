@@ -2,16 +2,25 @@
 
 describe('MarkdownEditorDirective', function() {
     
-    var $compile, $scope;
+    var $compile, $scope, $httpBackend;
 
     var template = "<markdown-editor text='testText'></markdown-editor>";
 
     beforeEach(function() {
         module('flashcardModule.directives');
 
-        inject(function (_$compile_, $rootScope) {
+        inject(function (_$compile_, $rootScope, _$httpBackend_) {
             $compile = _$compile_;
             $scope = $rootScope.$new();
+            $httpBackend = _$httpBackend_;
+
+            $httpBackend
+                .when('GET', "views/markdownEditorTemplate.html")
+                .respond('<div ng-hide="isEditMode" ng-dblclick="toEditMode()" class="preview"> \
+                        </div> \
+                        <textarea ng-show="isEditMode" class="editor input-block-level"> \
+                        </textarea>');
+
         });
     });
 
@@ -21,6 +30,7 @@ describe('MarkdownEditorDirective', function() {
 
         // when
         var element = $compile(template)($scope);
+        $httpBackend.flush();
         $scope.$digest();
 
         // then
@@ -31,6 +41,7 @@ describe('MarkdownEditorDirective', function() {
     it('should have editor mode off by default', function() {
         // when
         var element = $compile(template)($scope);
+        $httpBackend.flush();
 
         // then
         expect(element.scope().isEditMode).toBe(false);
@@ -39,6 +50,7 @@ describe('MarkdownEditorDirective', function() {
     it("should haved editor mode on upon clicking", function() {
         // when
         var element = $compile(template)($scope);
+        $httpBackend.flush();
         element.scope().toEditMode();
 
         // then

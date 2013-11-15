@@ -10,7 +10,7 @@ angular
             scope: {
                 text: '=text'
             },
-            template: '<div ng-hide="isEditMode" ng-dblclick="toEditMode()" class="preview"></div><textarea ng-show="isEditMode" class="editor input-block-level"></textarea>',
+            templateUrl: 'views/markdownEditorTemplate.html',
             compile: function(tElement, tAttrs, transclude) {
                 return function(scope, iElement, iAttrs, controller) {
                     scope.isEditMode = false;
