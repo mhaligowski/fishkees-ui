@@ -4,7 +4,7 @@ describe('MarkdownEditorDirective', function() {
     
     var $compile, $scope, $httpBackend;
 
-    var template = "<markdown-editor text='testText'></markdown-editor>";
+    var template = "<markdown-editor text='testText' edit-mode='false'></markdown-editor>";
 
     beforeEach(function() {
         module('flashcardModule.directives');
@@ -42,6 +42,7 @@ describe('MarkdownEditorDirective', function() {
         // when
         var element = $compile(template)($scope);
         $httpBackend.flush();
+        element.scope().$apply();
 
         // then
         expect(element.scope().isEditMode).toBe(false);
@@ -51,6 +52,7 @@ describe('MarkdownEditorDirective', function() {
         // when
         var element = $compile(template)($scope);
         $httpBackend.flush();
+        element.scope().$apply();
         element.scope().toEditMode();
 
         // then

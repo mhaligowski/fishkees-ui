@@ -8,7 +8,8 @@ angular
         return {
             restrict: 'E',
             scope: {
-                text: '=text'
+                text: '=text',
+                isEditMode: '&editMode'
             },
             templateUrl: 'views/markdownEditorTemplate.html',
             compile: function(tElement, tAttrs, transclude) {
