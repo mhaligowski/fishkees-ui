@@ -12,7 +12,7 @@ angular
                 isEditMode: '&editMode'
             },
             templateUrl: 'views/markdownEditorTemplate.html',
-            compile: function(tElement, tAttrs, transclude) {
+            compile: function(tElement, tAttrs) {
                 return function(scope, iElement, iAttrs, controller) {
                     scope.isEditMode = false;
 

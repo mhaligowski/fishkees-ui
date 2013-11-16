@@ -31,31 +31,27 @@ describe('MarkdownEditorDirective', function() {
         // when
         var element = $compile(template)($scope);
         $httpBackend.flush();
-        $scope.$digest();
 
         // then
         expect(element.html()).toContain("<strong>hello</strong>");
-
     });
 
     it('should have editor mode off by default', function() {
         // when
         var element = $compile(template)($scope);
         $httpBackend.flush();
-        element.scope().$apply();
 
         // then
-        expect(element.scope().isEditMode).toBe(false);
+        expect($scope.$$childTail.isEditMode).toBe(false);
     });
 
     it("should haved editor mode on upon clicking", function() {
         // when
         var element = $compile(template)($scope);
         $httpBackend.flush();
-        element.scope().$apply();
-        element.scope().toEditMode();
+        $scope.$$childTail.toEditMode();
 
         // then
-        expect(element.scope().isEditMode).toBe(true);
+        expect($scope.$$childTail.isEditMode).toBe(true);
     });
 });
