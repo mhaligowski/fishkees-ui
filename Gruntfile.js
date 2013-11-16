@@ -331,6 +331,15 @@ module.exports = function (grunt) {
       unit: {
         configFile: 'karma.conf.js',
         singleRun: true
+      },
+      e2e: {
+        configFile: 'karma-e2e.conf.js',
+        singleRun: true
+      },
+      headless_e2e: {
+        configFile: 'karma-e2e.conf.js',
+        singleRun: true,
+        browsers: ['PhantomJS']
       }
     },
     cdnify: {
@@ -380,7 +389,23 @@ module.exports = function (grunt) {
     'concurrent:test',
     'autoprefixer',
     'connect:test',
-    'karma'
+    'karma:unit'
+  ]);
+
+  grunt.registerTask('e2e', [
+    'clean:server',
+    'concurrent:server',
+    'autoprefixer',
+    'connect:livereload',
+    'karma:e2e'
+  ]);
+
+  grunt.registerTask('headless_e2e', [
+    'clean:server',
+    'concurrent:server',
+    'autoprefixer',
+    'connect:livereload',
+    'karma:headless_e2e'
   ]);
 
   grunt.registerTask('build', [
