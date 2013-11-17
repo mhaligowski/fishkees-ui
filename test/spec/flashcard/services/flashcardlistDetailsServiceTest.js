@@ -87,4 +87,24 @@ describe('FlashcardListDetailsService', function() {
         expect(actual[0]).toEqual(testFlashcards[0]);
         expect(actual[1]).toEqual(testFlashcards[2]);
     });
+
+    it('should update the list', function() {
+        // given
+        testFlashcards[1].front = "newFront";
+        $httpBackend
+            .expectPUT('/service/flashcardlists/someNiceId1/flashcards/someId2')
+            .respond(testFlashcards[1]);
+
+
+        // when
+        var actual = null;
+        testObj.updateFlashcard(testFlashcards[1])
+                  .then(function(r) { actual = r; });
+        $httpBackend.flush();
+
+        // then
+        expect(actual.id).toBe(testFlashcards[1].id);
+        expect(actual.front).toBe(testFlashcards[1].front);
+        expect(actual.flashcardListId).toBe(testFlashcards[1].flashcardListId);
+    });
 });

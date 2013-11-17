@@ -28,7 +28,7 @@ describe('Controller: FlashcardListCtrl', function () {
         modalMock = jasmine.createSpyObj('$modal', ['open']);
 
         mockService = jasmine.createSpyObj('listsEditService', 
-            ['getLists', 'addToLists', 'removeFromLists', 'updateLists']);
+            ['getLists', 'addToLists', 'removeFromLists', 'updateLists', 'updateFlashcard']);
         mockService.getLists.andCallFake(function() { return testList; });
 
         module('flashcardListModule.controllers');
@@ -107,4 +107,5 @@ describe('Controller: FlashcardListCtrl', function () {
         expect(callObject.resolve.modalObject).not.toBeUndefined();
         expect(callObject.resolve.modalObject()).toEqual({ id: 1 });
     });
+
 });

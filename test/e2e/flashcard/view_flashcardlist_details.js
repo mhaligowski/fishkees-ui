@@ -44,4 +44,55 @@ describe('View details for flashcardlist', function() {
         expect(element('.flashcards-container > div:nth-child(2) > .back').html()).toContain('<strong>back 2</strong>');
     });
 
+    it('should not display textarea by default', function() {
+        expect(element('.flashcards-container > div > .front textarea:visible').count()).toBe(0);
+    });
+
+    it('should change the flashcard to editor after doubleclick', function() {
+        // when
+        element('.flashcards-container > div:nth-child(1) > .front markdown-editor div').dblclick();
+
+        // then
+        expect(element('.flashcards-container > div:nth-child(1) > .front textarea:visible').count()).toBe(1);
+    });
+
+    it('should contain the flashcard value after changing to editor after doubleclick', function() {
+        // when
+        element('.flashcards-container > div:nth-child(1) > .front markdown-editor div').dblclick();
+
+        // then
+        expect(element('.flashcards-container > div:nth-child(1) > .front textarea').text()).toBe("*front 1*");
+    });
+
+    it('should not contain the "cancel" button in preview mode', function() {
+        // then
+        expect(element('.flashcards-container > div:nth-child(1) > .front .cancel:visible').count()).toBe(0);
+    });
+
+    it('should contain the "cancel" button in editor mode', function() {
+        // when
+        element('.flashcards-container > div:nth-child(1) > .front markdown-editor div').dblclick();
+
+        // then
+        expect(element('.flashcards-container > div:nth-child(1) > .front .cancel:visible').count()).toBe(1);
+    });
+
+    it('should go back to preview mode when clicking "cancel"', function() {
+        // when
+        element('.flashcards-container > div:nth-child(1) > .front markdown-editor div').dblclick();
+        element('.flashcards-container > div:nth-child(1) > .front .cancel:button').click();
+
+        // then
+        expect(element('.flashcards-container > div:nth-child(1) > .front textarea:visible').count()).toBe(0);
+    });
+
+    it('should have still the same text after clicking "cancel" button', function() {
+        // when
+        element('.flashcards-container > div:nth-child(1) > .front markdown-editor div').dblclick();
+        element('.flashcards-container > div:nth-child(1) > .front textarea').val('brand new text');
+        element('.flashcards-container > div:nth-child(1) > .front .cancel:button').click();
+
+        // then
+        expect(element('.flashcards-container > div:nth-child(1) > .front textarea').text()).toBe("*front 1*");
+    });
 });
