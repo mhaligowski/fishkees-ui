@@ -110,4 +110,19 @@ describe('MarkdownEditorDirective', function() {
         // then
         expect(element.html()).toContain("<em>hello</em>");
     });
+
+    it('should call the update function after clicking "OK"', function() {
+        // given
+        $scope.editMode = true;
+        $scope.mockFunction = jasmine.createSpy("mockFunction");
+
+        // when
+        var element = $compile(template)($scope);
+        $httpBackend.flush();
+        element.find('textarea').val("*hello*");
+        $scope.$$childTail.ok();
+
+        // then
+        expect($scope.mockFunction).toHaveBeenCalled();
+    });
 });

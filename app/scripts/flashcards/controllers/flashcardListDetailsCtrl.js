@@ -31,4 +31,15 @@ angular.module('flashcardModule.controllers')
 
                 modalInstance.result.then(removeFromFlashcards);
             }
+
+            $scope.updateFlashcardFront = function(flashcard, newValue) {
+                flashcard.front = newValue;
+                service.updateFlashcard(flashcard);
+            }
+
+            $scope.updateFlashcardBack= function(flashcard, newValue) {
+                flashcard.back = newValue;
+                service.updateFlashcard(flashcard);
+            }
+
         });

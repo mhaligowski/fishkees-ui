@@ -31,4 +31,15 @@ describe('Edit details for flashcardlist', function() {
         // then
         expect(element('.flashcards-container > div:nth-child(1) > .front').html()).toContain('brand <em>new</em> text');
     });
+
+    it('should save the new text upon refreshing the page', function() {
+        // when
+        element('.flashcards-container > div:nth-child(1) > .front markdown-editor div').dblclick();
+        element('.flashcards-container > div:nth-child(1) > .front textarea').val('brand *new* text');
+        element('.flashcards-container > div:nth-child(1) > .front .save:visible').click();
+        browser().reload();
+
+        // then
+        expect(element('.flashcards-container > div:nth-child(1) > .front .preview').html()).toContain('brand <em>new</em> text');
+    });
 });

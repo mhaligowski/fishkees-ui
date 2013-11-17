@@ -40,6 +40,7 @@ angular
 
                     scope.ok = function() {
                         scope.text = iElement.find('textarea').val();
+                        scope.update({newValue: scope.text});
                         updateMarkdown(scope.text);
 
                         scope.isEditMode = false;

@@ -31,4 +31,10 @@ angular.module('flashcardModule.services')
                 .$promise
                 .then(createNewListWithoutElement);
         };
+
+        this.updateFlashcard = function(flashcard) {
+            return Flashcards
+                .update(flashcard)
+                .$promise;
+        }
     });

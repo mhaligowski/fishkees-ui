@@ -11,11 +11,19 @@
         <div ng-repeat="fl in flashcards" class="row-fluid flashcard">
 
             <div class="span5 front well well-small">
-                <markdown-editor text="fl.front"></markdown-editor>
+                <markdown-editor 
+                    text="fl.front"
+                    update-fn="updateFlashcardFront(fl, newValue);"
+                    >
+                </markdown-editor>
             </div>
 
             <div class="span5 back well well-small">
-                <markdown-editor text="fl.back"></markdown-editor>
+                <markdown-editor 
+                    text="fl.back"
+                    update-fn="updateFlashcardBack(fl, newValue);"
+                    >
+                </markdown-editor>
             </div>
             
             <div class="span2 toolbox">
