@@ -1,4 +1,7 @@
 <div ng-hide="isEditMode" ng-dblclick="toEditMode()" class="preview">
 </div>
+<button ng-show="isEditMode" class="cancel btn btn-small btn-danger">
+    <i class="icon-remove"></i>
+</button>
 <textarea ng-show="isEditMode" class="editor input-block-level">
 </textarea>

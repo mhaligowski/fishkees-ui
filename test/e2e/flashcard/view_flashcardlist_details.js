@@ -64,4 +64,16 @@ describe('View details for flashcardlist', function() {
         expect(element('.flashcards-container > div:nth-child(1) > .front textarea').text()).toBe("*front 1*");
     });
 
+    it('should not contain the "cancel" button in preview mode', function() {
+        // then
+        expect(element('.flashcards-container > div:nth-child(1) > .front .cancel:visible').count()).toBe(0);
+    });
+
+    it('should contain the "cancel" button in editor mode', function() {
+        // when
+        element('.flashcards-container > div:nth-child(1) > .front markdown-editor div').dblclick();
+
+        // then
+        expect(element('.flashcards-container > div:nth-child(1) > .front .cancel:visible').count()).toBe(1);
+    });
 });
