@@ -45,7 +45,7 @@ describe('FlashcardListDetailsCtrl controller', function() {
 
         // mock service
         mockService = jasmine.createSpyObj('flashcardListDetailsService', 
-            ['getListDetails', 'getFlashcards', 'removeFlashcardFromList']);
+            ['getListDetails', 'getFlashcards', 'removeFlashcardFromList', 'updateFlashcard']);
         mockService.getListDetails.andCallFake(function() { return testList; });
         mockService.getFlashcards.andCallFake(function() { return testFlashcards; });
         
@@ -134,4 +134,31 @@ describe('FlashcardListDetailsCtrl controller', function() {
         expect(mockService.removeFlashcardFromList).toHaveBeenCalledWith({ id: 'someId3 '}, testFlashcards);
         expect($scope.flashcards).toBe(result);
     });
+
+    it('should call the update service when updating the front', function() {
+        // given
+        var flashcard = {};
+        var newValue = 'new front';
+
+        // when
+        $scope.updateFlashcardFront(flashcard, newValue);
+
+        // then
+        expect(flashcard.front).toBe(newValue);
+        expect(mockService.updateFlashcard).toHaveBeenCalledWith(flashcard);        
+    });
+
+    it('should call the update service when updating the back', function() {
+        // given
+        var flashcard = {};
+        var newValue = 'new back';
+
+        // when
+        $scope.updateFlashcardBack(flashcard, newValue);
+
+        // then
+        expect(flashcard.back).toBe(newValue);
+        expect(mockService.updateFlashcard).toHaveBeenCalledWith(flashcard);        
+    });
+
 });
