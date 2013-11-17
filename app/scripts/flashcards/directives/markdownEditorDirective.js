@@ -9,12 +9,15 @@ angular
             restrict: 'E',
             scope: {
                 text: '=text',
-                isEditMode: '&editMode'
+                isEditMode: '=?editMode'
             },
             templateUrl: 'views/markdownEditorTemplate.html',
             compile: function(tElement, tAttrs) {
                 return function(scope, iElement, iAttrs, controller) {
-                    scope.isEditMode = false;
+                    scope.isEditMode = 
+                        typeof scope.isEditMode !== 'undefined' 
+                            ? scope.isEditMode
+                            : false;
 
                     if (scope.text) {
                         var htmlText = converter.makeHtml(scope.text);
@@ -24,6 +27,10 @@ angular
                     scope.toEditMode = function() {
                         iElement.find('textarea').html(scope.text);
                         scope.isEditMode = true;
+                    }
+
+                    scope.cancel = function() {
+                        scope.isEditMode = false;
                     }
                 }
             }

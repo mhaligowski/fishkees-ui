@@ -4,7 +4,7 @@ describe('MarkdownEditorDirective', function() {
     
     var $compile, $scope, $httpBackend;
 
-    var template = "<markdown-editor text='testText' edit-mode='false'></markdown-editor>";
+    var template = "<markdown-editor text='testText' edit-mode='editMode'></markdown-editor>";
 
     beforeEach(function() {
         module('flashcardModule.directives');
@@ -45,6 +45,18 @@ describe('MarkdownEditorDirective', function() {
         expect($scope.$$childTail.isEditMode).toBe(false);
     });
 
+    it('should be able to initialize with editor mode', function() {
+        // given
+        $scope.editMode = true;
+
+        // when
+        var element = $compile(template)($scope);
+        $httpBackend.flush();
+
+        // then
+        expect($scope.$$childTail.isEditMode).toBe(true);
+    });
+
     it("should haved editor mode on upon clicking", function() {
         // when
         var element = $compile(template)($scope);
@@ -54,4 +66,18 @@ describe('MarkdownEditorDirective', function() {
         // then
         expect($scope.$$childTail.isEditMode).toBe(true);
     });
+
+    it('should switch to preview mode after clicking "Close" button', function() {
+        // given
+        $scope.editMode = true;
+
+        // when
+        var element = $compile(template)($scope);
+        $httpBackend.flush();
+        $scope.$$childTail.cancel();
+
+        // then
+        expect($scope.$$childTail.isEditMode).toBe(false);
+    });
+
 });

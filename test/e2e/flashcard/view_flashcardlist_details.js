@@ -76,4 +76,13 @@ describe('View details for flashcardlist', function() {
         // then
         expect(element('.flashcards-container > div:nth-child(1) > .front .cancel:visible').count()).toBe(1);
     });
+
+    it('should go back to preview mode when clicking "cancel"', function() {
+        // when
+        element('.flashcards-container > div:nth-child(1) > .front markdown-editor div').dblclick();
+        element('.flashcards-container > div:nth-child(1) > .front .cancel:visible').click();
+
+        // then
+        expect(element('.flashcards-container > div:nth-child(1) > .front textarea:visible').count()).toBe(0);
+ });
 });
