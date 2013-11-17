@@ -3,11 +3,23 @@
     ng-hide="isEditMode" 
     ng-dblclick="toEditMode()">
 </div>
-<button 
-    class="cancel btn btn-small btn-danger" 
-    ng-show="isEditMode" 
-    ng-click="cancel()">
-    <i class="icon-remove"></i>
-</button>
+
+<p>
+    <button 
+        class="cancel btn btn-mini btn-danger" 
+        type="button"
+        ng-show="isEditMode" 
+        ng-click="cancel()">
+        <i class="icon-remove"></i>
+    </button>
+
+    <button
+        class="save btn btn-mini btn-success"
+        type="button"
+        ng-show="isEditMode">
+        <i class="icon-ok"></i>
+    </button>
+</p>
+
 <textarea ng-show="isEditMode" class="editor input-block-level">
 </textarea>
