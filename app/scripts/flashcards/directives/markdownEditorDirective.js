@@ -9,20 +9,25 @@ angular
             restrict: 'E',
             scope: {
                 text: '=text',
+                update: '&updateFn',
                 isEditMode: '=?editMode'
             },
             templateUrl: 'views/markdownEditorTemplate.html',
             compile: function(tElement, tAttrs) {
                 return function(scope, iElement, iAttrs, controller) {
+                    var updateMarkdown = function(text) {
+                        if (scope.text) {
+                            var htmlText = converter.makeHtml(scope.text);
+                            iElement.find('div').html(htmlText);
+                        }
+                    };
+
+                    updateMarkdown(scope.text);
+
                     scope.isEditMode = 
                         typeof scope.isEditMode !== 'undefined' 
                             ? scope.isEditMode
                             : false;
-
-                    if (scope.text) {
-                        var htmlText = converter.makeHtml(scope.text);
-                        iElement.find('div').html(htmlText);
-                    }
 
                     scope.toEditMode = function() {
                         iElement.find('textarea').html(scope.text);
@@ -30,6 +35,13 @@ angular
                     }
 
                     scope.cancel = function() {
+                        scope.isEditMode = false;
+                    }
+
+                    scope.ok = function() {
+                        scope.text = iElement.find('textarea').val();
+                        updateMarkdown(scope.text);
+
                         scope.isEditMode = false;
                     }
                 }

@@ -1,6 +1,6 @@
 'use strict'
 
-describe('View details for flashcardlist', function() {
+describe('Edit details for flashcardlist', function() {
 
     beforeEach(function() {
         browser().navigateTo('/');
@@ -15,10 +15,20 @@ describe('View details for flashcardlist', function() {
     });
 
     it('should contain the "save" button in edit mode', function() {
-        // given
+        // when
         element('.flashcards-container > div:nth-child(1) > .front markdown-editor div').dblclick();
 
         // then
         expect(element('.flashcards-container > div:nth-child(1) > .front .save:visible').count()).toBe(1);
+    });
+
+    it('should save the new text upon editing', function() {
+        // when
+        element('.flashcards-container > div:nth-child(1) > .front markdown-editor div').dblclick();
+        element('.flashcards-container > div:nth-child(1) > .front textarea').val('brand *new* text');
+        element('.flashcards-container > div:nth-child(1) > .front .save:visible').click();
+
+        // then
+        expect(element('.flashcards-container > div:nth-child(1) > .front').html()).toContain('brand <em>new</em> text');
     });
 });
