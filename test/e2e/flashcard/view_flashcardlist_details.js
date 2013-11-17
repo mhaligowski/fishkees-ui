@@ -80,9 +80,19 @@ describe('View details for flashcardlist', function() {
     it('should go back to preview mode when clicking "cancel"', function() {
         // when
         element('.flashcards-container > div:nth-child(1) > .front markdown-editor div').dblclick();
-        element('.flashcards-container > div:nth-child(1) > .front .cancel:visible').click();
+        element('.flashcards-container > div:nth-child(1) > .front .cancel:button').click();
 
         // then
         expect(element('.flashcards-container > div:nth-child(1) > .front textarea:visible').count()).toBe(0);
- });
+    });
+
+    it('should have still the same text after clicking "cancel" button', function() {
+        // when
+        element('.flashcards-container > div:nth-child(1) > .front markdown-editor div').dblclick();
+        element('.flashcards-container > div:nth-child(1) > .front textarea').val('brand new text');
+        element('.flashcards-container > div:nth-child(1) > .front .cancel:button').click();
+
+        // then
+        expect(element('.flashcards-container > div:nth-child(1) > .front textarea').text()).toBe("*front 1*");
+    });
 });
