@@ -333,11 +333,11 @@ module.exports = function (grunt) {
         singleRun: true
       },
       e2e: {
-        configFile: 'karma-e2e.conf.js',
+        configFile: 'test/conf/karma-e2e.conf.js',
         singleRun: true
       },
       headless_e2e: {
-        configFile: 'karma-e2e.conf.js',
+        configFile: 'test/conf/karma-e2e.conf.js',
         singleRun: true,
         browsers: ['PhantomJS']
       }
