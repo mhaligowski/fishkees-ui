@@ -408,7 +408,7 @@ module.exports = function (grunt) {
     'concurrent:server',
     'autoprefixer',
     'connect:livereload',
-    'karma:headless_e2e'
+    'karma:headlessE2e'
   ]);
 
   grunt.registerTask('build', [
