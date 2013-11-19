@@ -336,7 +336,7 @@ module.exports = function (grunt) {
         configFile: 'test/conf/karma-e2e.conf.js',
         singleRun: true
       },
-      headless_e2e: {
+      headlessE2e: {
         configFile: 'test/conf/karma-e2e.conf.js',
         singleRun: true,
         browsers: ['PhantomJS']
@@ -385,6 +385,7 @@ module.exports = function (grunt) {
   });
 
   grunt.registerTask('test', [
+    'jshint',
     'clean:server',
     'concurrent:test',
     'autoprefixer',
@@ -393,6 +394,7 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('e2e', [
+    'jshint',
     'clean:server',
     'concurrent:server',
     'autoprefixer',
@@ -401,6 +403,7 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('headless_e2e', [
+    'jshint',
     'clean:server',
     'concurrent:server',
     'autoprefixer',
