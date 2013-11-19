@@ -9,6 +9,6 @@ describe('Add new flashcard', function() {
     });  
 
     it('should show the add button', function() {
-        expect(element('.add-flashcard.btn').count()).toBe(1);
+        expect(fishkees().addNewFlashcardButton().count()).toBe(1);
     });
 });
