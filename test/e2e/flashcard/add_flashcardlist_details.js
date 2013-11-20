@@ -5,24 +5,23 @@ describe('Add new flashcard', function() {
     var INITIAL_ROW_COUNT = 2;
 
     beforeEach(function() {
-        _ = fishkees();
         browser().navigateTo('/');
         restartDB();
         sleep(0.3);
-        _.goToPageWithSomeFlashcards();
+        fishkees().goToPageWithSomeFlashcards();
     });  
 
     it('should show the add button when there are some flashcards', function() {
         // then
-        expect(_.addNewFlashcardButton().count()).toBe(1);
+        expect(fishkees().addNewFlashcardButton().count()).toBe(1);
     });
 
     it('should show the add button when there are no flashcards', function() {
         // when
-        _.goToPageWithNoFlashcards();
+        fishkees().goToPageWithNoFlashcards();
 
         // then
-        expect(_.addNewFlashcardButton().count()).toBe(1);
+        expect(fishkees().addNewFlashcardButton().count()).toBe(1);
     });
 
     it('should add new markdown editor after clicking', function() {
@@ -30,6 +29,15 @@ describe('Add new flashcard', function() {
         fishkees().addNewFlashcardButton().click();
 
         // then
-        expect(fishkees().markdownEditors().count()).toBe(2 * (INITIAL_ROW_COUNT + 1));               
+        expect(fishkees().allMarkdownEditors().count()).toBe(2 * (INITIAL_ROW_COUNT + 1));               
     });
+
+    it('should be in edit mode', function() {
+        // when
+        fishkees().addNewFlashcardButton().click();
+
+        // then
+        expect(fishkees().markdownEditor(1).fishkees().isEditMode()).toBe(true);
+    });
+
 });

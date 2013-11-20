@@ -25,18 +25,17 @@ angular
                     updateMarkdown(scope.text);
 
                     scope.isEditMode = 
-                        typeof scope.isEditMode !== 'undefined' 
-                            ? scope.isEditMode
-                            : false;
+                        typeof scope.isEditMode !== 'undefined'
+                            && scope.isEditMode != '';
 
                     scope.toEditMode = function() {
                         iElement.find('textarea').html(scope.text);
                         scope.isEditMode = true;
-                    }
+                    };
 
                     scope.cancel = function() {
                         scope.isEditMode = false;
-                    }
+                    };
 
                     scope.ok = function() {
                         scope.text = iElement.find('textarea').val();
@@ -44,7 +43,11 @@ angular
                         updateMarkdown(scope.text);
 
                         scope.isEditMode = false;
-                    }
+                    };
+
+                    scope.getEditMode = function() {
+                        return scope.isEditMode;
+                    };
                 }
             }
         };

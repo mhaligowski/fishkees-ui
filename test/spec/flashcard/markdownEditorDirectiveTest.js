@@ -42,7 +42,7 @@ describe('MarkdownEditorDirective', function() {
 
     it('should have editor mode off by default', function() {
         // when
-        var element = $compile(template)($scope);
+        var element = $compile("<markdown-editor></markdown-editor>")($scope);
         $httpBackend.flush();
 
         // then

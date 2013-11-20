@@ -46,6 +46,7 @@ angular.module('flashcardModule.controllers')
                 service
                     .createNewFlashcard(listId)
                     .then(function(newFlashcard) {
+                        newFlashcard.isNew = true;
                         $scope
                             .flashcards
                             .unshift(newFlashcard);     

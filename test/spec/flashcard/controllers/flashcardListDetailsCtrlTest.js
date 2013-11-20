@@ -187,6 +187,7 @@ describe('FlashcardListDetailsCtrl controller', function() {
         // then
         expect($scope.flashcards.length).toBe(expectedLength);
         expect($scope.flashcards[0]).toBe(result);
+        expect($scope.flashcards[0].isNew).not.toBeUndefined();
         expect(mockService.createNewFlashcard).toHaveBeenCalled();
     });
 
