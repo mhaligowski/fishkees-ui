@@ -107,4 +107,26 @@ describe('FlashcardListDetailsService', function() {
         expect(actual.front).toBe(testFlashcards[1].front);
         expect(actual.flashcardListId).toBe(testFlashcards[1].flashcardListId);
     });
+
+    it('should return new flashcard list', function() {
+        // given
+        var newFlashcard = testFlashcards[1];
+        $httpBackend
+            .expectPOST('/service/flashcardlists/someNiceId1/flashcards')
+            .respond(newFlashcard);
+
+        // when
+        var actual = null;
+        testObj
+            .createNewFlashcard("someNiceId1")
+            .then(function(r) {
+                actual = r;
+            });
+        $httpBackend.flush();
+
+        // then
+        expect(actual.front).toBe(newFlashcard.front);
+        expect(actual.back).toBe(newFlashcard.back);
+        expect(actual.create_date).toBe(newFlashcard.create_date);
+    });
 });

@@ -37,4 +37,13 @@ angular.module('flashcardModule.services')
                 .update(flashcard)
                 .$promise;
         }
-    });
+
+        this.createNewFlashcard = function(listId) {
+            var newFlashcard = new Flashcards({
+                flashcard_list_id: listId
+            });
+
+            return Flashcards
+                .save(newFlashcard);
+        }
+    }); 

@@ -2,6 +2,7 @@
 
 describe('Add new flashcard', function() {
     var _;
+    var INITIAL_ROW_COUNT = 2;
 
     beforeEach(function() {
         _ = fishkees();
@@ -24,4 +25,11 @@ describe('Add new flashcard', function() {
         expect(_.addNewFlashcardButton().count()).toBe(1);
     });
 
+    it('should add new markdown editor after clicking', function() {
+        // when
+        fishkees().addNewFlashcardButton().click();
+
+        // then
+        expect(fishkees().markdownEditors().count()).toBe(2 * (INITIAL_ROW_COUNT + 1));               
+    });
 });
