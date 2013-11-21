@@ -16,13 +16,20 @@ angular
             templateUrl: 'views/markdownEditorTemplate.html',
             compile: function(tElement, tAttrs) {
                 return function(scope, iElement, iAttrs, controller) {
+                    var buildWarning = function(text) {
+                        return angular
+                            .element('<p class="text-warning"></p>')
+                            .text(text)[0].outerHTML;
+                    }
+
                     var updateMarkdown = function(text) {
-                        if (scope.text && scope.text != '') {
-                            var htmlText = converter.makeHtml(scope.text);
-                            iElement.find('div').html(htmlText);
-                        } else {
-                            iElement.find('div').html(scope.placeholderText);
-                        }
+                        var htmlText = scope.text 
+                            ? converter.makeHtml(scope.text)
+                            : buildWarning(scope.placeholderText || '');
+
+                        iElement
+                            .find('div')
+                            .html(htmlText);
                     };
 
                     updateMarkdown(scope.text);

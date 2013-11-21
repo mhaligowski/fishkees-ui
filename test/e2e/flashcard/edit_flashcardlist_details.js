@@ -50,6 +50,6 @@ describe('Edit details for flashcardlist', function() {
         element('.flashcards-container > div:nth-child(1) > .front .save:visible').click();
    
         // then
-        expect(element('.flashcards-container > div:nth-child(1) > .front .preview').text()).toBe('No text given');
+        expect(element('.flashcards-container > div:nth-child(1) > .front .preview').text()).toContain('No text given');
     });
 });

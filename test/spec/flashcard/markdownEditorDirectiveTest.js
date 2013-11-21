@@ -136,8 +136,9 @@ describe('MarkdownEditorDirective', function() {
         // when
         var element = $compile(template)($scope);
         $httpBackend.flush();
+        $scope.$digest();
 
         // then
-        expect(element.html()).toContain("No text given");     
+        expect(element.html()).toContain('<p class="text-warning">No text given</p>');
     });
 });
