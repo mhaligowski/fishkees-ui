@@ -7,11 +7,13 @@
         You have not yet added any flashcards to this list!
     </p>
 
-    <button 
-        class="add-flashcard btn btn-primary"
-        ng-click="addNewFlashcardAtTop(list.id)">
-        Add new flashcard
-    </button>
+    <p>
+        <button 
+            class="add-flashcard btn btn-primary"
+            ng-click="addNewFlashcardAtTop(list.id)">
+            Add new flashcard
+        </button>
+    </p>
 
     <div ng-if="flashcards.length != 0" class="flashcards-container">
         <div ng-repeat="fl in flashcards" class="row-fluid flashcard">
