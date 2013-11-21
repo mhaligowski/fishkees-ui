@@ -9,6 +9,7 @@ angular
             restrict: 'E',
             scope: {
                 text: '=text',
+                placeholderText: '@placeholderText',
                 update: '&updateFn',
                 isEditMode: '=?editMode'
             },
@@ -16,9 +17,11 @@ angular
             compile: function(tElement, tAttrs) {
                 return function(scope, iElement, iAttrs, controller) {
                     var updateMarkdown = function(text) {
-                        if (scope.text) {
+                        if (scope.text && scope.text != '') {
                             var htmlText = converter.makeHtml(scope.text);
                             iElement.find('div').html(htmlText);
+                        } else {
+                            iElement.find('div').html(scope.placeholderText);
                         }
                     };
 

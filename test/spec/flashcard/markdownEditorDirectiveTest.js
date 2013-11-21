@@ -7,7 +7,9 @@ describe('MarkdownEditorDirective', function() {
     var template = "<markdown-editor \
                         text='testText' \
                         edit-mode='editMode' \
-                        update-fn='mockFunction()'> \
+                        update-fn='mockFunction()' \
+                        placeholder-text='No text given' \
+                        > \
                     </markdown-editor>";
 
     beforeEach(function() {
@@ -124,5 +126,18 @@ describe('MarkdownEditorDirective', function() {
 
         // then
         expect($scope.mockFunction).toHaveBeenCalled();
+    });
+
+    it('should compile to placeholder text if the variable is empty', function() {
+        // given
+        $scope.testText = '';
+        $scope.placeholderText = 'No text given';
+
+        // when
+        var element = $compile(template)($scope);
+        $httpBackend.flush();
+
+        // then
+        expect(element.html()).toContain("No text given");     
     });
 });

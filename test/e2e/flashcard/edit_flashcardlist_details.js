@@ -29,7 +29,7 @@ describe('Edit details for flashcardlist', function() {
         element('.flashcards-container > div:nth-child(1) > .front .save:visible').click();
 
         // then
-        expect(element('.flashcards-container > div:nth-child(1) > .front').html()).toContain('brand <em>new</em> text');
+        expect(element('.flashcards-container > div:nth-child(1) > .front .preview').html()).toContain('brand <em>new</em> text');
     });
 
     it('should save the new text upon refreshing the page', function() {
@@ -41,5 +41,15 @@ describe('Edit details for flashcardlist', function() {
 
         // then
         expect(element('.flashcards-container > div:nth-child(1) > .front .preview').html()).toContain('brand <em>new</em> text');
+    });
+
+    it('should have filling text when there is empty text', function() {
+        // when
+        element('.flashcards-container > div:nth-child(1) > .front markdown-editor div').dblclick();
+        element('.flashcards-container > div:nth-child(1) > .front textarea').val('');
+        element('.flashcards-container > div:nth-child(1) > .front .save:visible').click();
+   
+        // then
+        expect(element('.flashcards-container > div:nth-child(1) > .front .preview').text()).toBe('No text given');
     });
 });
