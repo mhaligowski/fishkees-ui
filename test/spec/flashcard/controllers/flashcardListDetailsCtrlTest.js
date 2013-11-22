@@ -10,6 +10,7 @@ describe('FlashcardListDetailsCtrl controller', function() {
         $q,
         deferredModal,
         deferredRemoving,
+        deferredCreate,
         testFlashcards;
 
     beforeEach(function() {
@@ -45,7 +46,13 @@ describe('FlashcardListDetailsCtrl controller', function() {
 
         // mock service
         mockService = jasmine.createSpyObj('flashcardListDetailsService', 
-            ['getListDetails', 'getFlashcards', 'removeFlashcardFromList', 'updateFlashcard']);
+            [
+                'getListDetails', 
+                'getFlashcards', 
+                'removeFlashcardFromList', 
+                'updateFlashcard',
+                'createNewFlashcard'
+            ]);
         mockService.getListDetails.andCallFake(function() { return testList; });
         mockService.getFlashcards.andCallFake(function() { return testFlashcards; });
         
@@ -57,6 +64,7 @@ describe('FlashcardListDetailsCtrl controller', function() {
             $q = _$q_;
             deferredModal = $q.defer();
             deferredRemoving = $q.defer();
+            deferredCreate = $q.defer();
 
             mockModal.open.andCallFake(function() { 
                 return { result: deferredModal.promise };
@@ -65,6 +73,11 @@ describe('FlashcardListDetailsCtrl controller', function() {
             mockService.removeFlashcardFromList.andCallFake(function() {
                 return deferredRemoving.promise;
             });
+
+            mockService.createNewFlashcard.andCallFake(function() { 
+                return deferredCreate.promise; 
+            });
+
 
             FlashcardListDetailsCtrl = $controller('FlashcardListDetailsCtrl', {
                 $scope: $scope,
@@ -159,6 +172,23 @@ describe('FlashcardListDetailsCtrl controller', function() {
         // then
         expect(flashcard.back).toBe(newValue);
         expect(mockService.updateFlashcard).toHaveBeenCalledWith(flashcard);        
+    });
+
+    it('should add new empty flashcard at the beginning', function() {
+        // given
+        var expectedLength = testFlashcards.length + 1;
+
+        // when
+        $scope.addNewFlashcardAtTop();
+        var result = {}
+        deferredCreate.resolve(result);
+        $scope.$digest();
+
+        // then
+        expect($scope.flashcards.length).toBe(expectedLength);
+        expect($scope.flashcards[0]).toBe(result);
+        expect($scope.flashcards[0].isNew).not.toBeUndefined();
+        expect(mockService.createNewFlashcard).toHaveBeenCalled();
     });
 
 });

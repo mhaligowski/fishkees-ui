@@ -37,9 +37,20 @@ angular.module('flashcardModule.controllers')
                 service.updateFlashcard(flashcard);
             }
 
-            $scope.updateFlashcardBack= function(flashcard, newValue) {
+            $scope.updateFlashcardBack = function(flashcard, newValue) {
                 flashcard.back = newValue;
                 service.updateFlashcard(flashcard);
             }
 
-        });
+            $scope.addNewFlashcardAtTop = function() {
+                service
+                    .createNewFlashcard(listId)
+                    .then(function(newFlashcard) {
+                        newFlashcard.isNew = true;
+                        $scope
+                            .flashcards
+                            .unshift(newFlashcard);     
+                    });     
+            }
+        }
+    );

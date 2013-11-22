@@ -7,6 +7,14 @@
         You have not yet added any flashcards to this list!
     </p>
 
+    <p>
+        <button 
+            class="add-flashcard btn btn-primary"
+            ng-click="addNewFlashcardAtTop(list.id)">
+            Add new flashcard
+        </button>
+    </p>
+
     <div ng-if="flashcards.length != 0" class="flashcards-container">
         <div ng-repeat="fl in flashcards" class="row-fluid flashcard">
 
@@ -14,6 +22,8 @@
                 <markdown-editor 
                     text="fl.front"
                     update-fn="updateFlashcardFront(fl, newValue);"
+                    edit-mode="fl.isNew"
+                    placeholder-text="No text given"
                     >
                 </markdown-editor>
             </div>
@@ -22,6 +32,7 @@
                 <markdown-editor 
                     text="fl.back"
                     update-fn="updateFlashcardBack(fl, newValue);"
+                    placeholder-text="No text given"
                     >
                 </markdown-editor>
             </div>

@@ -5,7 +5,10 @@ angular.module('flashcardListModule.services')
         var url = RestAdressService.getAddress('flashcardlists/');
 
         return $resource(url + ":flashcard_list_id/flashcards/:id", 
-            {},
+            {
+                flashcard_list_id: '@flashcard_list_id',
+                id: '@id'
+            },
             {
                 'update': {
                     'method': 'PUT',
