@@ -40,4 +40,16 @@ describe('Add new flashcard', function() {
         expect(fishkees().markdownEditor(1).fishkees().isEditMode()).toBe(true);
     });
 
+    it('should have more flashcards after refresh', function() {
+        // when
+        fishkees().addNewFlashcardButton().click();
+        fishkees().markdownEditor(1).fishkees().frontTextArea().val('brand *new* text');
+        fishkees().markdownEditor(1).fishkees().frontOkButton().click();
+        browser().reload();
+
+        // then
+        expect(fishkees().allMarkdownEditors().count()).toBe(2 * (INITIAL_ROW_COUNT + 1));
+        expect(fishkees().markdownEditor(1).fishkees().frontContent().text()).toContain('brand new text');
+    });
+
 });

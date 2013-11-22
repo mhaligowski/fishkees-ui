@@ -23,6 +23,18 @@ angular.scenario.dsl('fishkees', function() {
         return this.dsl.using('.flashcard:nth-child(' + rowNr + ') markdown-editor');
     }
 
+    api.frontTextArea = function() {
+        return element('.front textarea');
+    }
+
+    api.frontContent = function() {
+        return element('.front .preview');
+    }
+
+    api.frontOkButton = function() {
+        return element('.front .save');
+    }
+
     api.isEditMode = function() {
         return this.addFutureAction('is area visible', function($window, $document, done) {
             try {
