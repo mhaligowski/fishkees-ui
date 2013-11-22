@@ -44,6 +44,7 @@ angular.module('flashcardModule.services')
             });
 
             return Flashcards
-                .save(newFlashcard);
+                .save(newFlashcard)
+                .$promise;
         }
     }); 
