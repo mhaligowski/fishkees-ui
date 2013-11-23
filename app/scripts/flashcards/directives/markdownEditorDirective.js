@@ -54,11 +54,7 @@ angular
 
                         scope.isEditMode = false;
                     };
-
-                    scope.getEditMode = function() {
-                        return scope.isEditMode;
-                    };
-                }
+                 }
             }
         };
     });
