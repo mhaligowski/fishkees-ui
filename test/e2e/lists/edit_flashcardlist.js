@@ -29,8 +29,8 @@ describe('Edit flashcardlist scenarios', function() {
 
         expect(element('modal.edit.list-modal').count()).toBe(0);
 
-        var titleElement = element('.flashcard-list-container > div:nth-child(3) span.flashcard-list-title');
-        expect(titleElement.text()).toBe('Spanish for beginners');
+        var titleElement = element('.flashcard-list-container > div:nth-child(3) .flashcard-list-title');
+        expect(titleElement.text()).toContain('Spanish for beginners');
     });
 
     it('should change the list title after clicking the ok button', function() {
@@ -42,8 +42,8 @@ describe('Edit flashcardlist scenarios', function() {
 
         expect(element('modal.edit.list-modal').count()).toBe(0);
 
-        var titleElement = element('.flashcard-list-container > div:first span.flashcard-list-title');
-        expect(titleElement.text()).toBe('Klingon for beginners');
+        var titleElement = element('.flashcard-list-container > .flashcardlist:first .flashcard-list-title');
+        expect(titleElement.text()).toContain('Klingon for beginners');
     });
 
     it('should change the list and remain after refresh', function() {
@@ -55,8 +55,8 @@ describe('Edit flashcardlist scenarios', function() {
 
         expect(element('modal.edit.list-modal').count()).toBe(0);
 
-        var titleElement = element('.flashcard-list-container > div:first span.flashcard-list-title');
-        expect(titleElement.text()).toBe('Klingon for beginners');
+        var titleElement = element('.flashcard-list-container > .flashcardlist:first .flashcard-list-title');
+        expect(titleElement.text()).toContain('Klingon for beginners');
 
         browser().reload();
         expect(repeater('.flashcard-list-container > div').count()).toBe(INITIAL_NUMBER_OF_LISTS);
@@ -71,8 +71,8 @@ describe('Edit flashcardlist scenarios', function() {
 
         expect(element('modal.edit.list-modal').count()).toBe(0);
 
-        var titleElement = element('.flashcard-list-container > div:first span.flashcard-list-title');
-        expect(titleElement.text()).toBe('AAAAA');
+        var titleElement = element('.flashcard-list-container > div:first .flashcard-list-title');
+        expect(titleElement.text()).toContain('AAAAA');
 
         browser().reload();
         expect(repeater('.flashcard-list-container > div').count()).toBe(INITIAL_NUMBER_OF_LISTS);
