@@ -1,10 +1,9 @@
 'use strict';
 
-describe("Module: FlashcardList module", function() {
-    
+describe('FlashcardPlayerModule', function() {
     var route, location, rootScope, httpBackend;
 
-    beforeEach(module('flashcardListModule'));
+    beforeEach(module('flashcardPlayerModule'));
 
     beforeEach(inject(function ($route, $location, $rootScope, $httpBackend) {
         route = $route;
@@ -13,20 +12,20 @@ describe("Module: FlashcardList module", function() {
         httpBackend = $httpBackend;
     }));
 
-    it("should handle /FlashcardList properly", function() {
+    it("should handle /Player properly", function() {
         // given
-        httpBackend.expectGET('views/flashcardList.html').respond(200);
+        httpBackend.expectGET('views/player.html').respond(200);
 
         expect(route.current).toBeUndefined();
         
         // when
-        location.path("/FlashcardList");
+        location.path("/Player/12345/abcd");
         rootScope.$digest();
         httpBackend.flush();
 
         // then
-        expect(route.current.templateUrl).toBe('views/flashcardList.html');
+        expect(route.current.templateUrl).toBe('views/player.html');
         expect(route.current.controller).toBeUndefined();
 
-    }); 
+    });     
 });
