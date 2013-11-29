@@ -1,3 +1,5 @@
+'use strict'
+
 angular.module('flashcardListModule.controllers')
     .controller('FlashcardListCtrl', function($scope, $modal, listsEditService) {
         $scope.lists = listsEditService.getLists();
