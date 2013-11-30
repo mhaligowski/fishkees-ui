@@ -1,10 +1,15 @@
 'use strict';
 
+angular.module('flashcardPlayerModule.controllers', []);
+
 angular
-    .module('flashcardPlayerModule', ['ngRoute'])
+    .module(
+        'flashcardPlayerModule',
+        ['ngRoute', 'flashcardPlayerModule.controllers']
+    )
     .config(function($routeProvider) {
         $routeProvider
-            .when('/Player/:flashcardListId/:flashcardId', {
+            .when('/Player/:flashcardListId/:flashcardId?', {
                 templateUrl: 'views/player.html'
             });
     });

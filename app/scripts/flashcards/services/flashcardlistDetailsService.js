@@ -3,11 +3,15 @@
 angular.module('flashcardModule.services')
     .service('flashcardListDetailsService', function(Flashcards, FlashcardLists) {
         this.getListDetails = function(listId) {
-            return FlashcardLists.get( { flashcardListId: listId } );
+            return FlashcardLists
+                .get( { flashcardListId: listId } )
+                .$promise;
         };
 
         this.getFlashcards = function(listId) {
-            return Flashcards.query( { flashcard_list_id: listId } );
+            return Flashcards
+                .query( { flashcard_list_id: listId } )
+                .$promise;
         };
 
         this.removeFlashcardFromList = function(flashcard, flashcards) {

@@ -50,9 +50,9 @@ module.exports = function(config) {
       'app/scripts/flashcards/controllers/*.js',
       'app/scripts/flashcards/directives/*.js',
 
-      // flashcards
+      // player
       'app/scripts/player/*.js',
-
+      'app/scripts/player/controllers/*.js',
 
       // tests
       'test/spec/**/*.js'
