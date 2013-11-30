@@ -1,6 +1,6 @@
 'use strict';
 
-ddescribe('Player', function() {
+describe('Player', function() {
     describe('Single flashcard', function() {
         beforeEach(function() {
             browser().navigateTo('/');

@@ -1,5 +1,35 @@
 'use strict'
 
+var testList = {
+        "id": "someNiceId1",
+        "title": "Spanish for beginners",
+        "create_date": 1379617022000
+    };
+
+var testFlashcards = [
+    {
+        id: "someId1",
+        flashcard_list_id: "someNiceId1",
+        front: "front 1",
+        back: "back 1",
+        create_date: 520603200000
+    },
+    {
+        id: "someId2",
+        flashcard_list_id: "someNiceId1",
+        front: "front 2",
+        back: "back 2",
+        create_date: 520603200000
+    },
+    {
+        id: "someId3",
+        flashcard_list_id: "someNiceId1",
+        front: "front 3",
+        back: "back 3",
+        create_date: 520603200000
+}];
+
+
 describe('FlashcardListDetailsCtrl controller', function() {
    
     var FlashcardListDetailsCtrl,
@@ -11,38 +41,10 @@ describe('FlashcardListDetailsCtrl controller', function() {
         deferredModal,
         deferredRemoving,
         deferredCreate,
-        testFlashcards;
+        deferred;
 
     beforeEach(function() {
-        var testList = {
-                "id": "someNiceId1",
-                "title": "Spanish for beginners",
-                "create_date": 1379617022000
-            };
         module('flashcardModule');
-
-        testFlashcards = [
-            {
-                id: "someId1",
-                flashcard_list_id: "someNiceId1",
-                front: "front 1",
-                back: "back 1",
-                create_date: 520603200000
-            },
-            {
-                id: "someId2",
-                flashcard_list_id: "someNiceId1",
-                front: "front 2",
-                back: "back 2",
-                create_date: 520603200000
-            },
-            {
-                id: "someId3",
-                flashcard_list_id: "someNiceId1",
-                front: "front 3",
-                back: "back 3",
-                create_date: 520603200000
-            }];
 
         // mock service
         mockService = jasmine.createSpyObj('flashcardListDetailsService', 
@@ -53,8 +55,6 @@ describe('FlashcardListDetailsCtrl controller', function() {
                 'updateFlashcard',
                 'createNewFlashcard'
             ]);
-        mockService.getListDetails.andCallFake(function() { return testList; });
-        mockService.getFlashcards.andCallFake(function() { return testFlashcards; });
         
         // mock modal
         mockModal = jasmine.createSpyObj('$modal', ['open']);
@@ -65,19 +65,13 @@ describe('FlashcardListDetailsCtrl controller', function() {
             deferredModal = $q.defer();
             deferredRemoving = $q.defer();
             deferredCreate = $q.defer();
+            deferred = $q.defer();
 
-            mockModal.open.andCallFake(function() { 
-                return { result: deferredModal.promise };
-            });
-
-            mockService.removeFlashcardFromList.andCallFake(function() {
-                return deferredRemoving.promise;
-            });
-
-            mockService.createNewFlashcard.andCallFake(function() { 
-                return deferredCreate.promise; 
-            });
-
+            mockModal.open.andReturn({ result: deferredModal.promise });
+            mockService.removeFlashcardFromList.andReturn(deferredRemoving.promise);
+            mockService.createNewFlashcard.andReturn(deferredCreate.promise);
+            mockService.getListDetails.andReturn(deferred.promise);
+            mockService.getFlashcards.andReturn(deferred.promise);
 
             FlashcardListDetailsCtrl = $controller('FlashcardListDetailsCtrl', {
                 $scope: $scope,
@@ -89,11 +83,25 @@ describe('FlashcardListDetailsCtrl controller', function() {
     });
 
     it('should give the title from the flashcardListResource', function() {
+        // given
+        deferred.resolve(testList);
+
+        // when
+        $scope.$digest();
+
+        // then
         expect($scope.list.title).toBe("Spanish for beginners");
         expect(mockService.getListDetails).toHaveBeenCalledWith("someNiceId1");
     });
 
     it('should load the flashcards at the startup', function() {
+        // given
+        deferred.resolve(testFlashcards);
+
+        // when
+        $scope.$digest();
+
+        // then
         expect($scope.flashcards.length).toBe(3);
         expect(mockService.getFlashcards).toHaveBeenCalledWith("someNiceId1");
     });
@@ -118,7 +126,7 @@ describe('FlashcardListDetailsCtrl controller', function() {
         expect(callObject.resolve.modalObject()).toEqual(argument);
     });
 
-    it('should call removing the modal', function() {
+    it('should call the removing modal', function() {
         // given
         var result = [
             {
@@ -135,6 +143,8 @@ describe('FlashcardListDetailsCtrl controller', function() {
                 back: "back 3",
                 create_date: 520603200000
             }];
+        deferred.resolve(testFlashcards);
+        $scope.$digest();
 
         // when
         $scope.showRemoveFlashcardModal({ id: 'someId3 '});
@@ -152,6 +162,7 @@ describe('FlashcardListDetailsCtrl controller', function() {
         // given
         var flashcard = {};
         var newValue = 'new front';
+
 
         // when
         $scope.updateFlashcardFront(flashcard, newValue);
@@ -176,6 +187,9 @@ describe('FlashcardListDetailsCtrl controller', function() {
 
     it('should add new empty flashcard at the beginning', function() {
         // given
+        deferred.resolve(testFlashcards);
+        $scope.$digest();
+
         var expectedLength = testFlashcards.length + 1;
 
         // when

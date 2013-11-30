@@ -8,8 +8,20 @@ angular.module('flashcardModule.controllers')
             var service = flashcardListDetailsService;
             var listId = $routeParams.id;
             
-            $scope.list = service.getListDetails(listId);
-            $scope.flashcards = service.getFlashcards(listId);
+            $scope.flashcards = [];
+            $scope.list = "";
+
+            service
+                .getListDetails(listId)
+                .then(function(result) {
+                    $scope.list = result;
+                });
+
+            service
+                .getFlashcards(listId)
+                .then(function(result) {
+                    $scope.flashcards = result;
+                });
 
             var removeFromFlashcards = function(flashcard) {
                 service
