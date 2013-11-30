@@ -34,9 +34,7 @@ describe('PlayerCtrl', function() {
                 'createNewFlashcard'
             ]);
 
-        mockService.getFlashcards.andReturn(testData);
-
-        mockLocation = jasmine.createSpyObj('$location', [ 'hash' ]);
+        mockLocation = jasmine.createSpyObj('$location', [ 'path' ]);
 
         module(function ($provide) {
             $provide.value('flashcardListDetailsService', mockService);
@@ -52,22 +50,30 @@ describe('PlayerCtrl', function() {
     });
 
     describe('with no flashcard given', function() {
-        var testObj;
+        var testObj,
+            deferred;
 
         beforeEach(function() {
+            deferred = $q.defer();
+            mockService.getFlashcards.andReturn(deferred.promise);
+
             testObj = $controller('PlayerCtrl', {
                 $scope: $rootScope.$new(),
                 $routeParams: { 'flashcardListId': 'mockFlashcardList' },
             });
+
         });
 
         it('should redirect to given flashcard', function() {
+            // given
+            deferred.resolve(testData);
+
             // when
-            $rootScope.$apply();
+            $rootScope.$digest();
 
             // then
             expect(mockService.getFlashcards).toHaveBeenCalledWith('mockFlashcardList');
-            expect(mockLocation.hash).toHaveBeenCalledWith('/Player/mockFlashcardList/someId1');
+            expect(mockLocation.path).toHaveBeenCalledWith('/Player/mockFlashcardList/someId1');
         });
     });
 });
