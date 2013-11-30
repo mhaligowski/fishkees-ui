@@ -42,28 +42,34 @@ describe('FlashcardListDetailsService', function() {
         });
     });
 
-    it('should return a list', function() {
+    it('should return a promise of a list', function() {
         // given
         $httpBackend
             .expectGET('/service/flashcardlists/12345')
             .respond(testList);
 
         // when
-        var actual = testObj.getListDetails(12345);
+        var actual;
+        testObj
+            .getListDetails(12345)
+            .then(function(result) { actual = result; });
         $httpBackend.flush();
 
         // then
         expect(actual.title).toEqual(testList.title);
     });
 
-    it('should return a list of flashcards', function() {
+    it('should return a promise of a list of flashcards', function() {
         // given
         $httpBackend
             .expectGET('/service/flashcardlists/12345/flashcards')
             .respond(testFlashcards);
 
         // when
-        var actual = testObj.getFlashcards(12345);
+        var actual;
+        testObj
+            .getFlashcards(12345)
+            .then(function(result) { actual = result; });
         $httpBackend.flush();
 
         // then
