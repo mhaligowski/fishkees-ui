@@ -9,13 +9,21 @@ angular
                  $location,
                  flashcardListDetailsService) {
             var service = flashcardListDetailsService,
-                flashcardListId = $routeParams.flashcardListId;
+                flashcardListId = $routeParams.flashcardListId,
+                flashcardId = $routeParams.flashcardId;
+
 
             service
                 .getFlashcards(flashcardListId)
                 .then(function(result) {
                     $scope.flashcards = result;
-                    $location.path('/Player/' + flashcardListId + '/' + $scope.flashcards[0].id);
+                    
+                    if (!flashcardId) {
+                        $location
+                            .path('/Player/' 
+                                + flashcardListId + '/' 
+                                + $scope.flashcards[0].id);
+                    }
                 });
 
 

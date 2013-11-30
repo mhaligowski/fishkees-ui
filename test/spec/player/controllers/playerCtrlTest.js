@@ -76,4 +76,35 @@ describe('PlayerCtrl', function() {
             expect(mockLocation.path).toHaveBeenCalledWith('/Player/mockFlashcardList/someId1');
         });
     });
+
+    describe('with flashcard given', function() {
+        var testObj,
+            deferred;
+
+        beforeEach(function() {
+            deferred = $q.defer();
+            mockService.getFlashcards.andReturn(deferred.promise);
+
+            testObj = $controller('PlayerCtrl', {
+                $scope: $rootScope.$new(),
+                $routeParams: {
+                    'flashcardListId': 'mockFlashcardList',
+                    'flashcardId': 'mockFlashcard'
+                },
+            });
+
+        });
+
+        it('should remain at given flashcard', function() {
+            // given
+            deferred.resolve(testData);
+
+            // when
+            $rootScope.$digest();
+
+            // then
+            expect(mockService.getFlashcards).toHaveBeenCalledWith('mockFlashcardList');
+            expect(mockLocation.path).not.toHaveBeenCalled();
+        });
+    });
 });
