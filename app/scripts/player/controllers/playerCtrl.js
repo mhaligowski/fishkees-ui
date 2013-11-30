@@ -6,9 +6,12 @@ angular
         'PlayerCtrl', 
         function($scope,
                  $routeParams,
+                 $location,
                  flashcardListDetailsService) {
             var service = flashcardListDetailsService,
                 flashcardListId = $routeParams.flashcardListId,
-                flashcardId = $routeParams.flashcardId || service.getFlashcards(flashcardListId);
+                flashcards = service.getFlashcards(flashcardListId);
+
+            $location.hash('/Player/' + flashcardListId + '/' + flashcards[0].id);
 
     });
