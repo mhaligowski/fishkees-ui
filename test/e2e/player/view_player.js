@@ -32,6 +32,18 @@ describe('Player', function() {
             // then
             expect(browser().window().hash()).toBe('/Player/someFlashcardListId1/someId1');
         });
+
+        it('should display the contents of the card by default', function() {
+            expect(element('.flashcard-contents').html()).toContain('<em>front 1</em>');
+        });
+
+        // it('should show the back of the card', function() {
+        //     // when
+        //     element('.flashcard-buttons .show-back:button').click();
+
+        //     // then
+        //     expect(element('.flashcard-contents').html()).toContain('<strong>back 2</strong>');
+        // });
     });
 
 });
