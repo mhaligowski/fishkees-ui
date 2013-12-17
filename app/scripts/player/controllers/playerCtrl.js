@@ -35,5 +35,6 @@ angular
                     $scope.renderedText = $sce.trustAsHtml(converter.makeHtml($scope.currentFlashcard.front));
                 });
 
+            $scope.isFront = true;
 
     });

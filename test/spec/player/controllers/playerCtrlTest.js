@@ -1,4 +1,5 @@
 'use strict'
+
 var testData = [
     {
         id: "someId1",
@@ -96,14 +97,16 @@ describe('PlayerCtrl', function() {
 
     describe('with flashcard given', function() {
         var testObj,
-            deferred;
+            deferred,
+            scope;
 
         beforeEach(function() {
             deferred = $q.defer();
             mockService.getFlashcards.andReturn(deferred.promise);
+            scope = $rootScope.$new();
 
             testObj = $controller('PlayerCtrl', {
-                $scope: $rootScope.$new(),
+                $scope: scope,
                 $routeParams: {
                     'flashcardListId': 'mockFlashcardList',
                     'flashcardId': 'someId1'
@@ -122,6 +125,15 @@ describe('PlayerCtrl', function() {
             // then
             expect(mockService.getFlashcards).toHaveBeenCalledWith('mockFlashcardList');
             expect(mockLocation.path).not.toHaveBeenCalled();
+        });
+
+        it('should be front at the beginning', function() {
+            expect(scope.isFront).toBe(true);
+        });
+
+        xit('should change the flashcard upon clicking', function() {
+            // when
+            testObj.toggleFrontBack();
         });
     });
 });

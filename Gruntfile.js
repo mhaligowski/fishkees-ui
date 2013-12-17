@@ -72,11 +72,11 @@ module.exports = function (grunt) {
         connect: {
             options: {
                 port: 9000,
-                hostname: 'localhost'
+                hostname: '0.0.0.0'
             },
             proxies: [{
                 context: '/service',
-                host: 'localhost',
+                host: '0.0.0.0',
                 port: '8080',
                 https: false,
                 changeOrigin: true,
