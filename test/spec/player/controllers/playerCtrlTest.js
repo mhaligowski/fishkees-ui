@@ -131,9 +131,23 @@ describe('PlayerCtrl', function() {
             expect(scope.isFront).toBe(true);
         });
 
-        xit('should change the flashcard upon clicking', function() {
+        it('should change the side upon clicking', function() {
             // when
-            testObj.toggleFrontBack();
+            scope.toggleFrontBack();
+
+            // then
+            expect(scope.isFront).toBe(false);
         });
+
+        it('should return side upon clicking twice', function() {
+            // when
+            scope.toggleFrontBack();
+            scope.toggleFrontBack();
+
+            // then
+            expect(scope.isFront).toBe(true);
+        });
+
+
     });
 });

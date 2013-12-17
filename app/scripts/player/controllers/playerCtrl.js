@@ -37,4 +37,8 @@ angular
 
             $scope.isFront = true;
 
+            $scope.toggleFrontBack = function() {
+                $scope.isFront = !$scope.isFront;
+            }
+
     });
