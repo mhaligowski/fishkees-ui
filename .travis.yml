@@ -1,8 +1,18 @@
 language: node_js
 node_js:
-  - '0.8'
-  - '0.10'
+- '0.8'
+- '0.10'
 before_script:
-  - 'gem install compass'
-  - 'npm install -g bower grunt-cli'
-  - 'bower install'
+- gem install compass
+- npm install -g bower grunt-cli
+- bower install
+deploy:
+  provider: s3
+  access_key_id: AKIAJOG6PLQKQ555Q7VA
+  secret_access_key:
+    secure: fd54rmDkgNXS7sqvUlfJzue7ThuyjfbNBi6NuHfz/o/RFQwyGO3cxnMUME1+1c1fKtcGHXD9cacXE3FOsUom7043sShnil5QWeCs2AZ9WIESKebdnkPc302WAfAfWLiz0xmDM2Z8Elifp3i+o69eWnjlKWT27+kgZnxiuYn+XaI=
+  bucket: fishkees-demo
+  local-dir: dist
+  on:
+    repo: mhaligowski/fishkees-ui
+    branch: experimental/s3
