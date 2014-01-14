@@ -17,4 +17,4 @@ deploy:
   on:
     repo: mhaligowski/fishkees-ui
     branch: experimental/s3
-    node: 0.10
+    node: '0.10'
