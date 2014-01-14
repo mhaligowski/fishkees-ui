@@ -17,5 +17,5 @@ deploy:
   skip_cleanup: true
   on:
     repo: mhaligowski/fishkees-ui
-    branch: experimental/s3
+    branch: master
     node: '0.10'
