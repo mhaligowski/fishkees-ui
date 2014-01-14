@@ -334,6 +334,23 @@ module.exports = function (grunt) {
                     ]
                 }
             }
+        },
+        ngconstant: {
+            dist: {
+                dest: 'app/scripts/common/services/commonConstants.js',
+                name: 'commonModule.constants',
+                constants: {
+                    'REST_PREFIX': 'http://fishkees-demo.herokuapp.com'
+                }
+            },
+            test: {
+                dest: 'app/scripts/common/services/commonConstants.js',
+                name: 'commonModule.constants',
+                constants: {
+                    'REST_PREFIX': '/service/'
+                }
+            }
+
         }
     });
 
@@ -354,6 +371,7 @@ module.exports = function (grunt) {
     });
 
     grunt.registerTask('test', [
+        'ngconstant:test',
         'jshint',
         'clean:server',
         'concurrent:test',
@@ -363,6 +381,7 @@ module.exports = function (grunt) {
     ]);
 
     grunt.registerTask('e2e', [
+        'ngconstant:test',
         'jshint',
         'clean:server',
         'concurrent:server',
@@ -372,6 +391,7 @@ module.exports = function (grunt) {
     ]);
 
     grunt.registerTask('headless_e2e', [
+        'ngconstant:test',
         'jshint',
         'clean:server',
         'concurrent:server',
@@ -381,6 +401,7 @@ module.exports = function (grunt) {
     ]);
 
     grunt.registerTask('build', [
+        'ngconstant:dist',
         'clean:dist',
         'useminPrepare',
         'concurrent:dist',
