@@ -14,6 +14,7 @@ deploy:
     secure: fd54rmDkgNXS7sqvUlfJzue7ThuyjfbNBi6NuHfz/o/RFQwyGO3cxnMUME1+1c1fKtcGHXD9cacXE3FOsUom7043sShnil5QWeCs2AZ9WIESKebdnkPc302WAfAfWLiz0xmDM2Z8Elifp3i+o69eWnjlKWT27+kgZnxiuYn+XaI=
   bucket: fishkees-demo
   local-dir: dist
+  skip_cleanup: true
   on:
     repo: mhaligowski/fishkees-ui
     branch: experimental/s3
