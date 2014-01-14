@@ -1,6 +1,5 @@
 language: node_js
 node_js:
-- '0.8'
 - '0.10'
 before_script:
 - gem install compass
@@ -18,4 +17,3 @@ deploy:
   on:
     repo: mhaligowski/fishkees-ui
     branch: master
-    node: '0.10'
