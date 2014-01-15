@@ -340,7 +340,7 @@ module.exports = function (grunt) {
                 dest: 'app/scripts/common/services/commonConstants.js',
                 name: 'commonModule.constants',
                 constants: {
-                    'REST_PREFIX': 'http://fishkees-demo.herokuapp.com'
+                    'REST_PREFIX': 'http://fishkees-demo.herokuapp.com/'
                 }
             },
             test: {
