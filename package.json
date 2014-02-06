@@ -39,7 +39,7 @@
     "karma-phantomjs-launcher": "~0.1.0",
     "karma": "~0.10.2",
     "karma-ng-html2js-preprocessor": "~0.1.0",
-    "grunt-connect-proxy": "~0.1.6",
+    "grunt-connect-proxy": "0.1.6",
     "karma-coverage": "~0.1.0",
     "grunt-ng-constant": "~0.4.7",
     "decompress": "~0.1.5"
