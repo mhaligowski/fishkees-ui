@@ -37,13 +37,23 @@ describe('Player', function() {
             expect(element('.flashcard-contents').html()).toContain('<em>front 1</em>');
         });
 
-        it('should show the back of the card', function() {
+        it('should show the back of the card upon clicking the button', function() {
             // when
             element('.flashcard-buttons .show-back:button').click();
 
             // then
             expect(element('.flashcard-contents').html()).toContain('<em>back 1</em>');
         });
+
+        it('should show the foront of the card upon clicking the button twice', function() {
+            // when
+            element('.flashcard-buttons .show-back:button').click();
+            element('.flashcard-buttons .show-back:button').click();
+
+            // then
+            expect(element('.flashcard-contents').html()).toContain('<em>front 1</em>');
+        });
+
     });
 
 });
