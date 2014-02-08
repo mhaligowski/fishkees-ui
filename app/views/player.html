@@ -1,16 +1,18 @@
 <div ng-controller="PlayerCtrl"> 
     <div 
         class='flashcard-contents 
-               front
+               {{ isFront ? "front" : "back" }}
                hero-unit
                well
                well-large' 
         ng-bind-html="renderedText">
     </div>
 
-    <div class="btn-group flashcard-buttons">
-        <button class="btn prev"><i class="icon-backward"></i></button>
-        <button class="btn show-back" ng-click="toggleFrontBack()"><i class="icon-rotate-right"></i></button>
-        <button class="btn next"><i class="icon-forward"></i></button>
+    <div class="flashcard-buttons">
+      <div class="btn-group">
+          <button class="btn prev"><i class="icon-backward"></i></button>
+          <button class="btn show-back" ng-click="toggleFrontBack()"><i class="icon-rotate-right"></i></button>
+          <button class="btn next"><i class="icon-forward"></i></button>
+      </div>
     </div>
 </div>
