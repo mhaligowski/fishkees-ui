@@ -9,6 +9,9 @@ angular
                  $location,
                  $sce,
                  flashcardListDetailsService) {
+            $scope.currentFlashcard = {};
+            $scope.renderedText = "";
+
             var service = flashcardListDetailsService,
                 flashcardListId = $routeParams.flashcardListId,
                 flashcardId = $routeParams.flashcardId,
@@ -39,6 +42,12 @@ angular
 
             $scope.toggleFrontBack = function() {
                 $scope.isFront = !$scope.isFront;
+
+                var textToBeConverted = $scope.isFront === true 
+                    ? $scope.currentFlashcard.front
+                    : $scope.currentFlashcard.back;
+
+                $scope.renderedText = $sce.trustAsHtml(converter.makeHtml(textToBeConverted));
             }
 
     });

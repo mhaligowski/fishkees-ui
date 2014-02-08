@@ -132,6 +132,9 @@ describe('PlayerCtrl', function() {
         });
 
         it('should change the side upon clicking', function() {
+            // given
+            scope.currentFlashcard = testData[0];
+
             // when
             scope.toggleFrontBack();
 
@@ -140,6 +143,9 @@ describe('PlayerCtrl', function() {
         });
 
         it('should return side upon clicking twice', function() {
+            // given
+            scope.currentFlashcard = testData[0];
+
             // when
             scope.toggleFrontBack();
             scope.toggleFrontBack();
@@ -148,6 +154,15 @@ describe('PlayerCtrl', function() {
             expect(scope.isFront).toBe(true);
         });
 
+        it('should switch the rendered text upon toggling', function() {
+            // given
+            scope.currentFlashcard = testData[0];
 
+            // when
+            scope.toggleFrontBack();
+
+            // then
+            expect(scope.renderedText).toMatch(testData[0].back);
+        });
     });
 });
