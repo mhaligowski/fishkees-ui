@@ -89,6 +89,14 @@ describe('Player', function() {
             expect(element('.flashcard-contents').html()).toContain('<strong>front 2</strong>');
         });
 
+        it('should cycle over the flashcards around', function() {
+            // when
+            element('.flashcard-buttons .next:button').click();
+            element('.flashcard-buttons .next:button').click();
+
+            // then
+            expect(element('.flashcard-contents').html()).toContain('<em>front 1</em>');
+        });
     });
 
 });

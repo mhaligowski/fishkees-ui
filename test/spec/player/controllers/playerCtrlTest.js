@@ -172,5 +172,14 @@ describe('PlayerCtrl', function() {
             expect(scope.isFront).toBe(true);
         });
 
+        it('should cycle when clicking next', function() {
+            // when
+            scope.goToNextFlashcard();
+            scope.goToNextFlashcard();
+
+            // then
+            expect(scope.renderedText).toMatch(testData[0].front);
+        });
+
     });
 });
