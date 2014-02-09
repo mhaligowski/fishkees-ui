@@ -133,8 +133,9 @@ describe('PlayerCtrl', function() {
 
         it('should change the side upon clicking', function() {
             // given
-            scope.currentFlashcard = testData[0];
-
+            deferred.resolve(testData);
+            $rootScope.$digest();
+        
             // when
             scope.toggleFrontBack();
 
@@ -144,7 +145,8 @@ describe('PlayerCtrl', function() {
 
         it('should return side upon clicking twice', function() {
             // given
-            scope.currentFlashcard = testData[0];
+            deferred.resolve(testData);
+            $rootScope.$digest();
 
             // when
             scope.toggleFrontBack();
@@ -156,7 +158,8 @@ describe('PlayerCtrl', function() {
 
         it('should switch the rendered text upon toggling', function() {
             // given
-            scope.currentFlashcard = testData[0];
+            deferred.resolve(testData);
+            $rootScope.$digest();
 
             // when
             scope.toggleFrontBack();
