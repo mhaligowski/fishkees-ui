@@ -110,7 +110,6 @@ describe('PlayerCtrl', function() {
         it('should remain at given flashcard', function() {
             // then
             expect(mockService.getFlashcards).toHaveBeenCalledWith('mockFlashcardList');
-            expect(mockLocation.path).not.toHaveBeenCalled();
         });
 
         it('should be front at the beginning', function() {
@@ -141,6 +140,14 @@ describe('PlayerCtrl', function() {
 
             // then
             expect(scope.renderedText).toMatch(testData[0].back);
+        });
+
+        it('should change the address upon clicking next', function() {
+            // when
+            scope.goToNextFlashcard();
+
+            // then
+            expect(mockLocation.path).toHaveBeenCalledWith('/Player/mockFlashcardList/someId3');
         });
 
     });

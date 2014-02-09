@@ -56,7 +56,7 @@ describe('Player', function() {
 
     });
 
-    xdescribe('player flashcard navigation', function() {
+    describe('player flashcard navigation', function() {
         beforeEach(function() {
             browser().navigateTo('/');
             restartDB();
@@ -72,7 +72,7 @@ describe('Player', function() {
             expect(browser().window().hash()).toBe('/Player/someFlashcardListId1/someId2');
         });
 
-        it('should display the next flashcard front upon clicking next', function() {
+        xit('should display the next flashcard front upon clicking next', function() {
             // when
             element('.flashcard-buttons .next:button').click();
 
@@ -80,7 +80,7 @@ describe('Player', function() {
             expect(element('.flashcard-contents').html()).toContain('<em>front 2</em>');
         });
 
-        it('should display the next flashcard front upon clicking next from back', function() {
+        xit('should display the next flashcard front upon clicking next from back', function() {
             // when
             element('.flashcard-buttons .show-back:button').click();            
             element('.flashcard-buttons .next:button').click();
