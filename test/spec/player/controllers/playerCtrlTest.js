@@ -150,5 +150,13 @@ describe('PlayerCtrl', function() {
             expect(mockLocation.path).toHaveBeenCalledWith('/Player/mockFlashcardList/someId3');
         });
 
+        it('should have the flashcard update upon clicking next', function() {
+            // when
+            scope.goToNextFlashcard();
+
+            // then
+            expect(scope.renderedText).toMatch(testData[1].front);
+        });
+
     });
 });

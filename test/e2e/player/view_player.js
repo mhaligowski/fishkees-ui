@@ -72,21 +72,21 @@ describe('Player', function() {
             expect(browser().window().hash()).toBe('/Player/someFlashcardListId1/someId2');
         });
 
-        xit('should display the next flashcard front upon clicking next', function() {
+        it('should display the next flashcard front upon clicking next', function() {
             // when
             element('.flashcard-buttons .next:button').click();
 
             // then
-            expect(element('.flashcard-contents').html()).toContain('<em>front 2</em>');
+            expect(element('.flashcard-contents').html()).toContain('<strong>front 2</strong>');
         });
 
-        xit('should display the next flashcard front upon clicking next from back', function() {
+        xit('should display the next flashcard front upon clicking next from back side', function() {
             // when
             element('.flashcard-buttons .show-back:button').click();            
             element('.flashcard-buttons .next:button').click();
 
             // then
-            expect(element('.flashcard-contents').html()).toContain('<em>front 2</em>');
+            expect(element('.flashcard-contents').html()).toContain('<strong>front 2</strong>');
         });
 
     });

@@ -9,8 +9,8 @@ angular
                  $location,
                  $sce,
                  flashcardListDetailsService) {
-            $scope.flashcards = [];
-            $scope.currentFlashcard = {};
+            var flashcards = [],
+                currentFlashcard = {};
             $scope.renderedText = "";
             $scope.isFront = true;
 
@@ -18,19 +18,19 @@ angular
                 flashcardListId = $routeParams.flashcardListId,
                 converter = new Showdown.converter();
 
-            var findFlashcardWithId = function(flashcards, searchedFlashcardId) {
-                return flashcards.filter(function(f) { return f.id === searchedFlashcardId; })[0];
+            var findFlashcardWithId = function(flashcardsList, searchedFlashcardId) {
+                return flashcardsList.filter(function(f) { return f.id === searchedFlashcardId; })[0];
             };
 
             var updateRenderedText = function() {
                 var newText = $scope.isFront === true 
-                    ? $scope.currentFlashcard.front
-                    : $scope.currentFlashcard.back;
+                    ? currentFlashcard.front
+                    : currentFlashcard.back;
                 $scope.renderedText = $sce.trustAsHtml(converter.makeHtml(newText));                
             }
 
             var goToCurrentPathLocation = function() {
-                var flashcardId = $scope.currentFlashcard.id;
+                var flashcardId = currentFlashcard.id;
                 $location
                     .path('/Player/' 
                         + flashcardListId + '/' 
@@ -40,9 +40,9 @@ angular
             service
                 .getFlashcards(flashcardListId)
                 .then(function(result) {
-                    $scope.flashcards = result;
-                    var flashcardId = $routeParams.flashcardId || $scope.flashcards[0].id;
-                    $scope.currentFlashcard = findFlashcardWithId($scope.flashcards, flashcardId);
+                    flashcards = result;
+                    var flashcardId = $routeParams.flashcardId || flashcards[0].id;
+                    currentFlashcard = findFlashcardWithId(flashcards, flashcardId);
                     
                     updateRenderedText();                    
                     goToCurrentPathLocation()
@@ -55,11 +55,11 @@ angular
             };
 
             $scope.goToNextFlashcard = function() {
-                var currentIndex = $scope.flashcards.indexOf($scope.currentFlashcard);
-                var nextIndex = (currentIndex + 1) % $scope.flashcards.length;
+                var currentIndex = flashcards.indexOf(currentFlashcard);
+                var nextIndex = (currentIndex + 1) % flashcards.length;
 
-                $location.path('/Player/' 
-                                + flashcardListId + '/' 
-                                + $scope.flashcards[nextIndex].id);
+                currentFlashcard = flashcards[nextIndex];
+                updateRenderedText();
+                goToCurrentPathLocation();
             };
     });
