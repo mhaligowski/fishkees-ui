@@ -5,6 +5,7 @@ angular
     .controller(
         'PlayerCtrl', 
         function($scope,
+                 $route,
                  $routeParams,
                  $location,
                  $sce,
@@ -27,7 +28,7 @@ angular
                     ? currentFlashcard.front
                     : currentFlashcard.back;
                 $scope.renderedText = $sce.trustAsHtml(converter.makeHtml(newText));                
-            }
+            };
 
             var goToCurrentPathLocation = function() {
                 var flashcardId = currentFlashcard.id;
@@ -35,7 +36,14 @@ angular
                     .path('/Player/' 
                         + flashcardListId + '/' 
                         + flashcardId);
-            }
+            };
+
+            var preventAddressChangeFromReloading = function() {
+                var lastRoute = $route.current;
+                $scope.$on('$locationChangeSuccess', function(event) {
+                    $route.current = lastRoute;
+                });
+            };
 
             service
                 .getFlashcards(flashcardListId)
@@ -48,6 +56,7 @@ angular
                     goToCurrentPathLocation()
                 });
 
+            preventAddressChangeFromReloading();
 
             $scope.toggleFrontBack = function() {
                 $scope.isFront = !$scope.isFront;
@@ -59,6 +68,8 @@ angular
                 var nextIndex = (currentIndex + 1) % flashcards.length;
 
                 currentFlashcard = flashcards[nextIndex];
+                $scope.isFront = true;
+                
                 updateRenderedText();
                 goToCurrentPathLocation();
             };

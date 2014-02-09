@@ -20,6 +20,7 @@ describe('PlayerCtrl', function() {
     var $controller,
         $rootScope,
         $q,
+        mockRoute,
         mockLocation,
         mockService,
         mockSanitize;
@@ -37,6 +38,7 @@ describe('PlayerCtrl', function() {
             ]);
 
         mockLocation = jasmine.createSpyObj('$location', [ 'path' ]);
+        mockRoute = jasmine.createSpy('mockRoute');
         mockSanitize = jasmine.createSpyObj('$sce', [ 'trustAsHtml' ]);
         mockSanitize.trustAsHtml.andCallFake(function(p) { return p; });
 
@@ -44,6 +46,7 @@ describe('PlayerCtrl', function() {
             $provide.value('flashcardListDetailsService', mockService);
             $provide.value('$location', mockLocation);
             $provide.value('$sce', mockSanitize);
+            $provide.value('$route', mockRoute);
         });
 
         inject(function (_$controller_, _$rootScope_, _$q_) {
@@ -156,6 +159,17 @@ describe('PlayerCtrl', function() {
 
             // then
             expect(scope.renderedText).toMatch(testData[1].front);
+        });
+
+        it('should change to front upon clicking next', function() {
+            // given
+            scope.isFront = false;
+
+            // when
+            scope.goToNextFlashcard();
+
+            // then
+            expect(scope.isFront).toBe(true);
         });
 
     });

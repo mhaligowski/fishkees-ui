@@ -80,7 +80,7 @@ describe('Player', function() {
             expect(element('.flashcard-contents').html()).toContain('<strong>front 2</strong>');
         });
 
-        xit('should display the next flashcard front upon clicking next from back side', function() {
+        it('should display the next flashcard front upon clicking next from back side', function() {
             // when
             element('.flashcard-buttons .show-back:button').click();            
             element('.flashcard-buttons .next:button').click();
