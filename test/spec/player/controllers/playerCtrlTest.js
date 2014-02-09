@@ -69,27 +69,17 @@ describe('PlayerCtrl', function() {
                 $routeParams: { 'flashcardListId': 'mockFlashcardList' },
             });
 
+            deferred.resolve(testData);
+            $rootScope.$digest();
         });
 
         it('should redirect to given flashcard', function() {
-            // given
-            deferred.resolve(testData);
-
-            // when
-            $rootScope.$digest();
-
             // then
             expect(mockService.getFlashcards).toHaveBeenCalledWith('mockFlashcardList');
             expect(mockLocation.path).toHaveBeenCalledWith('/Player/mockFlashcardList/someId1');
         });
 
         it('should show the rendered text', function() {
-            // given
-            deferred.resolve(testData);
-
-            // when
-            $rootScope.$digest();
-
             // then
             expect(scope.renderedText).toBe('<p>front 1</p>');
         });
@@ -113,29 +103,22 @@ describe('PlayerCtrl', function() {
                 },
             });
 
+            deferred.resolve(testData);
+            $rootScope.$digest();
         });
 
         it('should remain at given flashcard', function() {
-            // given
-            deferred.resolve(testData);
-
-            // when
-            $rootScope.$digest();
-
             // then
             expect(mockService.getFlashcards).toHaveBeenCalledWith('mockFlashcardList');
             expect(mockLocation.path).not.toHaveBeenCalled();
         });
 
         it('should be front at the beginning', function() {
+            // then
             expect(scope.isFront).toBe(true);
         });
 
         it('should change the side upon clicking', function() {
-            // given
-            deferred.resolve(testData);
-            $rootScope.$digest();
-        
             // when
             scope.toggleFrontBack();
 
@@ -144,10 +127,6 @@ describe('PlayerCtrl', function() {
         });
 
         it('should return side upon clicking twice', function() {
-            // given
-            deferred.resolve(testData);
-            $rootScope.$digest();
-
             // when
             scope.toggleFrontBack();
             scope.toggleFrontBack();
@@ -157,15 +136,12 @@ describe('PlayerCtrl', function() {
         });
 
         it('should switch the rendered text upon toggling', function() {
-            // given
-            deferred.resolve(testData);
-            $rootScope.$digest();
-
             // when
             scope.toggleFrontBack();
 
             // then
             expect(scope.renderedText).toMatch(testData[0].back);
         });
+
     });
 });
