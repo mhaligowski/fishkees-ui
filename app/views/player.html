@@ -1,10 +1,10 @@
 <div ng-controller="PlayerCtrl"> 
     <div 
-        class='flashcard-contents 
-               {{ isFront ? "front" : "back" }}
+        class="flashcard-contents 
                hero-unit
                well
-               well-large' 
+               well-large"
+        ng-class="isFront ? 'front' : 'back'"
         ng-bind-html="renderedText">
     </div>
 
