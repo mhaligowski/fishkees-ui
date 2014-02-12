@@ -221,6 +221,18 @@ describe('PlayerCtrl', function() {
             expect(scope.renderedText).toMatch(testData[0].front);
         });
 
+        it('should display the front of the previous flashcard if earlier was back', function() {
+            // given
+            scope.isFront = false;
+
+            // when
+            scope.goToPreviousFlashcard();
+
+            // then
+            expect(scope.isFront).toBeTruthy();
+            expect(scope.renderedText).toMatch(testData[0].front);
+        });
+
     });
 
 });

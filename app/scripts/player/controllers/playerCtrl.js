@@ -63,24 +63,25 @@ angular
                 updateRenderedText();
             };
 
-            $scope.goToNextFlashcard = function() {
-                var currentIndex = flashcards.indexOf(currentFlashcard);
-                var nextIndex = (currentIndex + 1) % flashcards.length;
-
-                currentFlashcard = flashcards[nextIndex];
+            var goToFlashcard = function(idx) {
+                currentFlashcard = flashcards[idx];
                 $scope.isFront = true;
                 
                 updateRenderedText();
                 goToCurrentPathLocation();
             };
 
+            $scope.goToNextFlashcard = function() {
+                var idx = flashcards.indexOf(currentFlashcard);
+                var nextIndex = (idx + 1) % flashcards.length;
+
+                goToFlashcard(nextIndex);
+            };
+
             $scope.goToPreviousFlashcard = function() {
-                var currentIndex = flashcards.indexOf(currentFlashcard);
-                var nextIndex = (currentIndex - 1 + flashcards.length) % flashcards.length;
+                var idx = flashcards.indexOf(currentFlashcard);
+                var nextIndex = (idx - 1 + flashcards.length) % flashcards.length;
 
-                currentFlashcard = flashcards[nextIndex];
-
-                updateRenderedText();
-                goToCurrentPathLocation();
+                goToFlashcard(nextIndex);
             }
     });
