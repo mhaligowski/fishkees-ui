@@ -5,49 +5,83 @@ angular
     .controller(
         'PlayerCtrl', 
         function($scope,
+                 $route,
                  $routeParams,
                  $location,
                  $sce,
                  flashcardListDetailsService) {
-            $scope.currentFlashcard = {};
+            var flashcards = [],
+                currentFlashcard = {};
             $scope.renderedText = "";
+            $scope.isFront = true;
 
             var service = flashcardListDetailsService,
                 flashcardListId = $routeParams.flashcardListId,
-                flashcardId = $routeParams.flashcardId,
                 converter = new Showdown.converter();
 
-            var findFlashcardWithId = function(flashcards, searchedFlashcardId) {
-                return flashcards.filter(function(f) { return f.id === searchedFlashcardId; })[0];
-            }
+            var findFlashcardWithId = function(flashcardsList, searchedFlashcardId) {
+                return flashcardsList.filter(function(f) { return f.id === searchedFlashcardId; })[0];
+            };
+
+            var updateRenderedText = function() {
+                var newText = $scope.isFront === true 
+                    ? currentFlashcard.front
+                    : currentFlashcard.back;
+                $scope.renderedText = $sce.trustAsHtml(converter.makeHtml(newText));                
+            };
+
+            var goToCurrentPathLocation = function() {
+                var flashcardId = currentFlashcard.id;
+                $location
+                    .path('/Player/' 
+                        + flashcardListId + '/' 
+                        + flashcardId);
+            };
+
+            var preventAddressChangeFromReloading = function() {
+                var lastRoute = $route.current;
+                $scope.$on('$locationChangeSuccess', function(event) {
+                    $route.current = lastRoute;
+                });
+            };
 
             service
                 .getFlashcards(flashcardListId)
                 .then(function(result) {
-                    $scope.flashcards = result;
+                    flashcards = result;
+                    var flashcardId = $routeParams.flashcardId || flashcards[0].id;
+                    currentFlashcard = findFlashcardWithId(flashcards, flashcardId);
                     
-                    if (!flashcardId) {
-                        $location
-                            .path('/Player/' 
-                                + flashcardListId + '/' 
-                                + $scope.flashcards[0].id);
-                        flashcardId = $scope.flashcards[0].id;
-                    }
-
-                    $scope.currentFlashcard = findFlashcardWithId($scope.flashcards, flashcardId);
-                    $scope.renderedText = $sce.trustAsHtml(converter.makeHtml($scope.currentFlashcard.front));
+                    updateRenderedText();                    
+                    goToCurrentPathLocation()
                 });
 
-            $scope.isFront = true;
+            preventAddressChangeFromReloading();
 
             $scope.toggleFrontBack = function() {
                 $scope.isFront = !$scope.isFront;
+                updateRenderedText();
+            };
 
-                var textToBeConverted = $scope.isFront === true 
-                    ? $scope.currentFlashcard.front
-                    : $scope.currentFlashcard.back;
+            var goToFlashcard = function(idx) {
+                currentFlashcard = flashcards[idx];
+                $scope.isFront = true;
+                
+                updateRenderedText();
+                goToCurrentPathLocation();
+            };
 
-                $scope.renderedText = $sce.trustAsHtml(converter.makeHtml(textToBeConverted));
+            $scope.goToNextFlashcard = function() {
+                var idx = flashcards.indexOf(currentFlashcard);
+                var nextIndex = (idx + 1) % flashcards.length;
+
+                goToFlashcard(nextIndex);
+            };
+
+            $scope.goToPreviousFlashcard = function() {
+                var idx = flashcards.indexOf(currentFlashcard);
+                var nextIndex = (idx - 1 + flashcards.length) % flashcards.length;
+
+                goToFlashcard(nextIndex);
             }
-
     });
