@@ -3,14 +3,14 @@
 var testData = [
     {
         id: "someId1",
-        flashcard_list_id: "someNiceId1",
+        flashcard_list_id: "mockFlashcardList",
         front: "front 1",
         back: "back 1",
         create_date: 520603200000
     },
     {
         id: "someId3",
-        flashcard_list_id: "someNiceId1",
+        flashcard_list_id: "mockFlashcardList",
         front: "front 3",
         back: "back 3",
         create_date: 520603200000
@@ -101,8 +101,8 @@ describe('PlayerCtrl', function() {
             testObj = $controller('PlayerCtrl', {
                 $scope: scope,
                 $routeParams: {
-                    'flashcardListId': 'mockFlashcardList',
-                    'flashcardId': 'someId1'
+                    'flashcardListId': testData[0].flashcard_list_id,
+                    'flashcardId': testData[0].flashcard_id
                 },
             });
 
@@ -182,4 +182,37 @@ describe('PlayerCtrl', function() {
         });
 
     });
+
+    describe('with second flashcard given', function() {
+        var testObj,
+            deferred,
+            scope;
+
+        beforeEach(function() {
+            deferred = $q.defer();
+            mockService.getFlashcards.andReturn(deferred.promise);
+            scope = $rootScope.$new();
+
+            testObj = $controller('PlayerCtrl', {
+                $scope: scope,
+                $routeParams: {
+                    'flashcardListId': testData[1].flashcard_list_id,
+                    'flashcardId': testData[1].flashcard_id
+                },
+            });
+
+            deferred.resolve(testData);
+            $rootScope.$digest();
+        });
+
+        it('should change the url to the previous flashcard after clicking previous button', function() {
+            // when
+            scope.goToPreviousFlashcard();
+
+            // then
+            expect(mockLocation.path).toHaveBeenCalledWith('/Player/mockFlashcardList/someId1');            
+        });
+
+    });
+
 });
