@@ -102,7 +102,7 @@ describe('PlayerCtrl', function() {
                 $scope: scope,
                 $routeParams: {
                     'flashcardListId': testData[0].flashcard_list_id,
-                    'flashcardId': testData[0].flashcard_id
+                    'flashcardId': testData[0].id
                 },
             });
 
@@ -197,7 +197,7 @@ describe('PlayerCtrl', function() {
                 $scope: scope,
                 $routeParams: {
                     'flashcardListId': testData[1].flashcard_list_id,
-                    'flashcardId': testData[1].flashcard_id
+                    'flashcardId': testData[1].id
                 },
             });
 
@@ -211,6 +211,14 @@ describe('PlayerCtrl', function() {
 
             // then
             expect(mockLocation.path).toHaveBeenCalledWith('/Player/mockFlashcardList/someId1');            
+        });
+
+        it('should show the front of the previous flashcard', function() {
+            // when
+            scope.goToPreviousFlashcard();
+
+            // then
+            expect(scope.renderedText).toMatch(testData[0].front);
         });
 
     });

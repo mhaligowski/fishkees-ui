@@ -77,8 +77,10 @@ angular
             $scope.goToPreviousFlashcard = function() {
                 var currentIndex = flashcards.indexOf(currentFlashcard);
                 var nextIndex = (currentIndex - 1 + flashcards.length) % flashcards.length;
-                
+
                 currentFlashcard = flashcards[nextIndex];
+
+                updateRenderedText();
                 goToCurrentPathLocation();
             }
     });
