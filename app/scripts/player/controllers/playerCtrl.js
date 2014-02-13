@@ -14,6 +14,7 @@ angular
                 currentFlashcard = {};
             $scope.renderedText = "";
             $scope.isFront = true;
+            $scope.isEmpty = true;
 
             var service = flashcardListDetailsService,
                 flashcardListId = $routeParams.flashcardListId,
@@ -48,6 +49,11 @@ angular
             service
                 .getFlashcards(flashcardListId)
                 .then(function(result) {
+                    if (result.length == 0) {
+                        return;
+                    }
+
+                    $scope.isEmpty = false;
                     flashcards = result;
                     var flashcardId = $routeParams.flashcardId || flashcards[0].id;
                     currentFlashcard = findFlashcardWithId(flashcards, flashcardId);

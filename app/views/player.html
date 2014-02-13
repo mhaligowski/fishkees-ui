@@ -1,18 +1,24 @@
 <div ng-controller="PlayerCtrl"> 
-    <div 
-        class="flashcard-contents 
-               hero-unit
-               well
-               well-large"
-        ng-class="isFront ? 'front' : 'back'"
-        ng-bind-html="renderedText">
+    <div ng-if="isEmpty">
+      <span class="empty-list-message"></span>
     </div>
 
-    <div class="flashcard-buttons">
-      <div class="btn-group">
-          <button class="btn prev"  ng-click="goToPreviousFlashcard()"><i class="icon-backward"></i></button>
-          <button class="btn show-back" ng-click="toggleFrontBack()"><i class="icon-rotate-right"></i></button>
-          <button class="btn next" ng-click="goToNextFlashcard()"><i class="icon-forward"></i></button>
+    <div ng-if="!isEmpty">
+      <div 
+          class="flashcard-contents 
+                 hero-unit
+                 well
+                 well-large"
+          ng-class="isFront ? 'front' : 'back'"
+          ng-bind-html="renderedText">
+      </div>
+
+      <div class="flashcard-buttons">
+        <div class="btn-group">
+            <button class="btn prev"  ng-click="goToPreviousFlashcard()"><i class="icon-backward"></i></button>
+            <button class="btn show-back" ng-click="toggleFrontBack()"><i class="icon-rotate-right"></i></button>
+            <button class="btn next" ng-click="goToNextFlashcard()"><i class="icon-forward"></i></button>
+        </div>
       </div>
     </div>
 </div>

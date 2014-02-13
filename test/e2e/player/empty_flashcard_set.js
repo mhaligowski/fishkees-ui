@@ -1,6 +1,6 @@
 'use strict'
 
-xdescribe('Player with empty flashcard set', function() {
+describe('Player with empty flashcard set', function() {
     beforeEach(function() {
         browser().navigateTo('/');
         restartDB();
