@@ -86,6 +86,11 @@ describe('PlayerCtrl', function() {
             // then
             expect(scope.renderedText).toBe('<p>front 1</p>');
         });
+
+        it('should set the isEmpty flag to false', function() {
+            // then
+            expect(scope.isEmpty).toBeFalsy();
+        });
     });
 
     describe('with flashcard given', function() {
@@ -235,4 +240,27 @@ describe('PlayerCtrl', function() {
 
     });
 
+    describe('with empty flashcard set', function() {
+        var testObj,
+            scope,
+            deferred;
+
+        beforeEach(function() {
+            deferred = $q.defer();
+            mockService.getFlashcards.andReturn(deferred.promise);
+            scope = $rootScope.$new();
+
+            testObj = $controller('PlayerCtrl', {
+                $scope: scope,
+                $routeParams: { 'flashcardListId': 'emptyList' },
+            });
+
+            deferred.resolve([]);
+            $rootScope.$digest();
+        });
+
+        it('should have isEmpty flag set to true', function() {
+            expect(scope.isEmpty).toBeTruthy();
+        });
+    });
 });
