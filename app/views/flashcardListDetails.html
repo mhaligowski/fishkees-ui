@@ -1,6 +1,14 @@
 <div ng-controller="FlashcardListDetailsCtrl">
+    <a ng-href="/#/FlashcardList" class="back-to-flashcard-sets">
+        &lt;&lt; back to list of flashcard lists
+    </a>
+
     <div class="page-header">
-        <h1>{{ list.title }}</h1>
+        <h1>{{ list.title }}
+        <small>
+            <a ng-href="/#/Player/{{ list.id }}" class="go-to-player"><i class="icon-play-circle" /></a>
+        </small>
+        </h1>
     </div>
 
     <p ng-if="flashcards.length == 0" class="text-warning no-flashcards-message">

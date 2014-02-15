@@ -1,6 +1,6 @@
 'use strict'
 
-describe('View details for flashcardlist', function() {
+describe('View for flashcardlist details', function() {
     var LIST1_COUNT = 2;
     
     beforeEach(function() {
@@ -16,7 +16,7 @@ describe('View details for flashcardlist', function() {
     });
 
     it('should show the proper title when going to the page', function() {
-        expect(element('.page-header > h1').text()).toBe("Spanish for beginners");
+        expect(element('.page-header > h1').text()).toMatch("Spanish for beginners");
     });
 
     it('should show a friendly message when there is no flashcards', function() {
@@ -24,7 +24,7 @@ describe('View details for flashcardlist', function() {
         browser().navigateTo("/#/FlashcardList/someFlashcardListId3");
 
         // then
-        expect(element('.page-header > h1').text()).toBe("List with no flashcards");
+        expect(element('.page-header > h1').text()).toMatch("List with no flashcards");
         expect(element('.flashcards-container > tr').count()).toBe(0);
         expect(element('.no-flashcards-message').count()).toBe(1);
     });
@@ -94,5 +94,13 @@ describe('View details for flashcardlist', function() {
 
         // then
         expect(element('.flashcards-container > div:nth-child(1) > .front textarea').text()).toBe("*front 1*");
+    });
+
+    it('should contain link to the player', function() {
+        expect(element('.go-to-player').attr('href')).toBe("/#/Player/someFlashcardListId1");
+    });
+
+    it('should contain link to the flashcard sets list', function() {
+        expect(element('.back-to-flashcard-sets').attr('href')).toBe("/#/FlashcardList");
     });
 });
