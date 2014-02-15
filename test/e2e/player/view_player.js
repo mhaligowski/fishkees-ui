@@ -18,6 +18,10 @@ describe('Player', function() {
             expect(element('.flashcard-contents').html()).toContain('<strong>front 2</strong>');
         });
 
+        xit('should display a link back to the flashcard set detail', function() {
+            expect(element('a.back-to-flashcard-list-details').attr('href')).toBe('/#/FlashcardList/someFlashcardListId1');
+        });
+
     });
 
     describe('with no flashcard given', function() {
