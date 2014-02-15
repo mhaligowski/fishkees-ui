@@ -101,6 +101,6 @@ describe('View for flashcardlist details', function() {
     });
 
     it('should contain link to the flashcard sets list', function() {
-        expect(element('.back-to-flashcard-sets').attr('href')).toBe("/#/FlashcardList/");
+        expect(element('.back-to-flashcard-sets').attr('href')).toBe("/#/FlashcardList");
     });
 });
