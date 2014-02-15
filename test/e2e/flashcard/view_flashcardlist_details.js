@@ -99,4 +99,8 @@ describe('View for flashcardlist details', function() {
     it('should contain link to the player', function() {
         expect(element('.go-to-player').attr('href')).toBe("/#/Player/someFlashcardListId1");
     });
+
+    it('should contain link to the flashcard sets list', function() {
+        expect(element('.back-to-flashcard-sets').attr('href')).toBe("/#/FlashcardList/");
+    });
 });
