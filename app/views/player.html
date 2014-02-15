@@ -1,4 +1,8 @@
 <div ng-controller="PlayerCtrl"> 
+    <a ng-href="/#/FlashcardList/{{ flashcardListId }}" class="back-to-flashcard-list-details">
+      << Back to flashcard set
+    </a>
+
     <div ng-if="isEmpty" class="well well-sm">
       <span class="text-warning empty-list-message">This flashcard set has no flashcards</span>
     </div>

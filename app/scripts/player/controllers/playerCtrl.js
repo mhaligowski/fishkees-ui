@@ -15,6 +15,7 @@ angular
             $scope.renderedText = "";
             $scope.isFront = true;
             $scope.isEmpty = true;
+            $scope.flashcardListId = $routeParams.flashcardListId;
 
             var service = flashcardListDetailsService,
                 flashcardListId = $routeParams.flashcardListId,
@@ -42,7 +43,9 @@ angular
             var preventAddressChangeFromReloading = function() {
                 var lastRoute = $route.current;
                 $scope.$on('$locationChangeSuccess', function(event) {
-                    $route.current = lastRoute;
+                    if ($route.current.$$route == lastRoute.$$route) {
+                       $route.current = lastRoute;
+                    }
                 });
             };
 
