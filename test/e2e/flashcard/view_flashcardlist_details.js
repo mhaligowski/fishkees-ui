@@ -1,6 +1,6 @@
 'use strict'
 
-describe('View details for flashcardlist', function() {
+describe('View for flashcardlist details', function() {
     var LIST1_COUNT = 2;
     
     beforeEach(function() {
@@ -94,5 +94,9 @@ describe('View details for flashcardlist', function() {
 
         // then
         expect(element('.flashcards-container > div:nth-child(1) > .front textarea').text()).toBe("*front 1*");
+    });
+
+    xit('should contain link to the player', function() {
+        expect(element('.go-to-player').attr('href')).toBe("/#/Player/someFlashcardListId1");
     });
 });
