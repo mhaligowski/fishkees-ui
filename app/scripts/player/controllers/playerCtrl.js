@@ -10,9 +10,11 @@ angular
                  $location,
                  $sce,
                  flashcardListDetailsService) {
+            var NULL_CONTENTS_TEMPLATE = "<< empty >>";
+
             var flashcards = [],
                 currentFlashcard = {};
-            $scope.renderedText = "";
+            $scope.renderedText = null;
             $scope.isFront = true;
             $scope.isEmpty = true;
             $scope.flashcardListId = $routeParams.flashcardListId;
@@ -26,10 +28,11 @@ angular
             };
 
             var updateRenderedText = function() {
-                var newText = $scope.isFront === true 
+                var newText = ($scope.isFront === true 
                     ? currentFlashcard.front
-                    : currentFlashcard.back;
-                $scope.renderedText = $sce.trustAsHtml(converter.makeHtml(newText));                
+                    : currentFlashcard.back) || NULL_CONTENTS_TEMPLATE;
+
+                $scope.renderedText = $sce.trustAsHtml(converter.makeHtml(newText));
             };
 
             var goToCurrentPathLocation = function() {
@@ -60,7 +63,7 @@ angular
                     flashcards = result;
                     var flashcardId = $routeParams.flashcardId || flashcards[0].id;
                     currentFlashcard = findFlashcardWithId(flashcards, flashcardId);
-                    
+
                     updateRenderedText();                    
                     goToCurrentPathLocation()
                 });
