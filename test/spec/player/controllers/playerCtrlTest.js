@@ -1,22 +1,23 @@
 'use strict'
 
-var testData = [
-    {
-        id: "someId1",
-        flashcard_list_id: "mockFlashcardList",
-        front: "front 1",
-        back: "back 1",
-        create_date: 520603200000
-    },
-    {
-        id: "someId3",
-        flashcard_list_id: "mockFlashcardList",
-        front: "front 3",
-        back: "back 3",
-        create_date: 520603200000
-    }];
 
 describe('PlayerCtrl', function() {
+    var testData = [
+        {
+            id: "someId1",
+            flashcard_list_id: "mockFlashcardList",
+            front: "front 1",
+            back: "back 1",
+            create_date: 520603200000
+        },
+        {
+            id: "someId3",
+            flashcard_list_id: "mockFlashcardList",
+            front: "front 3",
+            back: "back 3",
+            create_date: 520603200000
+    }];
+
     var $controller,
         $rootScope,
         $q,
