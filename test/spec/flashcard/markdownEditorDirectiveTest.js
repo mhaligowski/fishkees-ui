@@ -22,10 +22,8 @@ describe('MarkdownEditorDirective', function() {
 
             $httpBackend
                 .when('GET', "views/markdownEditorTemplate.html")
-                .respond('<div ng-hide="isEditMode" ng-dblclick="toEditMode()" class="preview"> \
-                        </div> \
-                        <textarea ng-show="isEditMode" class="editor input-block-level"> \
-                        </textarea>');
+                .respond('<div ng-hide="isEditMode" ng-dblclick="toEditMode()" class="preview"></div> \
+                        <textarea ng-show="isEditMode" class="editor input-block-level"></textarea>');
 
         });
     });

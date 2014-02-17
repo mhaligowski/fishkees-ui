@@ -27,8 +27,9 @@ angular
                             ? converter.makeHtml(scope.text)
                             : buildWarning(scope.placeholderText || '');
 
+
                         iElement
-                            .find('div.preview')
+                            .find('div')
                             .html(htmlText);
                     };
 
