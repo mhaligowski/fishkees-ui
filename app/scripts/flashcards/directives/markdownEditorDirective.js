@@ -27,6 +27,7 @@ angular
                             ? converter.makeHtml(scope.text)
                             : buildWarning(scope.placeholderText || '');
 
+
                         iElement
                             .find('div')
                             .html(htmlText);

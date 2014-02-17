@@ -7,7 +7,7 @@
         <h1>
             {{ list.title }}
             <small>
-                <a ng-href="/#/Player/{{ list.id }}" class="go-to-player"><i class="icon-play-circle"></i></a>
+                <a ng-href="/#/Player/{{ list.id }}" class="go-to-player"><i class="fa fa-play-circle-o"></i></a>
             </small>
         </h1>
     </div>
@@ -19,7 +19,7 @@
     <button 
         class="add-flashcard btn btn-primary"
         ng-click="addNewFlashcardAtTop(list.id)">
-        <i class="icon-plus-sign-alt"></i>        
+        <i class="fa fa-plus-square"></i>        
         Add new flashcard
     </button>
 
@@ -48,7 +48,7 @@
             <div class="span2 toolbox">
                 <button class="btn btn-link remove-flashcard"
                         ng-click="showRemoveFlashcardModal(fl);">
-                    <i class="icon-remove" ></i>
+                    <i class="fa fa-trash-o fa-2x"></i>
                 </button>
             </div>
 

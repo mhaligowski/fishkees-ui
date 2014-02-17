@@ -1,8 +1,11 @@
-<div 
-    class="preview"
-    ng-hide="isEditMode" 
-    ng-dblclick="toEditMode()">
-</div>
+<button 
+    class="btn btn-link edit"
+    ng-hide="isEditMode"
+    ng-click="toEditMode()">
+    <i class="fa fa-edit fa-2x"></i>
+</button>
+
+<div class="preview" ng-hide="isEditMode"></div>
 
 <p>
     <button 
@@ -10,7 +13,7 @@
         type="button"
         ng-show="isEditMode" 
         ng-click="cancel()">
-        <i class="icon-remove"></i>
+        <i class="fa fa-remove"></i>
     </button>
 
     <button
@@ -24,3 +27,4 @@
 
 <textarea ng-show="isEditMode" class="editor input-block-level">
 </textarea>
+

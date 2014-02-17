@@ -9,11 +9,11 @@
     "es5-shim": "~2.0.8",
     "angular-cookies": "~1.2.13",
     "angular-sanitize": "~1.2.13",
-    "font-awesome": "~3.2.1",
     "angular-ui-bootstrap-bower": "~0.6.0",
     "angular-route": "~1.2.13",
     "angular-resource": "~1.2.13",
-    "showdown": "~0.3.1"
+    "showdown": "~0.3.1",
+    "font-awesome": "~4.0.3"
   },
   "devDependencies": {
     "angular-mocks": "~1.2.13",
