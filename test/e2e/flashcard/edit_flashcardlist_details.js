@@ -1,6 +1,6 @@
 'use strict'
 
-describe('Edit details for flashcardlist', function() {
+describe('Flashcard editor', function() {
 
     beforeEach(function() {
         browser().navigateTo('/');
@@ -8,6 +8,19 @@ describe('Edit details for flashcardlist', function() {
         sleep(0.3);
         browser().navigateTo('/#/FlashcardList/someFlashcardListId1');
     });  
+
+    it("should contain edit button in preview mode", function() {
+        // then
+        expect(element('.flashcards-container > div:nth-child(1) .front button.edit:visible').count()).toBe(1);
+    });
+
+    it("should not contain edit button in edit mode", function() {
+        // when
+        element('.flashcards-container > div:nth-child(1) .front button.edit').click();
+
+        // then
+        expect(element('.flashcards-container > div:nth-child(1) .front button.edit:visible').count()).toBe(0);
+    });
 
     it('should not contain the "save" button in preview mode', function() {
         // then

@@ -28,7 +28,7 @@ angular
                             : buildWarning(scope.placeholderText || '');
 
                         iElement
-                            .find('div')
+                            .find('div.preview')
                             .html(htmlText);
                     };
 

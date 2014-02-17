@@ -24,3 +24,12 @@
 
 <textarea ng-show="isEditMode" class="editor input-block-level">
 </textarea>
+
+<div>
+    <button 
+        class="btn btn-link edit"
+        ng-hide="isEditMode"
+        ng-click="toEditMode()">
+        Edit
+    </button>
+</div>
