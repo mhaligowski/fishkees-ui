@@ -29,7 +29,7 @@ describe('Flashcard editor', function() {
 
     it('should contain the "save" button in edit mode', function() {
         // when
-        element('.flashcards-container > div:nth-child(1) > .front markdown-editor div').dblclick();
+        element('.flashcards-container > div:nth-child(1) .front button.edit').click();
 
         // then
         expect(element('.flashcards-container > div:nth-child(1) > .front .save:visible').count()).toBe(1);
@@ -37,7 +37,7 @@ describe('Flashcard editor', function() {
 
     it('should save the new text upon editing', function() {
         // when
-        element('.flashcards-container > div:nth-child(1) > .front markdown-editor div').dblclick();
+        element('.flashcards-container > div:nth-child(1) .front button.edit').click();
         element('.flashcards-container > div:nth-child(1) > .front textarea').val('brand *new* text');
         element('.flashcards-container > div:nth-child(1) > .front .save:visible').click();
 
@@ -47,7 +47,7 @@ describe('Flashcard editor', function() {
 
     it('should save the new text upon refreshing the page', function() {
         // when
-        element('.flashcards-container > div:nth-child(1) > .front markdown-editor div').dblclick();
+        element('.flashcards-container > div:nth-child(1) .front button.edit').click();
         element('.flashcards-container > div:nth-child(1) > .front textarea').val('brand *new* text');
         element('.flashcards-container > div:nth-child(1) > .front .save:visible').click();
         browser().reload();
@@ -58,7 +58,7 @@ describe('Flashcard editor', function() {
 
     it('should have filling text when there is empty text', function() {
         // when
-        element('.flashcards-container > div:nth-child(1) > .front markdown-editor div').dblclick();
+        element('.flashcards-container > div:nth-child(1) .front button.edit').click();
         element('.flashcards-container > div:nth-child(1) > .front textarea').val('');
         element('.flashcards-container > div:nth-child(1) > .front .save:visible').click();
    
