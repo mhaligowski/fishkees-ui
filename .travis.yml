@@ -5,10 +5,8 @@ before_script:
 - gem install sass -v 3.2.14
 - gem install compass
 - npm install -g bower grunt-cli --no-cache
-- npm update decompress-zip
-- bower cache clean
 - bower install
-script: 'grunt'
+script: 'grunt jshint && grunt test && grunt build'
 deploy:
   provider: s3
   access_key_id: AKIAJOG6PLQKQ555Q7VA
