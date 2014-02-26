@@ -5,6 +5,7 @@ before_script:
 - gem install sass -v 3.2.14
 - gem install compass
 - npm install -g bower grunt-cli --no-cache
+- npm update decompress-zip
 - bower install
 script: 'grunt'
 deploy:
