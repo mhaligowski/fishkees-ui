@@ -7,7 +7,7 @@ before_install:
 before_script:
 - gem install sass -v 3.2.14
 - gem install compass
-- bower install
+- bower install --config.interactive=0
 script: 'grunt'
 deploy:
   provider: s3
