@@ -1,11 +1,13 @@
 language: node_js
 node_js:
 - '0.10'
+before_install:
+- npm install -g git://github.com/neoziro/bower.git#v1.2.8-patched
+- npm install -g grunt-cli
 before_script:
 - gem install sass -v 3.2.14
 - gem install compass
-- npm install -g bower grunt-cli
-- bower install
+- bower install --config.interactive=0
 script: 'grunt'
 deploy:
   provider: s3
